@@ -33,7 +33,7 @@ import com.example.currencyconversionapp.ui.theme.CurrencyNameColor
 import com.example.currencyconversionapp.ui.theme.FieldColor
 import com.example.currencyconversionapp.ui.theme.FieldShadowColor
 
-
+/* This is a dummy list of some currencies to test the DropDownMenu */
 private val currenciesList = listOf(
     "EGP - EGYPTIAN POUND",
     "USD - US DOLLAR",
@@ -58,6 +58,7 @@ private val currenciesList = listOf(
     "CNY - CHINESE YUAN"
 )
 
+
 /** The SpinnerComponent is a component where the users can select the currency they want to convert from,
  * it's a dropdown menu that have all the currencies and the user should choose one to convert it to another
  * currency.
@@ -65,8 +66,15 @@ private val currenciesList = listOf(
 @Preview
 @Composable
 fun SpinnerComponent() {
+    /* this is a mutable state variable to control the dropDown menu whether it's expanded or not
+     */
     var isExpanded by remember { mutableStateOf(false) }
+
+    /* this the selected currency that the user will select from the dropDown menu, it's mutableState so it recopmose the component every time the user select another currency
+     */
     var selectedCurrency by remember { mutableStateOf("EGP - EGYPTIAN POUND") }
+
+    /* The container of the flag, currency name and the drop icon */
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
@@ -81,8 +89,7 @@ fun SpinnerComponent() {
             .height(48.dp)
             .background(color = FieldColor, shape = RoundedCornerShape(size = 10.dp))
     ) {
-
-
+        /* The flag of the currency */
         Image(
             painter = painterResource(id = R.drawable.egypt_flag),
             contentDescription = "currency flag",
@@ -92,6 +99,8 @@ fun SpinnerComponent() {
                 .width(28.dp)
                 .height(20.dp)
         )
+
+        /* The currency name */
         Text(
             text = selectedCurrency,
             style = TextStyle(
@@ -103,6 +112,8 @@ fun SpinnerComponent() {
             modifier = Modifier
                 .padding(start = 8.dp, end = 50.dp, top = 13.dp, bottom = 13.dp)
         )
+
+        /* The drop icon that shows list of all the currencies the user can choose from */
         IconButton(
             onClick = { isExpanded = isExpanded.not() },
             modifier = Modifier
@@ -118,6 +129,7 @@ fun SpinnerComponent() {
             )
         }
 
+        /* The menu of all the currencies where the user can choose only one from it */
         DropdownMenu(
             expanded = isExpanded,
             modifier = Modifier
