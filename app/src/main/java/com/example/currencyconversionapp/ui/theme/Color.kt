@@ -16,6 +16,7 @@ val DarkGrey = Color(0xFF202020)
 val White = Color(0xFFFFFFFF)
 
 // Custom colors
-val ButtonColor = Color(0xFF3CACFE)
+val ButtonColor = Color(0xFF363636)
 val FieldColor = Color(0xFFF9F9F9)
 val FieldShadowColor = Color(0xFFC5C5C5)
+val CurrencyNameColor=Color(0xFF202020)
