@@ -34,28 +34,16 @@ import com.example.currencyconversionapp.ui.theme.FieldColor
 import com.example.currencyconversionapp.ui.theme.FieldShadowColor
 
 /* This is a dummy list of some currencies to test the DropDownMenu */
+data class Currency(val currencyName: String, val currencyFlag: Int)
+
 private val currenciesList = listOf(
-    "EGP - EGYPTIAN POUND",
-    "USD - US DOLLAR",
-    "EUR - EURO",
-    "AED - UAE DIRHAM",
-    "SAR - SAUDI RIYAL",
-    "JPY - JAPANESE YEN",
-    "CNY - CHINESE YUAN",
-    "EGP - EGYPTIAN POUND",
-    "USD - US DOLLAR",
-    "EUR - EURO",
-    "AED - UAE DIRHAM",
-    "SAR - SAUDI RIYAL",
-    "JPY - JAPANESE YEN",
-    "CNY - CHINESE YUAN",
-    "EGP - EGYPTIAN POUND",
-    "USD - US DOLLAR",
-    "EUR - EURO",
-    "AED - UAE DIRHAM",
-    "SAR - SAUDI RIYAL",
-    "JPY - JAPANESE YEN",
-    "CNY - CHINESE YUAN"
+    Currency("EGP", R.drawable.egypt_flag),
+    Currency("EGP", R.drawable.egypt_flag),
+    Currency("EGP", R.drawable.egypt_flag),
+    Currency("EGP", R.drawable.egypt_flag),
+    Currency("EGP", R.drawable.egypt_flag),
+    Currency("EGP", R.drawable.egypt_flag),
+    Currency("EGP", R.drawable.egypt_flag)
 )
 
 
@@ -72,7 +60,7 @@ fun SpinnerComponent() {
 
     /* this the selected currency that the user will select from the dropDown menu, it's mutableState so it recopmose the component every time the user select another currency
      */
-    var selectedCurrency by remember { mutableStateOf("EGP - EGYPTIAN POUND") }
+    var selectedCurrency by remember { mutableStateOf("EGP") }
 
     /* The container of the flag, currency name and the drop icon */
     Row(
@@ -82,12 +70,12 @@ fun SpinnerComponent() {
             .border(
                 width = 0.5.dp,
                 color = FieldShadowColor,
-                shape = RoundedCornerShape(size = 10.dp)
+                shape = RoundedCornerShape(size = 20.dp)
             )
             .padding(0.5.dp)
-            .width(302.dp)
+            .width(184.dp)
             .height(48.dp)
-            .background(color = FieldColor, shape = RoundedCornerShape(size = 10.dp))
+            .background(color = FieldColor, shape = RoundedCornerShape(size = 20.dp))
     ) {
         /* The flag of the currency */
         Image(
@@ -118,11 +106,9 @@ fun SpinnerComponent() {
             onClick = { isExpanded = isExpanded.not() },
             modifier = Modifier
                 .padding(end = 16.dp, top = 16.dp, bottom = 16.dp)
-                .width(20.dp)
-                .height(20.dp)
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.frame),
+                painter = painterResource(id = R.drawable.drop_icon),
                 contentDescription = "Show all currencies",
                 modifier = Modifier
                     .padding(1.dp)
@@ -133,15 +119,16 @@ fun SpinnerComponent() {
         DropdownMenu(
             expanded = isExpanded,
             modifier = Modifier
-                .width(302.dp)
-                .height(302.dp)
+                .width(184.dp)
+                .height(250.dp)
                 .background(color = FieldColor),
-            onDismissRequest = { isExpanded = isExpanded.not() }) {
+            onDismissRequest = { isExpanded = isExpanded.not() }
+        ) {
             repeat(currenciesList.size) {
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = currenciesList[it],
+                            text = currenciesList[it].currencyName,
                             style = TextStyle(
                                 fontSize = 16.sp,
                                 /*fontFamily = FontFamily(Font(R.font.open sans)),*/
@@ -149,12 +136,25 @@ fun SpinnerComponent() {
                                 color = CurrencyNameColor,
                             )
                         )
-                    }, onClick = {
-                        selectedCurrency = currenciesList[it]
+                    },
+                    onClick = {
+                        selectedCurrency = currenciesList[it].currencyName
                         isExpanded = isExpanded.not()
+                    },
+                    leadingIcon = {
+                        Image(
+                            painter = painterResource(id = currenciesList[it].currencyFlag),
+                            contentDescription = "Currency Flag",
+                            modifier = Modifier
+                                .width(16.dp)
+                                .height(16.dp),
+                            contentScale = ContentScale.FillBounds
+                        )
                     }
                 )
             }
         }
     }
 }
+
+
