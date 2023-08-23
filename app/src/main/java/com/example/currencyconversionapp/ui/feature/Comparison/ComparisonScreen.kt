@@ -60,7 +60,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent(152.dp, 48.dp)
+                SpinnerComponent()
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -81,7 +81,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent(152.dp, 48.dp)
+                SpinnerComponent()
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween
@@ -95,7 +95,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent(152.dp, 48.dp)
+                SpinnerComponent()
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
