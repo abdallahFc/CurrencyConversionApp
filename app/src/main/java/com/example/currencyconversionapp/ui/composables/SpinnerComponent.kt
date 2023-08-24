@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
@@ -34,16 +35,28 @@ import com.example.currencyconversionapp.ui.theme.FieldColor
 import com.example.currencyconversionapp.ui.theme.FieldShadowColor
 
 /* This is a dummy list of some currencies to test the DropDownMenu */
-data class Currency(val currencyName: String, val currencyFlag: Int)
-
 private val currenciesList = listOf(
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag)
+    "EGP - EGYPTIAN POUND",
+    "USD - US DOLLAR",
+    "EUR - EURO",
+    "AED - UAE DIRHAM",
+    "SAR - SAUDI RIYAL",
+    "JPY - JAPANESE YEN",
+    "CNY - CHINESE YUAN",
+    "EGP - EGYPTIAN POUND",
+    "USD - US DOLLAR",
+    "EUR - EURO",
+    "AED - UAE DIRHAM",
+    "SAR - SAUDI RIYAL",
+    "JPY - JAPANESE YEN",
+    "CNY - CHINESE YUAN",
+    "EGP - EGYPTIAN POUND",
+    "USD - US DOLLAR",
+    "EUR - EURO",
+    "AED - UAE DIRHAM",
+    "SAR - SAUDI RIYAL",
+    "JPY - JAPANESE YEN",
+    "CNY - CHINESE YUAN"
 )
 
 
@@ -51,21 +64,20 @@ private val currenciesList = listOf(
  * it's a dropdown menu that have all the currencies and the user should choose one to convert it to another
  * currency.
  */
-@Preview
 @Composable
-fun SpinnerComponent() {
+fun SpinnerComponent(width: Dp, height: Dp) {
     /* this is a mutable state variable to control the dropDown menu whether it's expanded or not
      */
     var isExpanded by remember { mutableStateOf(false) }
 
-    /* this the selected currency that the user will select from the dropDown menu, it's mutableState so it recopmose the component every time the user select another currency
+    /* this the selected currency that the user will select from the dropDown menu, it's mutableState so it recompose the component every time the user select another currency
      */
     var selectedCurrency by remember { mutableStateOf("EGP") }
 
     /* The container of the flag, currency name and the drop icon */
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.SpaceAround,
         modifier = Modifier
             .border(
                 width = 0.5.dp,
@@ -73,26 +85,26 @@ fun SpinnerComponent() {
                 shape = RoundedCornerShape(size = 20.dp)
             )
             .padding(0.5.dp)
-            .width(184.dp)
-            .height(48.dp)
+            .width(width)
+            .height(height)
             .background(color = FieldColor, shape = RoundedCornerShape(size = 20.dp))
     ) {
         /* The flag of the currency */
         Image(
             painter = painterResource(id = R.drawable.egypt_flag),
             contentDescription = "currency flag",
-            contentScale = ContentScale.Fit,
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .padding(start = 16.dp)
-                .width(28.dp)
-                .height(20.dp)
+                .width(25.dp)
+                .height(18.dp)
         )
 
         /* The currency name */
         Text(
             text = selectedCurrency,
             style = TextStyle(
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 /*fontFamily = FontFamily(Font(R.font.open sans)),*/
                 fontWeight = FontWeight(400),
                 color = CurrencyNameColor,
@@ -106,6 +118,8 @@ fun SpinnerComponent() {
             onClick = { isExpanded = isExpanded.not() },
             modifier = Modifier
                 .padding(end = 16.dp, top = 16.dp, bottom = 16.dp)
+                .width(16.dp)
+                .height(16.dp)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.drop_icon),
@@ -119,42 +133,28 @@ fun SpinnerComponent() {
         DropdownMenu(
             expanded = isExpanded,
             modifier = Modifier
-                .width(184.dp)
-                .height(250.dp)
+                .width(width)
+                .height(302.dp)
                 .background(color = FieldColor),
-            onDismissRequest = { isExpanded = isExpanded.not() }
-        ) {
+            onDismissRequest = { isExpanded = isExpanded.not() }) {
             repeat(currenciesList.size) {
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = currenciesList[it].currencyName,
+                            text = currenciesList[it],
                             style = TextStyle(
-                                fontSize = 16.sp,
+                                fontSize = 14.sp,
                                 /*fontFamily = FontFamily(Font(R.font.open sans)),*/
                                 fontWeight = FontWeight(400),
                                 color = CurrencyNameColor,
                             )
                         )
-                    },
-                    onClick = {
-                        selectedCurrency = currenciesList[it].currencyName
+                    }, onClick = {
+                        selectedCurrency = currenciesList[it]
                         isExpanded = isExpanded.not()
-                    },
-                    leadingIcon = {
-                        Image(
-                            painter = painterResource(id = currenciesList[it].currencyFlag),
-                            contentDescription = "Currency Flag",
-                            modifier = Modifier
-                                .width(16.dp)
-                                .height(16.dp),
-                            contentScale = ContentScale.FillBounds
-                        )
                     }
                 )
             }
         }
     }
 }
-
-

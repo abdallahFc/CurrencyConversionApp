@@ -11,19 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.composables.AmountField
 import com.example.currencyconversionapp.ui.composables.CustomButton
 import com.example.currencyconversionapp.ui.composables.SpinnerComponent
 
-@Preview(showBackground = true, device = Devices.PIXEL_3)
 @Composable
-fun ConversionScreen() {
+fun Converting(viewModel: ConverterViewModel) {
     Column(
         modifier = Modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -38,7 +37,7 @@ fun ConversionScreen() {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Amount",
+                    text = stringResource(R.string.amount),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -46,13 +45,13 @@ fun ConversionScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                AmountField(121.dp, 48.dp)
+                AmountField(121.dp, 48.dp, true, viewModel.fromCurrencyAmount)
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "From",
+                    text = stringResource(R.string.from),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -60,7 +59,7 @@ fun ConversionScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(184.dp,48.dp)
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -73,7 +72,7 @@ fun ConversionScreen() {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "To",
+                    text = stringResource(R.string.to),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -81,24 +80,24 @@ fun ConversionScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(184.dp,48.dp)
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Amount",
+                    text = stringResource(id = R.string.amount),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
-                        color = Color(0xFF000000),
+                        color = Color.Black
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                AmountField(121.dp, 48.dp)
+                AmountField(121.dp, 48.dp, false, viewModel.toCurrencyAmount)
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton("Convert")
+        CustomButton(stringResource(R.string.convert), viewModel.convertButtonClickable())
     }
 }

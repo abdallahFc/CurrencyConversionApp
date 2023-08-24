@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ConCurrency</string>
+    <string name="amount">Amount</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="convert">Convert</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="my_portfolio">My Portfolio</string>
 </resources>

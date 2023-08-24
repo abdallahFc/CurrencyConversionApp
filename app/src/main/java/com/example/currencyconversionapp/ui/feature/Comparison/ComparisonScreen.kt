@@ -13,17 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.ui.composables.AmountField
 import com.example.currencyconversionapp.ui.composables.CustomButton
 import com.example.currencyconversionapp.ui.composables.SpinnerComponent
+import com.example.currencyconversionapp.ui.feature.Conversion.ConverterViewModel
 
-@Preview(showBackground = true, device = Devices.PIXEL_3)
 @Composable
-fun ComparisonScreen() {
+fun ComparisonScreen(viewModel: ConverterViewModel) {
     Column(
         modifier = Modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -46,7 +44,13 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                AmountField(152.dp, 48.dp)
+                /*AmountField(
+                    152.dp,
+                    48.dp,
+                    true,
+                    viewModel.fromCurrencyAmount.value,
+                    viewModel.fromCurrencyAmount
+                )*/
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween
@@ -60,7 +64,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(152.dp,48.dp)
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -81,7 +85,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(152.dp, 48.dp)
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween
@@ -95,7 +99,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(152.dp,48.dp)
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -104,10 +108,20 @@ fun ComparisonScreen() {
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.Top
         ) {
-                AmountField(152.dp, 48.dp)
-                AmountField(152.dp, 48.dp)
+                AmountField(
+                    152.dp,
+                    48.dp,
+                    false,
+                    viewModel.toCurrencyAmount
+                )
+                AmountField(
+                    152.dp,
+                    48.dp,
+                    false,
+                    viewModel.toCurrencyAmount
+                )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton("Compare")
+        CustomButton("Compare", viewModel.convertButtonClickable())
     }
 }
