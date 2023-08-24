@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="currency_convert">محول العملات</string>
+    <string name="check_live_exchange_rates">تحقق من أسعار صرف العملات مباشرة</string>
+    <string name="convert">تحويل</string>
+    <string name="compare">مقارنة</string>
+    <string name="amount">المبلغ</string>
+    <string name="from">من</string>
+    <string name="to">إلى</string>
+    <string name="live_exchange_rates">أسعار صرف العملات مباشرة</string>
+    <string name="add_to_favorites">إضافة إلى المفضلة</string>
+    <string name="my_portfolio">محفظتي</string>
+</resources>
