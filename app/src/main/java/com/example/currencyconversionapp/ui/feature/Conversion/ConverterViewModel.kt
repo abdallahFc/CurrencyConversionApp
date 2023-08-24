@@ -16,8 +16,4 @@ class ConverterViewModel : ViewModel() {
     fun convertButtonClickable() {
 
     }
-
-    fun onTextFieldChange(fromCurrencyAmount: String) {
-        _fromCurrencyAmount.value = fromCurrencyAmount
-    }
 }

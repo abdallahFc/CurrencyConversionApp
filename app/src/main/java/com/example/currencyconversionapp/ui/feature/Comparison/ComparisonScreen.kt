@@ -11,17 +11,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.composables.AmountField
 import com.example.currencyconversionapp.ui.composables.CustomButton
 import com.example.currencyconversionapp.ui.composables.SpinnerComponent
 import com.example.currencyconversionapp.ui.feature.Conversion.ConverterViewModel
 
 @Composable
-fun ComparisonScreen(viewModel: ConverterViewModel) {
+fun ComparisonScreen() {
+    val viewModel = ConverterViewModel()
     Column(
         modifier = Modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -36,7 +39,7 @@ fun ComparisonScreen(viewModel: ConverterViewModel) {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Amount",
+                    text = stringResource(id = R.string.amount),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -44,23 +47,22 @@ fun ComparisonScreen(viewModel: ConverterViewModel) {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                /*AmountField(
+                AmountField(
                     152.dp,
                     48.dp,
                     true,
-                    viewModel.fromCurrencyAmount.value,
                     viewModel.fromCurrencyAmount
-                )*/
+                )
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "From",
+                    text = stringResource(id = R.string.from),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
-                        color = Color(0xFF000000),
+                        color = Color.Black,
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
@@ -77,7 +79,7 @@ fun ComparisonScreen(viewModel: ConverterViewModel) {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Targeted currency",
+                    text = stringResource(R.string.targeted_currency),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -91,7 +93,7 @@ fun ComparisonScreen(viewModel: ConverterViewModel) {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Targeted currency",
+                    text = stringResource(id = R.string.targeted_currency),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),

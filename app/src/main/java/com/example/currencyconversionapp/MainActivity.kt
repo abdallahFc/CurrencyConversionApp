@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.currencyconversionapp.ui.feature.Comparison.ComparisonScreen
 import com.example.currencyconversionapp.ui.feature.Conversion.ConverterScreen
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
@@ -29,8 +30,7 @@ class MainActivity : ComponentActivity() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    //Greeting("Android")
-                    ConverterScreen()
+                    Greeting("Android")
                 }
             }
         }
