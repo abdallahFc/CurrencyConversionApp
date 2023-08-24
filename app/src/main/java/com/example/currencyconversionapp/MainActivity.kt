@@ -30,7 +30,8 @@ class MainActivity : ComponentActivity() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Greeting("Android")
+                    //Greeting("Android")
+                    ConverterScreen()
                 }
             }
         }
