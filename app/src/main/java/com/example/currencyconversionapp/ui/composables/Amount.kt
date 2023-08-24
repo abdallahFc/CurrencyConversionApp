@@ -31,30 +31,32 @@ import com.example.currencyconversionapp.ui.theme.FieldColor
 import com.example.currencyconversionapp.ui.theme.FieldShadowColor
 
 @Composable
-fun AmountField(width: Dp, height: Dp) {
-    var amount: String by remember {
-        mutableStateOf("1")
-    }
-    var currencyAmount by remember {
-        mutableStateOf("EGP")
-    }
-    OutlinedTextField(
-        modifier = Modifier
-            .height(height)
-            .width(width)
-            .background(color = FieldColor, shape = RoundedCornerShape(20.dp)),
-        value = amount,
-        onValueChange = { amount = it },
-        placeholder = {
-            Text(
-                text = "$amount",
-            )
-        },
-        shape = RoundedCornerShape(20.dp),
-        textStyle = TextStyle(
-            fontWeight = FontWeight(600),
-            color = Color(0xFF000000),
-            fontSize = 18.sp
+fun AmountField(width: Dp, height: Dp,readOnly:Boolean=false) {
+    var amount by remember {
+        mutableStateOf(
+            "1"
         )
-    )
+    }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start,
+        modifier = Modifier
+            .border(
+                width = 1.5.dp,
+                color = FieldShadowColor,
+                shape = RoundedCornerShape(size = 20.dp)
+            )
+            .padding(6.dp)
+            .width(width)
+            .height(height)
+            .background(color = FieldColor, shape = RoundedCornerShape(size = 20.dp))
+    ){
+        Text(text = "$amount",
+            style = TextStyle(
+                color = Color(0xFF000000),
+                fontWeight = FontWeight(600),
+                fontSize = 18.sp
+            )
+        )
+    }
 }

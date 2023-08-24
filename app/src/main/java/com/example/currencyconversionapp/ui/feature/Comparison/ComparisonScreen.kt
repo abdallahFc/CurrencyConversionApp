@@ -1,5 +1,6 @@
 package com.example.currencyconversionapp.ui.feature.Comparison
 
+import androidx.compose.foundation.interaction.HoverInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.ui.composables.AmountField
 import com.example.currencyconversionapp.ui.composables.CustomButton
+import com.example.currencyconversionapp.ui.composables.EnterAmount
 import com.example.currencyconversionapp.ui.composables.SpinnerComponent
 
 @Preview(showBackground = true, device = Devices.PIXEL_3)
@@ -46,7 +48,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                AmountField(152.dp, 50.dp)
+                EnterAmount(width = 152.dp, height =50.dp )
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween
@@ -104,8 +106,8 @@ fun ComparisonScreen() {
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.Top
         ) {
-                AmountField(152.dp, 50.dp)
-                AmountField(152.dp, 50.dp)
+              AmountField(width = 145.dp, height = 35.dp)
+                AmountField(width = 145.dp, height =  35.dp,true)
         }
         Spacer(modifier = Modifier.height(38.dp))
         CustomButton("Compare")

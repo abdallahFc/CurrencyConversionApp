@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.ui.composables.AmountField
 import com.example.currencyconversionapp.ui.composables.CustomButton
+import com.example.currencyconversionapp.ui.composables.EnterAmount
 import com.example.currencyconversionapp.ui.composables.SpinnerComponent
 
 @Preview(showBackground = true, device = Devices.PIXEL_3)
@@ -46,7 +47,7 @@ fun ConversionScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                AmountField(121.dp, 48.dp)
+                EnterAmount(121.dp, 48.dp)
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween

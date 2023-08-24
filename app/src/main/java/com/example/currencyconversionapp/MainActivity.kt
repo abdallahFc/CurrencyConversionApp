@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.currencyconversionapp.ui.composables.SpinnerComponent
 import com.example.currencyconversionapp.ui.feature.Comparison.ComparisonScreen
+import com.example.currencyconversionapp.ui.feature.Conversion.ConversionScreen
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
 class MainActivity : ComponentActivity() {

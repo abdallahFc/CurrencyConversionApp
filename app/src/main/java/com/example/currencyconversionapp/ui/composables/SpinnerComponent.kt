@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -98,7 +99,7 @@ fun SpinnerComponent() {
                 color = CurrencyNameColor,
             ),
             modifier = Modifier
-                .padding(start = 8.dp, end = 50.dp, top = 13.dp, bottom = 13.dp)
+                .padding(start = 8.dp, end = 30.dp, top = 13.dp, bottom = 13.dp)
         )
 
         /* The drop icon that shows list of all the currencies the user can choose from */
@@ -110,8 +111,8 @@ fun SpinnerComponent() {
             Icon(
                 painter = painterResource(id = R.drawable.drop_icon),
                 contentDescription = "Show all currencies",
-                modifier = Modifier
-                    .padding(1.dp)
+                 modifier = Modifier.padding(1.dp)
+
             )
         }
 
