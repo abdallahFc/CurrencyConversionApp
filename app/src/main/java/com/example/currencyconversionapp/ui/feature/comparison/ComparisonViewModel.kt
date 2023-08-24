@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.ui.feature.Comparison
+package com.example.currencyconversionapp.ui.feature.comparison
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

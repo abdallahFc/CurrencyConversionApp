@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -37,14 +38,28 @@ import com.example.currencyconversionapp.ui.theme.FieldShadowColor
 data class Currency(val currencyName: String, val currencyFlag: Int)
 
  val currenciesList = listOf(
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag),
-    Currency("EGP", R.drawable.egypt_flag)
-)
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag),
+     Currency("EGP", R.drawable.egypt_flag)
+ )
 
 
 /** The SpinnerComponent is a component where the users can select the currency they want to convert from,
@@ -68,12 +83,12 @@ fun SpinnerComponent() {
         horizontalArrangement = Arrangement.Center,
         modifier = Modifier
             .border(
-                width = 0.5.dp,
+                width =  1.dp,
                 color = FieldShadowColor,
                 shape = RoundedCornerShape(size = 20.dp)
             )
             .padding(0.5.dp)
-            .width(184.dp)
+            .fillMaxWidth()
             .height(48.dp)
             .background(color = FieldColor, shape = RoundedCornerShape(size = 20.dp))
     ) {

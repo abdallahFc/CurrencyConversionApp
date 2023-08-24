@@ -20,11 +20,11 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 val DarkColorScheme = darkColorScheme(
     primary = ButtonColor,
-    secondary = FieldShadowColor,
+    secondary = FieldShadowColorDark,
     tertiary = CurrencyNameColor,
     background = BackgroundDark,
     surface = CardBackgroundDark,
-    onPrimary = White,
+    onPrimary = TextColorDark,
     onSecondary = White,
     onTertiary = White,
     onBackground = TextColorDark,

@@ -27,30 +27,6 @@ import com.example.currencyconversionapp.ui.composables.CurrencyItem
 
 @Composable
 fun LiveExchange() {
-    val currenciesList = listOf(
-        "EGP - EGYPTIAN POUND",
-        "USD",
-        "USD - US DOLLAR",
-        "EUR - EURO",
-        "AED - UAE DIRHAM",
-        "SAR - SAUDI RIYAL",
-        "JPY - JAPANESE YEN",
-        "CNY - CHINESE YUAN",
-        "EGP - EGYPTIAN POUND",
-        "USD - US DOLLAR",
-        "EUR - EURO",
-        "AED - UAE DIRHAM",
-        "SAR - SAUDI RIYAL",
-        "JPY - JAPANESE YEN",
-        "CNY - CHINESE YUAN",
-        "EGP - EGYPTIAN POUND",
-        "USD - US DOLLAR",
-        "EUR - EURO",
-        "AED - UAE DIRHAM",
-        "SAR - SAUDI RIYAL",
-        "JPY - JAPANESE YEN",
-        "CNY - CHINESE YUAN"
-    )
     Column(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
@@ -108,6 +84,20 @@ fun LiveExchange() {
                 .padding(horizontal = 20.dp)
                 .padding(bottom = 10.dp)
         )
-        CurrencyItem(currencyList = currenciesList)
+        CurrencyItem(
+            "EGP",
+            R.drawable.egypt_flag,
+            "1.32"
+        )
+        CurrencyItem(
+            "EGP",
+            R.drawable.egypt_flag,
+            "1.32"
+        )
+        CurrencyItem(
+            "EGP",
+            R.drawable.egypt_flag,
+            "1.32"
+        )
     }
 }
