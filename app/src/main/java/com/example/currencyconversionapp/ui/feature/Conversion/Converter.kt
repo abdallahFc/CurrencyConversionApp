@@ -59,7 +59,7 @@ fun Converting(viewModel: ConverterViewModel) {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent(184.dp,48.dp)
+                SpinnerComponent()
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -80,7 +80,7 @@ fun Converting(viewModel: ConverterViewModel) {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent(184.dp,48.dp)
+                SpinnerComponent()
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween

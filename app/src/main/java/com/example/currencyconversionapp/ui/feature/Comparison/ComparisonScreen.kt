@@ -66,7 +66,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent(152.dp,48.dp)
+                SpinnerComponent()
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -79,7 +79,7 @@ fun ComparisonScreen() {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = stringResource(R.string.targeted_currency),
+                    text = "target",
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -87,13 +87,13 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent(152.dp, 48.dp)
+                SpinnerComponent()
             }
             Column(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = stringResource(id = R.string.targeted_currency),
+                    text ="target",
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -101,7 +101,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent(152.dp,48.dp)
+                SpinnerComponent()
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
