@@ -36,7 +36,7 @@ import com.example.currencyconversionapp.ui.theme.FieldShadowColor
 /* This is a dummy list of some currencies to test the DropDownMenu */
 data class Currency(val currencyName: String, val currencyFlag: Int)
 
-private val currenciesList = listOf(
+ val currenciesList = listOf(
     Currency("EGP", R.drawable.egypt_flag),
     Currency("EGP", R.drawable.egypt_flag),
     Currency("EGP", R.drawable.egypt_flag),
@@ -58,7 +58,7 @@ fun SpinnerComponent() {
      */
     var isExpanded by remember { mutableStateOf(false) }
 
-    /* this the selected currency that the user will select from the dropDown menu, it's mutableState so it recopmose the component every time the user select another currency
+    /* this the selected currency that the user will select from the dropDown menu, it's mutableState so it recompose the component every time the user select another currency
      */
     var selectedCurrency by remember { mutableStateOf("EGP") }
 
