@@ -132,57 +132,6 @@ fun HomeScreen() {
 }
 
 
-@Composable
-fun topControls(modifier: Modifier) {
-    Column(
-        modifier = modifier
-            .paint(
-                painter = painterResource(id = R.drawable.background),
-                contentScale = ContentScale.Crop
-            )
-            .paint(
-                painter = painterResource(id = R.drawable.grad), contentScale = ContentScale.Crop
-            )
-            .padding(start = 16.dp, end = 16.dp, top = 50.dp)
-    ) {
-
-
-        Text(
-            text = stringResource(id = R.string.app_name),
-            modifier = Modifier.fillMaxWidth(),
-            style = TextStyle(
-                fontSize = 26.sp,
-                fontWeight = FontWeight(700),
-                color = Color.White,
-            )
-        )
-        Text(
-            text = stringResource(id = R.string.currency_convert),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 42.dp),
-            textAlign = TextAlign.Center,
-            style = TextStyle(
-                fontSize = 22.sp,
-                fontWeight = FontWeight(600),
-                color = Color.White,
-            )
-        )
-        Text(
-            text = stringResource(id = R.string.check_live_exchange_rates),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp),
-            textAlign = TextAlign.Center,
-            style = TextStyle(
-                fontSize = 12.sp,
-                fontWeight = FontWeight(400),
-                color = Color.White,
-            )
-        )
-    }
-}
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun centerControls(layout: Modifier, pagerState: PagerState) {
