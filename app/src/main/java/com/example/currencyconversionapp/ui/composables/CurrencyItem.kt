@@ -1,6 +1,5 @@
 package com.example.currencyconversionapp.ui.composables
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,8 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -27,15 +24,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.ui.theme.LineShadowColor
-import com.example.currencyconversionapp.ui.theme.White
 
 @Composable
 fun CurrencyItem(
-    currencyTitle: String,
-    flag: Int,
-    rate:String
+    currencyName: String,
+    flag: String,
+    rate: String
 ) {
     Column {
         Row(
@@ -43,8 +39,10 @@ fun CurrencyItem(
             modifier = Modifier.fillMaxWidth()
         ) {
             Row {
-                Image(
-                    painter = painterResource(id = flag),
+                AsyncImage(
+                    model = flag,
+                    placeholder = painterResource(id = R.drawable.placeholder),
+                    error = painterResource(id = R.drawable.placeholder),
                     contentDescription = "flag Image",
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
@@ -52,9 +50,9 @@ fun CurrencyItem(
                         .clip(CircleShape)
                 )
                 Column(modifier = Modifier.padding(start = 16.dp)) {
-                    androidx.compose.material.Text(
+                    Text(
                         modifier = Modifier.padding(bottom = 2.dp),
-                        text = currencyTitle,
+                        text = currencyName,
                         style = TextStyle(
                             fontSize = 14.sp,
                             fontWeight = FontWeight(400),
@@ -84,7 +82,7 @@ fun CurrencyItem(
             )
 
         }
-       Divider(
+        Divider(
             modifier = Modifier
                 .padding(top = 12.dp)
                 .fillMaxWidth()
@@ -99,7 +97,7 @@ fun CurrencyItem(
 fun PreviewFava() {
     CurrencyItem(
         "EGP",
-        R.drawable.egypt_flag,
+        "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
         "1.32"
     )
 }

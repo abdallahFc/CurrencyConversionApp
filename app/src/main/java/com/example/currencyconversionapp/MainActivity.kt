@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.currencyconversionapp.ui.feature.comparison.ComparisonScreen
-import com.example.currencyconversionapp.ui.feature.conversion.ConverterScreen
 import com.example.currencyconversionapp.ui.feature.home.HomeScreen
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
