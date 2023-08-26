@@ -14,7 +14,7 @@ val Pink40 = Color(0xFF7D5260)
 val Black = Color(0xFF000000)
 val DarkGrey = Color(0xFF202020)
 val White = Color(0xDEFFFFFF)
-val Grey = Color(0xFFB8B8B8)
+val Grey = Color(0xFFF3F1F1)
 val LineShadowColor= Color(0xFFB9C1D9)
 // Custom colors
 val ButtonColor = Color(0xFF363636)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">تحويلات العملات</string>
     <string name="currency_convert">محول العملات</string>
     <string name="check_live_exchange_rates">تحقق من أسعار صرف العملات مباشرة</string>
     <string name="convert">تحويل</string>

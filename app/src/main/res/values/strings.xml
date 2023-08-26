@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ConCurrency</string>
     <string name="currency_convert">Currency Converter</string>
-    <string name="check_live_exchange_rates">Check live exchange rates</string>
+    <string name="check_live_exchange_rates">Check live foreign currency exchange rates</string>
     <string name="convert">Convert</string>
     <string name="compare">Compare</string>
     <string name="amount">Amount</string>

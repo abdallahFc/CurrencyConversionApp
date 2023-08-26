@@ -111,7 +111,7 @@ fun Converting() {
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton("Compare", viewModel::convertButtonClickable)
+        CustomButton("Convert", viewModel::convertButtonClickable)
     }
 }
 
