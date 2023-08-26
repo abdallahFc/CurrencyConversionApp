@@ -93,7 +93,7 @@ fun ConverterScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "live exchange rates",
+                    text = stringResource(id = R.string.live_exchange_rates),
                     style = TextStyle(
                         fontSize = 16.sp,
                         fontWeight = FontWeight(600),

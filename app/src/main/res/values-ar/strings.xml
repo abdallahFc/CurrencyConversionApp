@@ -11,4 +11,6 @@
     <string name="live_exchange_rates">أسعار صرف العملات مباشرة</string>
     <string name="add_to_favorites">إضافة إلى المفضلة</string>
     <string name="my_portfolio">محفظتي</string>
+    <string name="my_favourites">المفضلة</string>
+    <string name="targeted_currency">العملة المستهدفة</string>
 </resources>

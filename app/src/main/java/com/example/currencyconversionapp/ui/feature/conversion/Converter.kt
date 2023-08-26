@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +27,7 @@ import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
 @Composable
 fun Converting() {
-    val viewModel=ConverterViewModel()
+    val viewModel = ConverterViewModel()
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -37,7 +35,9 @@ fun Converting() {
             verticalAlignment = Alignment.Top
         ) {
             Column(
-                modifier =  Modifier.weight(1f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
@@ -56,7 +56,9 @@ fun Converting() {
                 }
             }
             Column(
-                modifier = Modifier.weight(1.5f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1.5f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
@@ -78,11 +80,13 @@ fun Converting() {
             verticalAlignment = Alignment.Top
         ) {
             Column(
-                modifier =  Modifier.weight(1.5f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1.5f)
+                    .padding(end = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Targeted currency",
+                    text = stringResource(id = R.string.targeted_currency),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -93,11 +97,13 @@ fun Converting() {
                 SpinnerComponent()
             }
             Column(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text ="Targeted currency",
+                    text = stringResource(id = R.string.amount),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -111,7 +117,7 @@ fun Converting() {
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton("Convert", viewModel::convertButtonClickable)
+        CustomButton(stringResource(id = R.string.convert), viewModel::convertButtonClickable)
     }
 }
 

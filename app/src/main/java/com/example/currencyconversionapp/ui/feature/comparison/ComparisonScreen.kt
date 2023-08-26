@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -33,7 +32,9 @@ import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 fun ComparisonScreen() {
     val viewModel = ConverterViewModel()
     Column(
-        modifier = Modifier.fillMaxSize().padding(32.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -41,7 +42,9 @@ fun ComparisonScreen() {
             verticalAlignment = Alignment.Top
         ) {
             Column(
-                modifier =  Modifier.weight(1f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
@@ -60,7 +63,9 @@ fun ComparisonScreen() {
                 }
             }
             Column(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
@@ -82,11 +87,13 @@ fun ComparisonScreen() {
             verticalAlignment = Alignment.Top
         ) {
             Column(
-                modifier =  Modifier.weight(1f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Targeted currency",
+                    text = stringResource(id = R.string.targeted_currency),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -97,11 +104,13 @@ fun ComparisonScreen() {
                 SpinnerComponent()
             }
             Column(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text ="Targeted currency",
+                    text = stringResource(id = R.string.targeted_currency),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -119,16 +128,20 @@ fun ComparisonScreen() {
             verticalAlignment = Alignment.Top
         ) {
             ConvertedFiled(
-                modifier = Modifier.weight(1f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
                 text = "1"
             )
             ConvertedFiled(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 text = "1"
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton("Compare", viewModel::convertButtonClickable)
+        CustomButton(stringResource(id = R.string.compare), viewModel::convertButtonClickable)
     }
 }
 
