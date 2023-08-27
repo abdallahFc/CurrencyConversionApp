@@ -38,7 +38,7 @@ fun AmountField(
             focusedBorderColor = MaterialTheme.colorScheme.secondary,
             unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
             textColor=MaterialTheme.colorScheme.onPrimary,
-        )
+        ),
     )
 }
 

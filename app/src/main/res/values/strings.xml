@@ -10,4 +10,5 @@
     <string name="live_exchange_rates">Live exchange rates</string>
     <string name="add_to_favorites">Add to Favorites</string>
     <string name="my_portfolio">My Portfolio</string>
+    <string name="targeted_currency">Targeted currency</string>
 </resources>

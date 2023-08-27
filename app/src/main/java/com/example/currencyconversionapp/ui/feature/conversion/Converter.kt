@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,11 +39,14 @@ fun Converting() {
             verticalAlignment = Alignment.Top
         ) {
             Column(
-                modifier =  Modifier.weight(1f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = stringResource(id = R.string.amount),
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -56,11 +61,14 @@ fun Converting() {
                 }
             }
             Column(
-                modifier = Modifier.weight(1.5f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1.5f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = stringResource(id = R.string.from),
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -68,7 +76,7 @@ fun Converting() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(184.dp,48.dp)
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -78,11 +86,14 @@ fun Converting() {
             verticalAlignment = Alignment.Top
         ) {
             Column(
-                modifier =  Modifier.weight(1.5f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1.5f)
+                    .padding(end = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Targeted currency",
+                    text = stringResource(id = R.string.to),
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -90,14 +101,17 @@ fun Converting() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(184.dp,48.dp)
             }
             Column(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text ="Targeted currency",
+                    text = stringResource(id = R.string.amount),
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -121,5 +135,4 @@ fun PreviewFavs() {
     CurrencyConversionAppTheme {
         Converting()
     }
-
 }

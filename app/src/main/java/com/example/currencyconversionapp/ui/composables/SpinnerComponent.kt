@@ -3,8 +3,9 @@ package com.example.currencyconversionapp.ui.composables
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,9 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -140,7 +144,6 @@ fun SpinnerComponent() {
                 .weight(0.8f)
                 .padding(start = 8.dp)
         )
-
         // The drop icon that shows list of all the currencies the user can choose from
         IconButton(
             onClick = { isExpanded = isExpanded.not() },
@@ -157,14 +160,13 @@ fun SpinnerComponent() {
             )
         }
 
-        // The menu of all the currencies where the user can choose only one from it
+        /* The menu of all the currencies where the user can choose only one from it */
         DropdownMenu(
             expanded = isExpanded,
             modifier = Modifier
                 .height(250.dp)
                 .background(color = FieldColor),
-            onDismissRequest = { isExpanded = isExpanded.not() },
-            offset = DpOffset(15.dp, 0.dp)
+            onDismissRequest = { isExpanded = isExpanded.not() }
         ) {
             repeat(currenciesList.size) {
                 DropdownMenuItem(

@@ -40,6 +40,8 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -80,8 +82,6 @@ fun HomeScreen() {
                     )
                     .padding(start = 16.dp, end = 16.dp, top = 50.dp)
             ) {
-
-
                 Text(
                     text = stringResource(id = R.string.app_name),
                     modifier = Modifier.fillMaxWidth(),
@@ -99,6 +99,7 @@ fun HomeScreen() {
                     textAlign = TextAlign.Center,
                     style = TextStyle(
                         fontSize = 22.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_bold)),
                         fontWeight = FontWeight(600),
                         color = Color.White,
                     )
@@ -111,6 +112,7 @@ fun HomeScreen() {
                     textAlign = TextAlign.Center,
                     style = TextStyle(
                         fontSize = 12.sp,
+                        fontFamily= FontFamily(Font(R.font.montserrat_regular)),
                         fontWeight = FontWeight(400),
                         color = Color.White,
                     )
@@ -222,6 +224,8 @@ private fun MyTabItem(
             .fillMaxHeight()
             .wrapContentHeight(Alignment.CenterVertically),
         text = text,
+        fontFamily = FontFamily(Font(R.font.poppins_regular)),
+        fontWeight = FontWeight(400),
         color = tabTextColor,
         textAlign = TextAlign.Center,
     )

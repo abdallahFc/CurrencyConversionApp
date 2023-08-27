@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -26,12 +27,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.ui.composables.Currency
 import com.example.currencyconversionapp.ui.composables.CurrencyItem
-import com.example.currencyconversionapp.ui.composables.currenciesList
-import com.example.currencyconversionapp.ui.feature.favourites.navigateToFavouritesScreen
-import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
+
+//val currenciesList = listOf(
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag),
+//    Currency("EGP", R.drawable.egypt_flag)
+//)
 //val currenciesList = listOf(
 //    Currency("EGP", R.drawable.egypt_flag),
 //    Currency("EGP", R.drawable.egypt_flag),
@@ -129,7 +152,7 @@ fun ConverterScreen() {
         }
         items(currenciesList.size) {
             CurrencyItem(
-                currencyName = currenciesList[it].currencyName,
+                currencyTitle = currenciesList[it].currencyName,
                 flag = currenciesList[it].currencyFlag,
                 rate = "1.32"
             )

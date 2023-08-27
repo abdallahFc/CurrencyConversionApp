@@ -13,9 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.theme.ButtonColor
 import com.example.currencyconversionapp.ui.theme.White
 
@@ -37,6 +40,7 @@ fun CustomButton(text: String, onClick: () -> Unit) {
     ) {
         Text(
             text = text,
+            fontFamily = FontFamily(Font(R.font.poppins_extrabold)),
             style = TextStyle(
                 fontSize = 16.sp,
                 fontWeight = FontWeight(700),
