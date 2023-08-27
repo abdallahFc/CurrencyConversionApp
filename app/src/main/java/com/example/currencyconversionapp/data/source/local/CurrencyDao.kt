@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.currencyconversionapp.domain.model.Currency
 
 @Dao
 interface CurrencyDao {

@@ -12,11 +12,12 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.currencyconversionapp.ui.feature.home.HomeScreen
-import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
-import com.example.currencyconversionapp.ui.navigation.MainNavGraph
-import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
+import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
+import com.example.currencyconversionapp.presentation.navigation.MainNavGraph
+import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

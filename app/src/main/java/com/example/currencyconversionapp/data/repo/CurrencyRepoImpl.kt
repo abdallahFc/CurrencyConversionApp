@@ -1,7 +1,8 @@
 package com.example.currencyconversionapp.data.repo
 
-import com.example.currencyconversionapp.data.source.local.Currency
+import com.example.currencyconversionapp.domain.model.Currency
 import com.example.currencyconversionapp.data.source.local.CurrencyDao
+import com.example.currencyconversionapp.domain.repository.CurrencyRepo
 
 class CurrencyRepoImpl(
     val currencyDao: CurrencyDao
