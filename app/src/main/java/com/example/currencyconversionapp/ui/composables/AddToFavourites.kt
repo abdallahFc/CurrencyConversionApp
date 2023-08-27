@@ -1,7 +1,6 @@
 package com.example.currencyconversionapp.ui.composables
 
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,13 +27,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.theme.LineShadowColor
 
 @Composable
 fun AddToFavourites(
-    currencyTitle: String,
-    flag: Int,
+    currencyName: String,
+    flag: String,
     isChecked: Boolean,
     onClickIconFavorite: () -> Unit
 ) {
@@ -43,10 +43,12 @@ fun AddToFavourites(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Row{
-                Image(
-                    painter = painterResource(id = flag),
+            Row {
+                AsyncImage(
+                    model = flag,
                     contentDescription = "flag Image",
+                    placeholder = painterResource(id = R.drawable.placeholder),
+                    error = painterResource(id = R.drawable.placeholder),
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
                         .size(48.dp)
@@ -55,7 +57,7 @@ fun AddToFavourites(
                 Column(modifier = Modifier.padding(start = 16.dp)) {
                     Text(
                         modifier = Modifier.padding(bottom = 2.dp),
-                        text = currencyTitle,
+                        text = currencyName,
                         style = TextStyle(
                             fontSize = 14.sp,
                             fontWeight = FontWeight(400),
@@ -91,7 +93,9 @@ fun AddToFavourites(
 
         }
         Divider(
-            modifier = Modifier.padding(top=12.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(top = 12.dp)
+                .fillMaxWidth()
                 .height(1.dp)
                 .background(LineShadowColor)
         )
@@ -104,7 +108,7 @@ fun AddToFavourites(
 fun PreviewFav() {
     AddToFavourites(
         "EGP",
-        R.drawable.egypt_flag,
+        "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
         isChecked = true,
         onClickIconFavorite = {}
     )

@@ -21,7 +21,7 @@ val ButtonColor = Color(0xFF363636)
 val FieldColor = Color(0xFFF9F9F9)
 val FieldShadowColor = Color(0xFFC5C5C5)
 val CardColor = Color(0xFFF8F8F8)
-val CurrencyNameColor = Color(0xFF202020)
+val CurrencyCodeColor = Color(0xFF202020)
 
 // Dark mode
 val BackgroundDark = Color(0xFF212121)

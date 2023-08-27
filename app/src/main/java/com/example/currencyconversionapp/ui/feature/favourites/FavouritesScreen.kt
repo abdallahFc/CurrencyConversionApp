@@ -3,30 +3,24 @@ package com.example.currencyconversionapp.ui.feature.favourites
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -49,12 +43,11 @@ fun FavouritesScreen() {
 
         Image(
             modifier = Modifier
-                .height(48.dp)
+                .size(55.dp)
                 .aspectRatio(1f)
                 .align(Alignment.End)
-                .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.surface)
-                .padding(16.dp),
+                .padding(16.dp)
+                .clickable { },
             painter = painterResource(id = R.drawable.close),
             contentDescription = null
         )
@@ -64,16 +57,15 @@ fun FavouritesScreen() {
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
-                .padding(top=26.dp)
+                .padding(top = 26.dp, bottom = 80.dp)
         ) {
 
             Text(
                 text = "My Favorites",
                 style = TextStyle(
                     fontSize = 18.sp,
-                    /*fontFamily = FontFamily(Font(R.font.montserrat)),*/
                     fontWeight = FontWeight(500),
-                    color = Color(0xFF121212),
+                    color = MaterialTheme.colorScheme.onPrimary,
                 ),
                 modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
             )
@@ -84,7 +76,7 @@ fun FavouritesScreen() {
             )
             {
                 items(currenciesList) {
-                    AddToFavourites(currencyTitle = it.currencyName, flag = it.currencyFlag,true) {}
+                    AddToFavourites(currencyName = it.currencyName, flag = it.currencyFlag, true) {}
                 }
             }
         }
