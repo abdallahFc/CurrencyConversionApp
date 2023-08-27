@@ -32,30 +32,6 @@ import com.example.currencyconversionapp.presentation.feature.favourites.navigat
 import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 
-
-//val currenciesList = listOf(
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag)
-//)
 //val currenciesList = listOf(
 //    Currency("EGP", R.drawable.egypt_flag),
 //    Currency("EGP", R.drawable.egypt_flag),
@@ -153,7 +129,7 @@ fun ConverterScreen() {
         }
         items(currenciesList.size) {
             CurrencyItem(
-                currencyTitle = currenciesList[it].currencyName,
+                currencyName = currenciesList[it].currencyName,
                 flag = currenciesList[it].currencyFlag,
                 rate = "1.32"
             )
