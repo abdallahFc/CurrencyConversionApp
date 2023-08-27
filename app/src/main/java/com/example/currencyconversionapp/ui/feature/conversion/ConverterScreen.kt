@@ -27,10 +27,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.ui.composables.Currency
 import com.example.currencyconversionapp.ui.composables.CurrencyItem
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
+
+data class Currency (
+    val currencyName: String,
+    val currencyFlag: Int
+)
 val currenciesList = listOf(
     Currency("EGP", R.drawable.egypt_flag),
     Currency("EGP", R.drawable.egypt_flag),

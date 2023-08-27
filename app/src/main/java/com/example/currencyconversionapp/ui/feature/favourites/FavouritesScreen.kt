@@ -29,13 +29,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.composables.AddToFavourites
-import com.example.currencyconversionapp.ui.composables.currenciesList
+import com.example.currencyconversionapp.ui.feature.conversion.currenciesList
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 import com.example.currencyconversionapp.ui.theme.White
 
@@ -71,7 +73,7 @@ fun FavouritesScreen() {
                 text = "My Favorites",
                 style = TextStyle(
                     fontSize = 18.sp,
-                    /*fontFamily = FontFamily(Font(R.font.montserrat)),*/
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     fontWeight = FontWeight(500),
                     color = Color(0xFF121212),
                 ),

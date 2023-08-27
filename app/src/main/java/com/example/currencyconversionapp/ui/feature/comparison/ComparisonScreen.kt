@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,7 +35,9 @@ import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 fun ComparisonScreen() {
     val viewModel = ConverterViewModel()
     Column(
-        modifier = Modifier.fillMaxSize().padding(32.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -41,11 +45,14 @@ fun ComparisonScreen() {
             verticalAlignment = Alignment.Top
         ) {
             Column(
-                modifier =  Modifier.weight(1f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = stringResource(id = R.string.amount),
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -55,16 +62,18 @@ fun ComparisonScreen() {
                 Spacer(modifier = Modifier.height(10.dp))
                 AmountField(
                     text = "1",
-                ) {
-
-                }
+                    onValueChange = {},
+                )
             }
             Column(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = stringResource(id = R.string.from),
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -72,7 +81,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(184.dp,48.dp)
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -82,11 +91,14 @@ fun ComparisonScreen() {
             verticalAlignment = Alignment.Top
         ) {
             Column(
-                modifier =  Modifier.weight(1f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Targeted currency",
+                    text = stringResource(R.string.targeted_currency),
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -94,14 +106,17 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(152.dp,48.dp)
             }
             Column(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text ="Targeted currency",
+                    text = stringResource(R.string.targeted_currency),
+                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -109,7 +124,7 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(152.dp,48.dp)
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -119,11 +134,15 @@ fun ComparisonScreen() {
             verticalAlignment = Alignment.Top
         ) {
             ConvertedFiled(
-                modifier = Modifier.weight(1f).padding(end = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
                 text = "1"
             )
             ConvertedFiled(
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
                 text = "1"
             )
         }

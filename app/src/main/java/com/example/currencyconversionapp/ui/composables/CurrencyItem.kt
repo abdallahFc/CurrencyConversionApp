@@ -23,6 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,9 +54,10 @@ fun CurrencyItem(
                         .clip(CircleShape)
                 )
                 Column(modifier = Modifier.padding(start = 16.dp)) {
-                    androidx.compose.material.Text(
+                    Text(
                         modifier = Modifier.padding(bottom = 2.dp),
                         text = currencyTitle,
+                        fontFamily = FontFamily(Font(R.font.poppins_regular)),
                         style = TextStyle(
                             fontSize = 14.sp,
                             fontWeight = FontWeight(400),
@@ -63,6 +66,7 @@ fun CurrencyItem(
                     )
                     Text(
                         text = "CURRENCY",
+                        fontFamily = FontFamily(Font(R.font.poppins_regular)),
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight(400),
@@ -76,6 +80,7 @@ fun CurrencyItem(
             Text(
                 text = rate,
                 modifier = Modifier.align(Alignment.CenterVertically),
+                fontFamily = FontFamily(Font(R.font.poppins_regular)),
                 style = TextStyle(
                     fontSize = 18.sp,
                     fontWeight = FontWeight(700),
