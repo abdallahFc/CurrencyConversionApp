@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.composables.CurrencyItem
 import com.example.currencyconversionapp.ui.composables.currenciesList
+import com.example.currencyconversionapp.ui.feature.favourites.navigateToFavouritesScreen
+import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
 //val currenciesList = listOf(
@@ -100,8 +102,11 @@ fun ConverterScreen() {
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                 )
+                val navController = LocalNavigationProvider.current
                 OutlinedButton(
-                    onClick = {},
+                    onClick = {
+                              navController.navigateToFavouritesScreen()
+                    },
                     modifier = Modifier
                         .height(35.dp)
                 ) {

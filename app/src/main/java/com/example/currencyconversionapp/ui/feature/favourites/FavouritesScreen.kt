@@ -29,58 +29,64 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.composables.AddToFavourites
+import com.example.currencyconversionapp.ui.composables.ContentVisibility
 import com.example.currencyconversionapp.ui.composables.currenciesList
+import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 import com.example.currencyconversionapp.ui.theme.White
 
 @Composable
 fun FavouritesScreen() {
-    Column(
-        modifier = Modifier
-            .padding(vertical = 32.dp, horizontal = 16.dp)
-            .background(color = White)
-    ) {
-
-        Image(
+    ContentVisibility(state = true) {
+        Column(
             modifier = Modifier
-                .size(55.dp)
-                .aspectRatio(1f)
-                .align(Alignment.End)
-                .padding(16.dp)
-                .clickable { },
-            painter = painterResource(id = R.drawable.close),
-            contentDescription = null
-        )
-
-
-        Card(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            shape = RoundedCornerShape(20.dp),
-            modifier = Modifier
-                .padding(top = 26.dp, bottom = 80.dp)
+                .padding(vertical = 32.dp, horizontal = 16.dp)
+                .background(color = White)
         ) {
-
-            Text(
-                text = "My Favorites",
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight(500),
-                    color = MaterialTheme.colorScheme.onPrimary,
-                ),
-                modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
+            val navController = LocalNavigationProvider.current
+            Image(
+                modifier = Modifier
+                    .size(55.dp)
+                    .aspectRatio(1f)
+                    .align(Alignment.End)
+                    .padding(16.dp)
+                    .clickable {
+                        navController.navigateUp()
+                    },
+                painter = painterResource(id = R.drawable.close),
+                contentDescription = null
             )
 
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(8.dp)
-            )
-            {
-                items(currenciesList) {
-                    AddToFavourites(currencyName = it.currencyName, flag = it.currencyFlag, true) {}
+
+            Card(
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier
+                    .padding(top = 26.dp, bottom = 80.dp)
+            ) {
+
+                Text(
+                    text = "My Favorites",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight(500),
+                        color = MaterialTheme.colorScheme.onPrimary,
+                    ),
+                    modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
+                )
+
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(8.dp)
+                )
+                {
+                    items(currenciesList) {
+                        AddToFavourites(currencyName = it.currencyName, flag = it.currencyFlag, true) {}
+                    }
                 }
             }
+            Spacer(modifier = Modifier.weight(1f))
         }
-        Spacer(modifier = Modifier.weight(1f))
     }
 }
 

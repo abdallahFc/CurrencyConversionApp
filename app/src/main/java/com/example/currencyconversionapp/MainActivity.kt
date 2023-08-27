@@ -8,26 +8,32 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import com.example.currencyconversionapp.ui.feature.home.HomeScreen
+import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
+import com.example.currencyconversionapp.ui.navigation.MainNavGraph
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CurrencyConversionAppTheme {
-                // A surface container using the 'background' color from the theme
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    //Greeting("Android")
-                    HomeScreen()
+            CompositionLocalProvider(LocalNavigationProvider provides rememberNavController()) {
+                CurrencyConversionAppTheme {
+                    // A surface container using the 'background' color from the theme
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.background),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        //Greeting("Android")
+                        MainNavGraph()
+                    }
                 }
             }
         }
