@@ -42,14 +42,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.domain.model.Currency
+import com.example.currencyconversionapp.presentation.components.ContentVisibility
 import com.example.currencyconversionapp.presentation.components.CurrencyItem
 import com.example.currencyconversionapp.presentation.components.currenciesList
 import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesScreen
 import com.example.currencyconversionapp.presentation.feature.favourites.navigateToFavouritesScreen
 import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 //val currenciesList = listOf(
 //    Currency("EGP", R.drawable.egypt_flag),
@@ -76,16 +81,16 @@ import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAp
 //)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConverterScreen(viewModel: ConverterViewModel = viewModel()) {
+fun ConverterScreen(viewModel: ConverterViewModel = hiltViewModel()) {
     val scope = rememberCoroutineScope()
     var list by remember { mutableStateOf(listOf<Currency>()) }
     LaunchedEffect(key1 = Unit) {
         Log.d("currencies", list.toString())
         scope.launch {
             viewModel.getCurrencies()
-            viewModel.favCurrenciesList.collectLatest { currencyList ->
-                currencyList?.let { currencies ->
-                    list = currencies.toMutableList()
+            viewModel.favCurrenciesList.collectLatest {
+                it?.let {
+                    list = it.toMutableList()
                 }
             }
         }

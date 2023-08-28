@@ -39,7 +39,7 @@ import com.example.currencyconversionapp.R
 
 
 /* This is a dummy list of some currencies to test the DropDownMenu */
-data class Currency(val code: String, val name: String, val flag: String)
+data class Currency(val code: String, val name: String, val flag: String, var isSelected: Boolean)
 
 val currenciesList = listOf(
     Currency(

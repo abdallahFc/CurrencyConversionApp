@@ -87,7 +87,8 @@ fun ComparisonScreen( viewModel:ConverterViewModel = viewModel()) {
                     Currency(
                         code = "EGP",
                         name = "Egyptian Pound",
-                        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+                        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
+                        isSelected = false
                     )
                 )
             }
@@ -118,7 +119,8 @@ fun ComparisonScreen( viewModel:ConverterViewModel = viewModel()) {
                     Currency(
                         code = "USD",
                         name = "US Dollar",
-                        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
+                        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
+                        isSelected = false
                     )
                 )
             }
@@ -142,6 +144,7 @@ fun ComparisonScreen( viewModel:ConverterViewModel = viewModel()) {
                     Currency(
                         code = "GBP",
                         name = "Sterling Pound",
+                        isSelected = false,
                         flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
                     )
                 )

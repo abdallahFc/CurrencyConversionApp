@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.presentation.components.AddToFavourites
@@ -45,7 +46,7 @@ import com.example.currencyconversionapp.ui.feature.favourites.FavouritesViewMod
 import kotlinx.coroutines.launch
 
 @Composable
-fun FavouritesScreen(favViewModel: FavouritesViewModel = viewModel()) {
+fun FavouritesScreen(favViewModel: FavouritesViewModel = hiltViewModel()) {
 
     var isChecked by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
