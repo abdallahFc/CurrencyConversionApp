@@ -46,11 +46,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.ui.composables.CurrencyItem
-import com.example.currencyconversionapp.ui.composables.currenciesList
-import com.example.currencyconversionapp.ui.feature.favourites.FavouritesScreen
-import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
-import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 import com.example.currencyconversionapp.domain.model.Currency
 import com.example.currencyconversionapp.presentation.components.ContentVisibility
 import com.example.currencyconversionapp.presentation.components.CurrencyItem
