@@ -8,16 +8,16 @@ import androidx.room.Query
 @Dao
 interface CurrencyDao {
 
-    @Query("SELECT * FROM Image_table")
-    fun getCurrencies(): List<Currency>
+    @Query("SELECT * FROM CURRENCY_TABLE")
+    suspend fun getCurrencies(): List<Currency>
 
-    @Query("SELECT * FROM Image_table WHERE code = :code")
-    suspend fun getCurrencyByCode(code: String) : Currency?
+    @Query("SELECT * FROM CURRENCY_TABLE WHERE code = :code")
+    suspend fun getCurrencyByCode(code: String): Currency?
 
     @Insert
-    fun insertCurrency(currency: Currency)
+    suspend fun insertCurrency(currency: Currency)
 
     @Delete
-    fun deleteCurrency(currency: Currency)
+    suspend fun deleteCurrency(currency: Currency)
 
 }

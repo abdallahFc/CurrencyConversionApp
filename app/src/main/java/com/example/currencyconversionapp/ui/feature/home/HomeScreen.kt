@@ -25,9 +25,10 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -53,16 +54,14 @@ import com.example.currencyconversionapp.ui.theme.Black
 import com.example.currencyconversionapp.ui.theme.ButtonColor
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 import com.example.currencyconversionapp.ui.theme.Grey
-import com.example.currencyconversionapp.ui.theme.White
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen() {
-    val pagerState = rememberPagerState(pageCount = {
-        2
-    }, initialPage = 0)
+
+    val pagerState = rememberPagerState(pageCount = { 2 }, initialPage = 0)
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -80,8 +79,6 @@ fun HomeScreen() {
                     )
                     .padding(start = 16.dp, end = 16.dp, top = 50.dp)
             ) {
-
-
                 Text(
                     text = stringResource(id = R.string.app_name),
                     modifier = Modifier.fillMaxWidth(),
@@ -116,7 +113,7 @@ fun HomeScreen() {
                     )
                 )
             }
-            centerControls(
+            CenterControls(
                 Modifier
                     .align(Alignment.BottomCenter)
                     .layout { measurable, constraints ->
@@ -127,27 +124,27 @@ fun HomeScreen() {
                     }, pagerState
             )
         }
-        bottomControls(Modifier.weight(0.7f), pagerState)
+        BottomControls(Modifier.weight(0.7f), pagerState)
     }
 }
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun centerControls(layout: Modifier, pagerState: PagerState) {
-    CustomTabSample(layout, pagerState)
+fun CenterControls(modifier: Modifier, pagerState: PagerState) {
+    CustomTabSample(modifier, pagerState)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun bottomControls(layout: Modifier, pagerState: PagerState) {
+fun BottomControls(modifier: Modifier, pagerState: PagerState) {
     Column(
-        modifier = layout.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) {
         HorizontalPager(
             state = pagerState,
             userScrollEnabled = false,
-            modifier = layout
+            modifier = modifier
                 .fillMaxSize()
         ) { page ->
             when (page) {
@@ -196,7 +193,7 @@ private fun MyTabItem(
 ) {
     val tabTextColor: Color by animateColorAsState(
         targetValue = if (isSelected) {
-            Black
+            MaterialTheme.colorScheme.onPrimary
         } else {
             ButtonColor
         },
@@ -244,7 +241,7 @@ fun CustomTab(
     Box(
         modifier = modifier
             .clip(CircleShape)
-            .background(Grey)
+            .background(MaterialTheme.colorScheme.surface)
             .height(54.dp)
             .padding(
                 end = if (selectedItemIndex == 1) 4.dp else 0.dp,
@@ -254,7 +251,7 @@ fun CustomTab(
         MyTabIndicator(
             indicatorWidth = tabWidth,
             indicatorOffset = indicatorOffset,
-            indicatorColor = Color.White,
+            indicatorColor = MaterialTheme.colorScheme.background /*Color.White*/,
         )
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -278,13 +275,13 @@ fun CustomTab(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CustomTabSample(layout: Modifier, pagerState: PagerState) {
+fun CustomTabSample(modifier: Modifier, pagerState: PagerState) {
     val (selected, setSelected) = remember {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
     val coroutineScope = rememberCoroutineScope()
     CustomTab(
-        modifier = layout,
+        modifier = modifier,
         items = listOf(
             stringResource(id = R.string.convert),
             stringResource(id = R.string.compare)
@@ -300,10 +297,9 @@ fun CustomTabSample(layout: Modifier, pagerState: PagerState) {
 }
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Preview(showBackground = true)
 @Composable
-fun PreviewFavs() {
+fun PreviewFavourites() {
     CurrencyConversionAppTheme {
         HomeScreen()
     }
