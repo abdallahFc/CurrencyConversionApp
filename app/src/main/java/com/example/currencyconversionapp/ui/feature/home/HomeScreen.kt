@@ -162,7 +162,6 @@ fun HomeScreen() {
                         }
                     )
                 }
-
                 Text(
                     text = stringResource(id = R.string.currency_convert),
                     modifier = Modifier
