@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.presentation.feature.comparison
+package com.example.currencyconversionapp.ui.feature.comparison
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.domain.model.Currency
 import com.example.currencyconversionapp.presentation.components.AmountField
@@ -34,7 +35,7 @@ import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAp
 
 
 @Composable
-fun ComparisonScreen(viewModel: ConverterViewModel = hiltViewModel()) {
+fun ComparisonScreen(viewModel : ComparisonViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -62,10 +63,11 @@ fun ComparisonScreen(viewModel: ConverterViewModel = hiltViewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 AmountField(
-                    text = "1",
-                ) {
-
-                }
+                    text = viewModel.fromCurrencyAmount.value,
+                    onValueChange = {
+                        viewModel.fromCurrencyAmount.value = it
+                    }
+                )
             }
             Column(
                 modifier = Modifier
@@ -157,17 +159,17 @@ fun ComparisonScreen(viewModel: ConverterViewModel = hiltViewModel()) {
                 modifier = Modifier
                     .weight(1f)
                     .padding(end = 8.dp),
-                text = "1"
+                text = viewModel.toCurrency1Amount.value
             )
             ConvertedFiled(
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 8.dp),
-                text = "1"
+                text = viewModel.toCurrency2Amount.value
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton(stringResource(id = R.string.compare), viewModel::convertButtonClickable)
+        CustomButton(stringResource(id = R.string.compare), viewModel::compareButtonClickable)
     }
 }
 

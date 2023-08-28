@@ -35,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -45,6 +46,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.ui.composables.CurrencyItem
+import com.example.currencyconversionapp.ui.composables.currenciesList
+import com.example.currencyconversionapp.ui.feature.favourites.FavouritesScreen
+import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
+import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 import com.example.currencyconversionapp.domain.model.Currency
 import com.example.currencyconversionapp.presentation.components.ContentVisibility
 import com.example.currencyconversionapp.presentation.components.CurrencyItem

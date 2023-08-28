@@ -14,4 +14,6 @@
     <string name="my_portfolio">محفظتي</string>
     <string name="my_favourites">المفضلة</string>
     <string name="currency">عملة</string>
+    <string name="change_language">تغيير اللغة</string>
+    <string name="change_mode">تغيير الوضع</string>
 </resources>

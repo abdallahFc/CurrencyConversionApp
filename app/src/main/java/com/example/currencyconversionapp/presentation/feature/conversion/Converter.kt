@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.domain.model.Currency
 import com.example.currencyconversionapp.presentation.components.AmountField
@@ -31,6 +32,7 @@ import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAp
 
 @Composable
 fun Converting(viewModel: ConverterViewModel = viewModel()) {
+fun Converting(viewModel: ConverterViewModel = hiltViewModel()) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -45,7 +47,6 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
             ) {
                 Text(
                     text = stringResource(id = R.string.amount),
-                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -54,9 +55,9 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 AmountField(
-                    text = "1",
+                    text = viewModel.fromCurrencyAmount.value,
                 ) {
-
+                    viewModel.fromCurrencyAmount.value = it
                 }
             }
             Column(
@@ -67,7 +68,6 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
             ) {
                 Text(
                     text = stringResource(id = R.string.from),
-                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -131,7 +131,7 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 ConvertedFiled(
-                    text = "1"
+                    text = viewModel.toCurrencyAmount.value
                 )
             }
         }

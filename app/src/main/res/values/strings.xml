@@ -13,4 +13,6 @@
     <string name="my_portfolio">My Portfolio</string>
     <string name="my_favourites">My Favourites</string>
     <string name="currency">CURRENCY</string>
+    <string name="change_language">Change Language</string>
+    <string name="change_mode">Change Mode</string>
 </resources>
