@@ -67,14 +67,8 @@ import androidx.core.os.LocaleListCompat
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.composables.ModesDropDown
 import com.example.currencyconversionapp.ui.feature.comparison.ComparisonScreen
-import com.example.currencyconversionapp.ui.feature.conversion.ConverterScreen
-import com.example.currencyconversionapp.ui.theme.Black
-import com.example.currencyconversionapp.ui.theme.ButtonColor
-import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
-import com.example.currencyconversionapp.ui.theme.Grey
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
-import com.example.currencyconversionapp.presentation.feature.comparison.ComparisonScreen
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterScreen
 import com.example.currencyconversionapp.presentation.theme.Black
 import com.example.currencyconversionapp.presentation.theme.ButtonColor
@@ -86,9 +80,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen() {
-    val pagerState = rememberPagerState(pageCount = {
-        2
-    }, initialPage = 0)
     val pagerState = rememberPagerState(pageCount = { 2 }, initialPage = 0)
     val context = LocalContext.current
     var language by remember {

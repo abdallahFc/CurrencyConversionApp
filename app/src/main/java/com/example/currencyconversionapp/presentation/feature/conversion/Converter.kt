@@ -16,9 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,10 +26,8 @@ import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
 import com.example.currencyconversionapp.presentation.components.CustomButton
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
-import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 
 @Composable
-fun Converting(viewModel: ConverterViewModel = viewModel()) {
 fun Converting(viewModel: ConverterViewModel = hiltViewModel()) {
     Column {
         Row(
@@ -140,11 +136,3 @@ fun Converting(viewModel: ConverterViewModel = hiltViewModel()) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewFavs() {
-    CurrencyConversionAppTheme {
-        Converting()
-    }
-
-}
