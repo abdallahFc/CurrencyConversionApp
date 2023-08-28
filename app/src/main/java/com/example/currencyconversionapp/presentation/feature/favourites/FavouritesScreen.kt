@@ -1,6 +1,8 @@
-package com.example.currencyconversionapp.ui.feature.favourites
+package com.example.currencyconversionapp.presentation.feature.favourites
 
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -12,54 +14,30 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.ui.composables.AddToFavourites
-import com.example.currencyconversionapp.ui.composables.currenciesList
-import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
+import com.example.currencyconversionapp.presentation.components.AddToFavourites
+import com.example.currencyconversionapp.presentation.components.currenciesList
+import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 import kotlinx.coroutines.launch
 
-
 @Composable
-fun FavouritesScreen(favViewModel: FavouritesViewModel = viewModel()) {
+fun FavouritesScreen(favViewModel: FavouritesViewModel = hiltViewModel()) {
 
-    var isChecked by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-    /*Column(
-        modifier = Modifier
-            .padding(vertical = 32.dp, horizontal = 16.dp)
-            *//*.background(color = White)*//*
-            .fillMaxHeight(0.85f)
-    ) {
-    val navController = LocalNavigationProvider.current
-    Image(
-        modifier = Modifier
-            .size(55.dp)
-            .aspectRatio(1f)
-            .align(Alignment.End)
-            .padding(16.dp)
-            .clickable {
-                scope.launch {
-                    sheetState.collapse()
-                }
-                navController.navigateUp()
-            },
-        painter = painterResource(id = R.drawable.close),
-        contentDescription = null
-    )*/
+    val context = LocalContext.current
+    /*val addedList = mutableListOf<String>()*/
+    /*val deletedList = mutableListOf<String>()*/
+
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(20.dp),
@@ -81,34 +59,39 @@ fun FavouritesScreen(favViewModel: FavouritesViewModel = viewModel()) {
         )
         {
             items(currenciesList) { currency ->
-                LaunchedEffect(key1 = Unit) {
-                    scope.launch {
-                        isChecked = (favViewModel.getCurrencyByCode(currency.code) != null)
-                    }
-                }
                 AddToFavourites(
                     currencyName = currency.name,
                     flag = currency.flag,
-                    isChecked = isChecked
+                    code = currency.code,
                 ) {
-                    if (it && !isChecked) {
+                    if (!it) {
+                        Log.d("currency", "${currency.id}")
                         scope.launch {
+                            /*deletedList.add(currency.name)*/
+                            favViewModel.deleteCurrency(currency.code)
+                        }
+                        Toast.makeText(
+                            context,
+                            "${currency.name} Deleted from Favourites!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    if (it) {
+                        scope.launch {
+                            /*addedList.add(currency.name)*/
                             favViewModel.insertCurrency(currency)
                         }
+                        Toast.makeText(
+                            context,
+                            "${currency.name} Added to Favourites!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                    if (!it && isChecked) {
-                        scope.launch {
-                            favViewModel.deleteCurrency(currency)
-                        }
-                    }
-                    isChecked = it
                 }
             }
         }
     }
-    /*Spacer(modifier = Modifier.weight(1f))*/
 }
-//}
 
 
 @Preview(showBackground = true)
