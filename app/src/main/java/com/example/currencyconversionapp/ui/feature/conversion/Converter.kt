@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,8 +28,7 @@ import com.example.currencyconversionapp.ui.composables.SpinnerComponent
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
 @Composable
-fun Converting() {
-    val viewModel = ConverterViewModel()
+fun Converting(viewModel: ConverterViewModel = viewModel()) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),

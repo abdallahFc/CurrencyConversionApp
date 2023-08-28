@@ -9,4 +9,5 @@ data class Currency(
     val code: String,
     val name: String,
     val flag: String,
+    var isSelected: Boolean = false
 )

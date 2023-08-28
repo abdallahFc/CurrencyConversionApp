@@ -1,18 +1,22 @@
 package com.example.currencyconversionapp.ui.feature.conversion
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -21,13 +25,14 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -36,12 +41,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.data.source.local.Currency
+import com.example.currencyconversionapp.ui.composables.ContentVisibility
 import com.example.currencyconversionapp.ui.composables.CurrencyItem
-import com.example.currencyconversionapp.ui.composables.currenciesList
 import com.example.currencyconversionapp.ui.feature.favourites.FavouritesScreen
 import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 //val currenciesList = listOf(
 //    Currency("EGP", R.drawable.egypt_flag),
@@ -68,7 +77,20 @@ import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 //)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConverterScreen() {
+fun ConverterScreen(viewModel: ConverterViewModel = viewModel()) {
+    val scope = rememberCoroutineScope()
+    var list by remember { mutableStateOf(listOf<Currency>()) }
+    LaunchedEffect(key1 = Unit) {
+        Log.d("currencies", list.toString())
+        scope.launch {
+            viewModel.getCurrencies()
+            viewModel.favCurrenciesList.collectLatest { currencyList ->
+                currencyList?.let { currencies ->
+                    list = currencies.toMutableList()
+                }
+            }
+        }
+    }
 //    Column(
 //        modifier = Modifier
 //            .fillMaxSize(),
@@ -82,12 +104,34 @@ fun ConverterScreen() {
     var isSheetOpened by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
     if (isSheetOpened) {
+        LaunchedEffect(key1 = Unit) {
+            viewModel.getCurrencies()
+        }
         ModalBottomSheet(
             sheetState = sheetState,
             containerColor = MaterialTheme.colorScheme.surface,
-            onDismissRequest = { isSheetOpened = false }
+            onDismissRequest = {
+                isSheetOpened = false
+                scope.launch {
+                    viewModel.getCurrencies()
+                }
+            }
         ) {
             Column(modifier = Modifier.padding(15.dp)) {
+                Image(
+                    modifier = Modifier
+                        .size(55.dp)
+                        .aspectRatio(1f)
+                        .align(Alignment.End)
+                        .padding(16.dp)
+                        .clickable {
+                            scope.launch {
+                                isSheetOpened = false
+                            }
+                        },
+                    painter = painterResource(id = R.drawable.close),
+                    contentDescription = null
+                )
                 FavouritesScreen()
                 Spacer(modifier = Modifier.weight(1f))
             }
@@ -140,7 +184,7 @@ fun ConverterScreen() {
                         modifier = Modifier.size(24.dp),
                         painter = painterResource(id = R.drawable.add_icon),
                         contentDescription = "Add Icon",
-                        colorFilter = ColorFilter.tint(color=MaterialTheme.colorScheme.onPrimary)
+                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onPrimary)
                     )
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
@@ -165,12 +209,28 @@ fun ConverterScreen() {
                 )
             )
         }
-        items(currenciesList.size) {
-            CurrencyItem(
-                currencyName = currenciesList[it].name,
-                flag = currenciesList[it].flag,
-                rate = "1.32"
-            )
+
+        if (list.isEmpty()) {
+            item {
+                Text(text = "No Favourite Currencies")
+            }
+        } else {
+            items(list) {
+                var showEmpty by remember {
+                    mutableStateOf(false)
+                }
+                if (list.isEmpty()) {
+                    showEmpty = true
+                }
+                ContentVisibility(state = showEmpty) {
+                    Text(text = "No Favourite Currencies yet!")
+                }
+                CurrencyItem(
+                    currencyName = it.name,
+                    flag = it.flag,
+                    rate = "1.32"
+                )
+            }
         }
     }
 }
