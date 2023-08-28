@@ -3,10 +3,10 @@ package com.example.currencyconversionapp.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Image_table")
+@Entity(tableName = "CURRENCY_TABLE")
 data class Currency(
-    @PrimaryKey(autoGenerate = true) val id: Int? = null,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val code: String,
-    val title: String,
+    val name: String,
     val flag: String,
 )

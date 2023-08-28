@@ -16,12 +16,17 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,8 +41,9 @@ fun AddToFavourites(
     currencyName: String,
     flag: String,
     isChecked: Boolean,
-    onClickIconFavorite: () -> Unit
+    onClickIconFavorite: (Boolean) -> Unit
 ) {
+    var checked by remember { mutableStateOf(isChecked) }
     Column {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -65,7 +71,7 @@ fun AddToFavourites(
                         )
                     )
                     Text(
-                        text = "CURRENCY",
+                        text = stringResource(id = R.string.currency),
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight(400),
@@ -77,17 +83,20 @@ fun AddToFavourites(
             }
 
             IconButton(
-                onClick = { onClickIconFavorite() },
+                onClick = {
+                    checked = !checked
+                    onClickIconFavorite(checked)
+                },
                 modifier = Modifier.align(Alignment.CenterVertically)
             ) {
                 Icon(
                     painter = painterResource(
-                        id = if (isChecked) R.drawable.checked
+                        id = if (checked) R.drawable.checked
                         else R.drawable.not_checked
                     ),
                     contentDescription = "Add to favourites",
-                    tint = if (isChecked) Color(0xFF363636)
-                    else Color(0xFFB8B8B8)
+                    tint = if (checked) MaterialTheme.colorScheme.onPrimary
+                    else MaterialTheme.colorScheme.secondary
                 )
             }
 

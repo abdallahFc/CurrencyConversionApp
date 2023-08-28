@@ -1,9 +1,10 @@
-package com.example.currencyconversionapp.presentation.feature.conversion
+package com.example.currencyconversionapp.ui.feature.conversion
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -29,7 +31,7 @@ import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAp
 
 @Composable
 fun Converting() {
-    val viewModel=ConverterViewModel()
+    val viewModel = ConverterViewModel()
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -74,7 +76,13 @@ fun Converting() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(
+                    Currency(
+                        code = "EGP",
+                        name = "Egyptian Pound",
+                        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+                    )
+                )
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -99,7 +107,13 @@ fun Converting() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(
+                    Currency(
+                        code = "USD",
+                        name = "US Dollar",
+                        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
+                    )
+                )
             }
             Column(
                 modifier = Modifier
@@ -123,7 +137,7 @@ fun Converting() {
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton("Convert", viewModel::convertButtonClickable)
+        CustomButton(stringResource(id = R.string.convert), viewModel::convertButtonClickable)
     }
 }
 
@@ -133,4 +147,5 @@ fun PreviewFavs() {
     CurrencyConversionAppTheme {
         Converting()
     }
+
 }

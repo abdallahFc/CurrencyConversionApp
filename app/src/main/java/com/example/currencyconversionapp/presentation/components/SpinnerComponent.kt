@@ -23,61 +23,104 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.presentation.theme.FieldColor
 import com.example.currencyconversionapp.presentation.theme.FieldShadowColor
+import com.example.currencyconversionapp.data.source.local.Currency
 
 /* This is a dummy list of some currencies to test the DropDownMenu */
 data class Currency(val currencyCode: String, val currencyName: String, val currencyFlag: String)
 
 val currenciesList = listOf(
     Currency(
-        currencyCode = "EGP",
-        currencyName = "Egyptian Pound",
-        currencyFlag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+        code = "EGP",
+        name = "Egyptian Pound",
+        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
     ),
     Currency(
-        currencyCode = "USD",
-        currencyName = "US Dollar",
-        currencyFlag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
+        code = "USD",
+        name = "US Dollar",
+        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
     ),
     Currency(
-        currencyCode = "EUR",
-        currencyName = "Euro",
-        currencyFlag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png"
+        code = "EUR",
+        name = "Euro",
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png"
     ),
     Currency(
-        currencyCode = "GBP",
-        currencyName = "Sterling Pound",
-        currencyFlag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
+        code = "GBP",
+        name = "Sterling Pound",
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
     ),
     Currency(
-        currencyCode = "AED",
-        currencyName = "UAE Dirham",
-        currencyFlag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png"
+        code = "AED",
+        name = "UAE Dirham",
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png"
     ),
     Currency(
-        currencyCode = "JPY",
-        currencyName = "Japan Yen",
-        currencyFlag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png"
+        code = "JPY",
+        name = "Japan Yen",
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png"
     ),
     Currency(
-        currencyCode = "SAR",
-        currencyName = "Saudi Riyal",
-        currencyFlag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
+        code = "SAR",
+        name = "Saudi Riyal",
+        flag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
     ),
     Currency(
-        currencyCode = "KWD",
-        currencyName = "Kuwait Dinar",
-        currencyFlag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg"
+        code = "KWD",
+        name = "Kuwait Dinar",
+        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg"
+    ),
+    Currency(
+        code = "EGP",
+        name = "Egyptian Pound",
+        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+    ),
+    Currency(
+        code = "USD",
+        name = "US Dollar",
+        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
+    ),
+    Currency(
+        code = "EUR",
+        name = "Euro",
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png"
+    ),
+    Currency(
+        code = "GBP",
+        name = "Sterling Pound",
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
+    ),
+    Currency(
+        code = "AED",
+        name = "UAE Dirham",
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png"
+    ),
+    Currency(
+        code = "JPY",
+        name = "Japan Yen",
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png"
+    ),
+    Currency(
+        code = "SAR",
+        name = "Saudi Riyal",
+        flag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
+    ),
+    Currency(
+        code = "KWD",
+        name = "Kuwait Dinar",
+        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg"
     )
 )
 
@@ -86,17 +129,16 @@ val currenciesList = listOf(
  * it's a dropdown menu that have all the currencies and the user should choose one to convert it to another
  * currency.
  */
-@Preview
 @Composable
-fun SpinnerComponent() {
+fun SpinnerComponent(baseCurrency: Currency) {
     // this is a mutable state variable to control the dropDown menu whether it's expanded or not
 
     var isExpanded by remember { mutableStateOf(false) }
 
     // this the selected currency that the user will select from the dropDown menu, it's mutableState so it recompose the component every time the user select another currency
 
-    var selectedCurrencyCode by remember { mutableStateOf("EGP") }
-    var selectedCurrencyFlag by remember { mutableStateOf("https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg") }
+    var selectedCurrencyCode by remember { mutableStateOf(baseCurrency.code) }
+    var selectedCurrencyFlag by remember { mutableStateOf(baseCurrency.flag) }
 
     // The container of the flag, currency name and the drop icon
     Row(
@@ -104,14 +146,21 @@ fun SpinnerComponent() {
         modifier = Modifier
             .border(
                 width = 1.dp,
-                color = FieldShadowColor,
+                color = MaterialTheme.colorScheme.secondary,
                 shape = RoundedCornerShape(size = 20.dp)
             )
             .padding(0.5.dp)
             .fillMaxWidth()
             .height(48.dp)
-            .background(color = FieldColor, shape = RoundedCornerShape(size = 20.dp))
-            .clickable { isExpanded = isExpanded.not() }
+            .background(
+                color = MaterialTheme.colorScheme.surface,
+                shape = RoundedCornerShape(size = 20.dp)
+            )
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = { isExpanded = isExpanded.not() }
+            )
     ) {
         // The flag of the currency
         AsyncImage(
@@ -139,8 +188,9 @@ fun SpinnerComponent() {
                 .weight(0.8f)
                 .padding(start = 8.dp)
         )
+
         // The drop icon that shows list of all the currencies the user can choose from
-        IconButton(
+        /*IconButton(
             onClick = { isExpanded = isExpanded.not() },
             modifier = Modifier
                 .padding(end = 16.dp)
@@ -153,21 +203,31 @@ fun SpinnerComponent() {
                     .padding(1.dp),
                 tint = MaterialTheme.colorScheme.onPrimary
             )
-        }
+        }*/
+        Image(
+            painter = painterResource(id = R.drawable.drop_icon),
+            contentDescription = "drop menu icon",
+            modifier = Modifier
+                .padding(end = 16.dp)
+                .size(18.dp),
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onPrimary),
+            contentScale = ContentScale.FillBounds
+        )
 
-        /* The menu of all the currencies where the user can choose only one from it */
+        // The menu of all the currencies where the user can choose only one from it
         DropdownMenu(
             expanded = isExpanded,
             modifier = Modifier
                 .height(250.dp)
-                .background(color = FieldColor),
-            onDismissRequest = { isExpanded = isExpanded.not() }
+                .background(color = MaterialTheme.colorScheme.surface),
+            onDismissRequest = { isExpanded = false },
+            offset = DpOffset(15.dp, 0.dp)
         ) {
             repeat(currenciesList.size) {
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = currenciesList[it].currencyCode,
+                            text = currenciesList[it].code,
                             style = TextStyle(
                                 fontSize = 16.sp,
                                 /*fontFamily = FontFamily(Font(R.font.open sans)),*/
@@ -178,7 +238,7 @@ fun SpinnerComponent() {
                     },
                     leadingIcon = {
                         AsyncImage(
-                            model = currenciesList[it].currencyFlag,
+                            model = currenciesList[it].flag,
                             placeholder = painterResource(id = R.drawable.placeholder),
                             error = painterResource(id = R.drawable.placeholder),
                             contentDescription = "Currency Flag",
@@ -189,8 +249,8 @@ fun SpinnerComponent() {
                         )
                     },
                     onClick = {
-                        selectedCurrencyCode = currenciesList[it].currencyCode
-                        selectedCurrencyFlag = currenciesList[it].currencyFlag
+                        selectedCurrencyCode = currenciesList[it].code
+                        selectedCurrencyFlag = currenciesList[it].flag
                         isExpanded = isExpanded.not()
                     }
                 )

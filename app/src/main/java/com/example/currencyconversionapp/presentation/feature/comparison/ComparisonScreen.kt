@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -61,8 +62,9 @@ fun ComparisonScreen() {
                 Spacer(modifier = Modifier.height(10.dp))
                 AmountField(
                     text = "1",
-                    onValueChange = {},
-                )
+                ) {
+
+                }
             }
             Column(
                 modifier = Modifier
@@ -80,7 +82,13 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(
+                    Currency(
+                        code = "EGP",
+                        name = "Egyptian Pound",
+                        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+                    )
+                )
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -105,7 +113,13 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(
+                    Currency(
+                        code = "USD",
+                        name = "US Dollar",
+                        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
+                    )
+                )
             }
             Column(
                 modifier = Modifier
@@ -123,7 +137,13 @@ fun ComparisonScreen() {
                     )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                SpinnerComponent()
+                SpinnerComponent(
+                    Currency(
+                        code = "GBP",
+                        name = "Sterling Pound",
+                        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
+                    )
+                )
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -146,7 +166,7 @@ fun ComparisonScreen() {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton("Compare", viewModel::convertButtonClickable)
+        CustomButton(stringResource(id = R.string.compare), viewModel::convertButtonClickable)
     }
 }
 
