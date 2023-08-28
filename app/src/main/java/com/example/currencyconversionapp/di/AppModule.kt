@@ -19,30 +19,30 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    @Provides
-    @Singleton
-    fun provideNoteDatabase(app: Application): CurrencyDatabase {
-        return Room.databaseBuilder(
-            app,
-            CurrencyDatabase::class.java,
-            CurrencyDatabase.DATABASE_NAME,
-        ).build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideNoteRepository(db: CurrencyDatabase): CurrencyRepo {
-        return CurrencyRepoImpl(db.currencyDao)
-    }
-
-    @Provides
-    @Singleton
-    fun provideNoteUseCases(repository: CurrencyRepo) : CurrencyUseCases {
-        return CurrencyUseCases(
-            getCurrencies = GetCurrenciesUseCase(repository),
-            getCurrency = GetCurrencyUseCase(repository),
-            insertCurrency = InsertCurrencyUseCase(repository),
-            deleteCurrency = DeleteCurrencyUseCase(repository)
-        )
-    }
+//    @Provides
+//    @Singleton
+//    fun provideNoteDatabase(app: Application): CurrencyDatabase {
+//        return Room.databaseBuilder(
+//            app,
+//            CurrencyDatabase::class.java,
+//            CurrencyDatabase.DATABASE_NAME,
+//        ).build()
+//    }
+//
+//    @Provides
+//    @Singleton
+//    fun provideNoteRepository(db: CurrencyDatabase): CurrencyRepo {
+//        return CurrencyRepoImpl(db.currencyDao)
+//    }
+//
+//    @Provides
+//    @Singleton
+//    fun provideNoteUseCases(repository: CurrencyRepo) : CurrencyUseCases {
+//        return CurrencyUseCases(
+//            getCurrencies = GetCurrenciesUseCase(repository),
+//            getCurrency = GetCurrencyUseCase(repository),
+//            insertCurrency = InsertCurrencyUseCase(repository),
+//            deleteCurrency = DeleteCurrencyUseCase(repository)
+//        )
+//    }
 }

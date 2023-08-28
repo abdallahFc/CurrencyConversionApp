@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
+import com.example.currencyconversionapp.presentation.components.Currency
 import com.example.currencyconversionapp.presentation.components.CustomButton
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterViewModel

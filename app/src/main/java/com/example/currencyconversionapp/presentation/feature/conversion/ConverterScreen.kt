@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.presentation.components.CurrencyItem
 import com.example.currencyconversionapp.presentation.components.currenciesList
+import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesScreen
 import com.example.currencyconversionapp.presentation.feature.favourites.navigateToFavouritesScreen
 import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme

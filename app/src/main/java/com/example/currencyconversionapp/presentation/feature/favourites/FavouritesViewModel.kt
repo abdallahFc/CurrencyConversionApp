@@ -2,7 +2,7 @@ package com.example.currencyconversionapp.ui.feature.favourites
 
 import androidx.lifecycle.ViewModel
 import com.example.currencyconversionapp.data.repo.CurrencyRepository
-import com.example.currencyconversionapp.data.source.local.Currency
+import com.example.currencyconversionapp.domain.model.Currency
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

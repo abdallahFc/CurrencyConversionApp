@@ -1,8 +1,10 @@
 package com.example.currencyconversionapp.presentation.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,12 +36,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.presentation.theme.FieldColor
-import com.example.currencyconversionapp.presentation.theme.FieldShadowColor
-import com.example.currencyconversionapp.data.source.local.Currency
+
 
 /* This is a dummy list of some currencies to test the DropDownMenu */
-data class Currency(val currencyCode: String, val currencyName: String, val currencyFlag: String)
+data class Currency(val code: String, val name: String, val flag: String)
 
 val currenciesList = listOf(
     Currency(

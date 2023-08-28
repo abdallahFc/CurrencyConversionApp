@@ -7,7 +7,7 @@ import com.example.currencyconversionapp.domain.repository.CurrencyRepo
 class CurrencyRepoImpl(
     val currencyDao: CurrencyDao
 ) : CurrencyRepo {
-    override fun getCurrencies(): List<Currency> {
+    override suspend fun getCurrencies(): List<Currency> {
         return currencyDao.getCurrencies()
     }
 
@@ -15,11 +15,11 @@ class CurrencyRepoImpl(
         return currencyDao.getCurrencyByCode(code)
     }
 
-    override fun insertCurrency(currency: Currency) {
+    override suspend fun insertCurrency(currency: Currency) {
         currencyDao.insertCurrency(currency)
     }
 
-    override fun deleteCurrency(currency: Currency) {
+    override suspend fun deleteCurrency(currency: Currency) {
         currencyDao.deleteCurrency(currency)
     }
 

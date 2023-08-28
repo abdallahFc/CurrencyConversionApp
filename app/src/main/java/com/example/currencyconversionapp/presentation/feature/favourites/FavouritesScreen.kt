@@ -20,6 +20,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -35,6 +36,8 @@ import com.example.currencyconversionapp.presentation.components.currenciesList
 import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 import com.example.currencyconversionapp.presentation.theme.White
+import com.example.currencyconversionapp.ui.feature.favourites.FavouritesViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun FavouritesScreen(favViewModel: FavouritesViewModel = viewModel()) {
@@ -96,12 +99,12 @@ fun FavouritesScreen(favViewModel: FavouritesViewModel = viewModel()) {
                 ) {
                     if (it && !isChecked) {
                         scope.launch {
-                            favViewModel.insertCurrency(currency)
+                           // favViewModel.insertCurrency(currency)
                         }
                     }
                     if (!it && isChecked) {
                         scope.launch {
-                            favViewModel.deleteCurrency(currency)
+                            //favViewModel.deleteCurrency(currency)
                         }
                     }
                     isChecked = it
