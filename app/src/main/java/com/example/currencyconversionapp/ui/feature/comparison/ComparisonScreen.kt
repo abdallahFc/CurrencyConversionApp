@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.source.local.Currency
 import com.example.currencyconversionapp.ui.composables.AmountField
@@ -32,8 +33,7 @@ import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
 
 @Composable
-fun ComparisonScreen() {
-    val viewModel = ConverterViewModel()
+fun ComparisonScreen(viewModel : ComparisonViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -61,8 +61,10 @@ fun ComparisonScreen() {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 AmountField(
-                    text = "1",
-                    onValueChange = {},
+                    text = viewModel.fromCurrencyAmount.value,
+                    onValueChange = {
+                        viewModel.fromCurrencyAmount.value = it
+                    }
                 )
             }
             Column(
@@ -154,17 +156,17 @@ fun ComparisonScreen() {
                 modifier = Modifier
                     .weight(1f)
                     .padding(end = 8.dp),
-                text = "1"
+                text = viewModel.toCurrency1Amount.value
             )
             ConvertedFiled(
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 8.dp),
-                text = "1"
+                text = viewModel.toCurrency2Amount.value
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton(stringResource(id = R.string.compare), viewModel::convertButtonClickable)
+        CustomButton(stringResource(id = R.string.compare), viewModel::compareButtonClickable)
     }
 }
 

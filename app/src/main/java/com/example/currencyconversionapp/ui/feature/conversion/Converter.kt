@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.source.local.Currency
 import com.example.currencyconversionapp.ui.composables.AmountField
@@ -27,8 +28,7 @@ import com.example.currencyconversionapp.ui.composables.SpinnerComponent
 import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 
 @Composable
-fun Converting() {
-    val viewModel = ConverterViewModel()
+fun Converting(viewModel: ConverterViewModel = hiltViewModel()) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -51,9 +51,9 @@ fun Converting() {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 AmountField(
-                    text = "1",
+                    text = viewModel.fromCurrencyAmount.value,
                 ) {
-
+                    viewModel.fromCurrencyAmount.value = it
                 }
             }
             Column(
@@ -125,7 +125,7 @@ fun Converting() {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 ConvertedFiled(
-                    text = "1"
+                    text = viewModel.toCurrencyAmount.value
                 )
             }
         }
