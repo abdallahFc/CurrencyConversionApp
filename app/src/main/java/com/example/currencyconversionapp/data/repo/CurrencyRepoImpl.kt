@@ -19,8 +19,8 @@ class CurrencyRepoImpl(
         currencyDao.insertCurrency(currency)
     }
 
-    override suspend fun deleteCurrency(currency: Currency) {
-        currencyDao.deleteCurrency(currency)
+    override suspend fun deleteCurrency(code: String) {
+        currencyDao.deleteCurrency(code)
     }
 
 }

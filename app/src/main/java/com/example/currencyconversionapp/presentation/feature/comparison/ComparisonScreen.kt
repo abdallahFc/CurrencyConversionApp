@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -22,11 +21,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.domain.model.Currency
 import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
-import com.example.currencyconversionapp.presentation.components.Currency
 import com.example.currencyconversionapp.presentation.components.CustomButton
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterViewModel
@@ -34,7 +34,7 @@ import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAp
 
 
 @Composable
-fun ComparisonScreen( viewModel:ConverterViewModel = viewModel()) {
+fun ComparisonScreen(viewModel: ConverterViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -88,7 +88,6 @@ fun ComparisonScreen( viewModel:ConverterViewModel = viewModel()) {
                         code = "EGP",
                         name = "Egyptian Pound",
                         flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
-                        isSelected = false
                     )
                 )
             }
@@ -120,7 +119,6 @@ fun ComparisonScreen( viewModel:ConverterViewModel = viewModel()) {
                         code = "USD",
                         name = "US Dollar",
                         flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
-                        isSelected = false
                     )
                 )
             }
@@ -144,7 +142,6 @@ fun ComparisonScreen( viewModel:ConverterViewModel = viewModel()) {
                     Currency(
                         code = "GBP",
                         name = "Sterling Pound",
-                        isSelected = false,
                         flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
                     )
                 )

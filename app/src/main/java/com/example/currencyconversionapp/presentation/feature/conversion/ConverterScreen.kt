@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,7 +34,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -43,14 +44,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.domain.model.Currency
 import com.example.currencyconversionapp.presentation.components.ContentVisibility
 import com.example.currencyconversionapp.presentation.components.CurrencyItem
-import com.example.currencyconversionapp.presentation.components.currenciesList
 import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesScreen
-import com.example.currencyconversionapp.presentation.feature.favourites.navigateToFavouritesScreen
 import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 import kotlinx.coroutines.flow.collectLatest
@@ -115,10 +113,10 @@ fun ConverterScreen(viewModel: ConverterViewModel = hiltViewModel()) {
             sheetState = sheetState,
             containerColor = MaterialTheme.colorScheme.surface,
             onDismissRequest = {
-                isSheetOpened = false
                 scope.launch {
                     viewModel.getCurrencies()
                 }
+                isSheetOpened = false
             }
         ) {
             Column(modifier = Modifier.padding(15.dp)) {
@@ -128,16 +126,25 @@ fun ConverterScreen(viewModel: ConverterViewModel = hiltViewModel()) {
                         .aspectRatio(1f)
                         .align(Alignment.End)
                         .padding(16.dp)
-                        .clickable {
-                            scope.launch {
-                                isSheetOpened = false
-                            }
-                        },
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {
+                                scope.launch {
+                                    viewModel.getCurrencies()
+                                    isSheetOpened = false
+                                }
+                            }),
                     painter = painterResource(id = R.drawable.close),
-                    contentDescription = null
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
                 )
                 FavouritesScreen()
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(
+                    modifier = Modifier
+                        .weight(1f)
+                        .alpha(0.3f)
+                )
             }
         }
     }

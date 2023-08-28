@@ -10,5 +10,5 @@ interface CurrencyRepo {
 
     suspend fun insertCurrency(currency: Currency)
 
-    suspend fun deleteCurrency(currency: Currency)
+    suspend fun deleteCurrency(code: String)
 }

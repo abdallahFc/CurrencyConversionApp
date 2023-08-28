@@ -16,6 +16,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,18 +33,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesViewModel
 import com.example.currencyconversionapp.presentation.theme.LineShadowColor
 
 @Composable
 fun AddToFavourites(
     currencyName: String,
     flag: String,
-    isChecked: Boolean,
+    code: String,
     onClickIconFavorite: (Boolean) -> Unit
 ) {
-    var checked by remember { mutableStateOf(isChecked) }
+    val favViewModel: FavouritesViewModel = hiltViewModel()
+    var checked by remember {
+        mutableStateOf(false)
+    }
+    LaunchedEffect(key1 = Unit) {
+        val currency = favViewModel.getCurrencyByCode(code)
+        checked = (currency != null)
+    }
     Column {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -116,9 +126,9 @@ fun AddToFavourites(
 @Composable
 fun PreviewFav() {
     AddToFavourites(
-        "EGP",
+        "Egyptian Pound",
         "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
-        isChecked = true,
+        "EGP",
         onClickIconFavorite = {}
     )
 }
