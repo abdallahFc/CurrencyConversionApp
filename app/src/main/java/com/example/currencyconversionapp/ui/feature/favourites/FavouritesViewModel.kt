@@ -12,4 +12,5 @@ class FavouritesViewModel @Inject constructor(private val currencyRepository: Cu
     suspend fun getCurrencyByCode(code: String) = currencyRepository.getCurrencyByCode(code)
     suspend fun insertCurrency(currency: Currency) = currencyRepository.insertCurrency(currency)
     suspend fun deleteCurrency(currency: Currency) = currencyRepository.deleteCurrency(currency)
+
 }

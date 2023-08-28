@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Upsert
 
 @Dao
 interface CurrencyDao {
@@ -14,7 +15,7 @@ interface CurrencyDao {
     @Query("SELECT * FROM CURRENCY_TABLE WHERE code = :code")
     suspend fun getCurrencyByCode(code: String): Currency?
 
-    @Insert
+    @Upsert
     suspend fun insertCurrency(currency: Currency)
 
     @Delete
