@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Upsert
+import com.example.currencyconversionapp.domain.model.Currency
 
 @Dao
 interface CurrencyDao {
@@ -15,7 +15,7 @@ interface CurrencyDao {
     @Query("SELECT * FROM CURRENCY_TABLE WHERE code = :code")
     suspend fun getCurrencyByCode(code: String): Currency?
 
-    @Upsert
+    @Insert
     suspend fun insertCurrency(currency: Currency)
 
     @Delete
