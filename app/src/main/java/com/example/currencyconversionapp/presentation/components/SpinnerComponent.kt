@@ -36,71 +36,57 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.domain.model.Currency
 
 
 /* This is a dummy list of some currencies to test the DropDownMenu */
-data class Currency(val code: String, val name: String, val flag: String, var isSelected: Boolean)
+//data class Currency(val code: String, val name: String, val flag: String, var isSelected: Boolean)
 
 val currenciesList = listOf(
     Currency(
         code = "EGP",
         name = "Egyptian Pound",
-        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
-        isSelected = false
+        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
     ),
     Currency(
         code = "USD",
         name = "US Dollar",
-        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
-        isSelected = false
+        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
     ),
     Currency(
         code = "EUR",
         name = "Euro",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png",
-        isSelected = false
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png"
     ),
     Currency(
         code = "GBP",
         name = "Sterling Pound",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png",
-        isSelected = false
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
     ),
     Currency(
         code = "AED",
         name = "UAE Dirham",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png",
-        isSelected = false
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png"
     ),
     Currency(
         code = "JPY",
         name = "Japan Yen",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png",
-        isSelected = false
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png"
     ),
     Currency(
         code = "SAR",
         name = "Saudi Riyal",
-        flag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg",
-        isSelected = false
+        flag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
     ),
     Currency(
         code = "KWD",
         name = "Kuwait Dinar",
-        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg",
-        isSelected = false
+        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg"
     ),
     Currency(
         code = "BHD",
         name = "Bahrain Dinar",
-        flag = "https://cdn.britannica.com/67/5767-004-E0FF7201/Flag-Bahrain.jpg",
-        isSelected = false
-    ),
-    Currency(
-        code = "KWD",
-        name = "Kuwait Dinar",
-        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg",
-        isSelected = false
+        flag = "https://cdn.britannica.com/67/5767-004-E0FF7201/Flag-Bahrain.jpg"
     )
 )
 
@@ -170,20 +156,7 @@ fun SpinnerComponent(baseCurrency: Currency) {
         )
 
         // The drop icon that shows list of all the currencies the user can choose from
-        /*IconButton(
-            onClick = { isExpanded = isExpanded.not() },
-            modifier = Modifier
-                .padding(end = 16.dp)
-                .size(16.dp)
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.drop_icon),
-                contentDescription = "Show all currencies",
-                modifier = Modifier
-                    .padding(1.dp),
-                tint = MaterialTheme.colorScheme.onPrimary
-            )
-        }*/
+
         Image(
             painter = painterResource(id = R.drawable.drop_icon),
             contentDescription = "drop menu icon",

@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.ui.feature.favourites
+package com.example.currencyconversionapp.presentation.feature.favourites
 
 import androidx.lifecycle.ViewModel
 import com.example.currencyconversionapp.data.repo.CurrencyRepository
@@ -11,6 +11,6 @@ class FavouritesViewModel @Inject constructor(private val currencyRepository: Cu
     suspend fun getCurrencies() = currencyRepository.getCurrencies()
     suspend fun getCurrencyByCode(code: String) = currencyRepository.getCurrencyByCode(code)
     suspend fun insertCurrency(currency: Currency) = currencyRepository.insertCurrency(currency)
-    suspend fun deleteCurrency(currency: Currency) = currencyRepository.deleteCurrency(currency)
+    suspend fun deleteCurrency(code: String) = currencyRepository.deleteCurrency(code)
 
 }

@@ -22,9 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.domain.model.Currency
 import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
-import com.example.currencyconversionapp.presentation.components.Currency
 import com.example.currencyconversionapp.presentation.components.CustomButton
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
@@ -80,7 +80,6 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
                         code = "EGP",
                         name = "Egyptian Pound",
                         flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
-                        isSelected = false
                     )
                 )
             }
@@ -112,7 +111,6 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
                         code = "USD",
                         name = "US Dollar",
                         flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
-                        isSelected = false
                     )
                 )
             }

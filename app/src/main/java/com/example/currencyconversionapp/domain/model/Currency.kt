@@ -8,6 +8,5 @@ data class Currency(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val code: String,
     val name: String,
-    val flag: String,
-    var isSelected: Boolean = false
+    val flag: String
 )

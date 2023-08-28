@@ -8,5 +8,5 @@ class CurrencyRepository @Inject constructor(private val dao: CurrencyDao) {
     suspend fun getCurrencies() = dao.getCurrencies()
     suspend fun getCurrencyByCode(code: String) = dao.getCurrencyByCode(code)
     suspend fun insertCurrency(currency: Currency) = dao.insertCurrency(currency)
-    suspend fun deleteCurrency(currency: Currency) = dao.deleteCurrency(currency)
+    suspend fun deleteCurrency(code: String) = dao.deleteCurrency(code)
 }
