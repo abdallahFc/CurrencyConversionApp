@@ -1,9 +1,13 @@
 package com.example.currencyconversionapp.presentation.feature.favourites
 
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,22 +55,8 @@ fun FavouritesScreen(favViewModel: FavouritesViewModel = viewModel()) {
             *//*.background(color = White)*//*
             .fillMaxHeight(0.85f)
     ) {
-    val navController = LocalNavigationProvider.current
-    Image(
-        modifier = Modifier
-            .size(55.dp)
-            .aspectRatio(1f)
-            .align(Alignment.End)
-            .padding(16.dp)
-            .clickable {
-                scope.launch {
-                    sheetState.collapse()
-                }
-                navController.navigateUp()
-            },
-        painter = painterResource(id = R.drawable.close),
-        contentDescription = null
-    )*/
+    val navController = LocalNavigationProvider.current*/
+
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(20.dp),
@@ -89,7 +80,8 @@ fun FavouritesScreen(favViewModel: FavouritesViewModel = viewModel()) {
             items(currenciesList) { currency ->
                 LaunchedEffect(key1 = Unit) {
                     scope.launch {
-                        isChecked = (favViewModel.getCurrencyByCode(currency.code) != null)
+                        val currency = favViewModel.getCurrencyByCode(currency.code)
+                        isChecked = currency?.isSelected ?: false
                     }
                 }
                 AddToFavourites(
@@ -97,17 +89,19 @@ fun FavouritesScreen(favViewModel: FavouritesViewModel = viewModel()) {
                     flag = currency.flag,
                     isChecked = isChecked
                 ) {
-                    if (it && !isChecked) {
+                    if (it && isChecked) {
+                        currency.isSelected = true
                         scope.launch {
                            // favViewModel.insertCurrency(currency)
                         }
                     }
                     if (!it && isChecked) {
+                        currency.isSelected = false
                         scope.launch {
                             //favViewModel.deleteCurrency(currency)
                         }
                     }
-                    isChecked = it
+//                    isChecked = it
                 }
             }
         }

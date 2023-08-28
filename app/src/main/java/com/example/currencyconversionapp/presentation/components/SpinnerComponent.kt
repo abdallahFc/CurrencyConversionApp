@@ -45,82 +45,62 @@ val currenciesList = listOf(
     Currency(
         code = "EGP",
         name = "Egyptian Pound",
-        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
+        isSelected = false
     ),
     Currency(
         code = "USD",
         name = "US Dollar",
-        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
+        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
+        isSelected = false
     ),
     Currency(
         code = "EUR",
         name = "Euro",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png"
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png",
+        isSelected = false
     ),
     Currency(
         code = "GBP",
         name = "Sterling Pound",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png",
+        isSelected = false
     ),
     Currency(
         code = "AED",
         name = "UAE Dirham",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png"
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png",
+        isSelected = false
     ),
     Currency(
         code = "JPY",
         name = "Japan Yen",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png"
+        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png",
+        isSelected = false
     ),
     Currency(
         code = "SAR",
         name = "Saudi Riyal",
-        flag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
+        flag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg",
+        isSelected = false
     ),
     Currency(
         code = "KWD",
         name = "Kuwait Dinar",
-        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg"
+        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg",
+        isSelected = false
     ),
     Currency(
-        code = "EGP",
-        name = "Egyptian Pound",
-        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
-    ),
-    Currency(
-        code = "USD",
-        name = "US Dollar",
-        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
-    ),
-    Currency(
-        code = "EUR",
-        name = "Euro",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png"
-    ),
-    Currency(
-        code = "GBP",
-        name = "Sterling Pound",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
-    ),
-    Currency(
-        code = "AED",
-        name = "UAE Dirham",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png"
-    ),
-    Currency(
-        code = "JPY",
-        name = "Japan Yen",
-        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png"
-    ),
-    Currency(
-        code = "SAR",
-        name = "Saudi Riyal",
-        flag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
+        code = "BHD",
+        name = "Bahrain Dinar",
+        flag = "https://cdn.britannica.com/67/5767-004-E0FF7201/Flag-Bahrain.jpg",
+        isSelected = false
     ),
     Currency(
         code = "KWD",
         name = "Kuwait Dinar",
-        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg"
+        flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg",
+        isSelected = false
     )
 )
 
