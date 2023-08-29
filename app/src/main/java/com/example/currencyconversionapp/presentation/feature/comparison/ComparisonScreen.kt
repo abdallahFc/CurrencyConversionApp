@@ -22,9 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.domain.model.Currency
+import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
 import com.example.currencyconversionapp.presentation.components.CustomButton
@@ -84,7 +83,7 @@ fun ComparisonScreen(viewModel: ConverterViewModel = hiltViewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    Currency(
+                    CurrencyEntity(
                         code = "EGP",
                         name = "Egyptian Pound",
                         flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
@@ -115,7 +114,7 @@ fun ComparisonScreen(viewModel: ConverterViewModel = hiltViewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    Currency(
+                    CurrencyEntity(
                         code = "USD",
                         name = "US Dollar",
                         flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
@@ -139,7 +138,7 @@ fun ComparisonScreen(viewModel: ConverterViewModel = hiltViewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    Currency(
+                    CurrencyEntity(
                         code = "GBP",
                         name = "Sterling Pound",
                         flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
@@ -167,7 +166,7 @@ fun ComparisonScreen(viewModel: ConverterViewModel = hiltViewModel()) {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton(stringResource(id = R.string.compare), viewModel::convertButtonClickable)
+        CustomButton(stringResource(id = R.string.compare), viewModel::onConvertClicked)
     }
 }
 

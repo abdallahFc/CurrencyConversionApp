@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,81 +46,54 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.domain.model.Currency
+import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.components.ContentVisibility
 import com.example.currencyconversionapp.presentation.components.CurrencyItem
+import com.example.currencyconversionapp.presentation.components.EmptyView
+import com.example.currencyconversionapp.presentation.feature.conversion.combosable.Converting
 import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesScreen
+import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesViewModel
 import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-
-//val currenciesList = listOf(
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag),
-//    Currency("EGP", R.drawable.egypt_flag)
-//)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConverterScreen(viewModel: ConverterViewModel = hiltViewModel()) {
+fun ConverterScreen(
+    viewModel: ConverterViewModel = hiltViewModel(),
+    favViewModel: FavouritesViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsState()
     val scope = rememberCoroutineScope()
-    var list by remember { mutableStateOf(listOf<Currency>()) }
+    var list by remember { mutableStateOf(listOf<CurrencyEntity>()) }
     LaunchedEffect(key1 = Unit) {
         Log.d("currencies", list.toString())
         scope.launch {
-            viewModel.getCurrencies()
-            viewModel.favCurrenciesList.collectLatest {
+            favViewModel.getCurrencies()
+            favViewModel.favCurrenciesList.collectLatest {
                 it?.let {
                     list = it.toMutableList()
                 }
             }
         }
     }
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize(),
-//    ) {
-//        Converting()
-//        Divider(modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(30.dp))
-//        LiveExchange()
-//    }
     var isSheetOpened by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
     if (isSheetOpened) {
         LaunchedEffect(key1 = Unit) {
-            viewModel.getCurrencies()
+            favViewModel.getCurrencies()
         }
         ModalBottomSheet(
             sheetState = sheetState,
             containerColor = MaterialTheme.colorScheme.surface,
             onDismissRequest = {
                 scope.launch {
-                    viewModel.getCurrencies()
+                    favViewModel.getCurrencies()
                 }
                 isSheetOpened = false
             }
         ) {
-            Column(modifier = Modifier.padding(15.dp)) {
+            Column(modifier = Modifier.padding(16.dp)) {
                 Image(
                     modifier = Modifier
                         .size(55.dp)
@@ -131,7 +105,7 @@ fun ConverterScreen(viewModel: ConverterViewModel = hiltViewModel()) {
                             indication = null,
                             onClick = {
                                 scope.launch {
-                                    viewModel.getCurrencies()
+                                    favViewModel.getCurrencies()
                                     isSheetOpened = false
                                 }
                             }),
@@ -157,7 +131,7 @@ fun ConverterScreen(viewModel: ConverterViewModel = hiltViewModel()) {
         contentPadding = PaddingValues(8.dp)
     ) {
         item {
-            Converting()
+            Converting(viewModel, state)
         }
         item {
             Divider(
@@ -182,8 +156,6 @@ fun ConverterScreen(viewModel: ConverterViewModel = hiltViewModel()) {
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                 )
-                val navController = LocalNavigationProvider.current
-
                 OutlinedButton(
                     onClick = {
                         isSheetOpened = true
@@ -223,7 +195,7 @@ fun ConverterScreen(viewModel: ConverterViewModel = hiltViewModel()) {
 
         if (list.isEmpty()) {
             item {
-                Text(text = "No Favourite Currencies")
+                EmptyView(state =true)
             }
         } else {
             items(list) {

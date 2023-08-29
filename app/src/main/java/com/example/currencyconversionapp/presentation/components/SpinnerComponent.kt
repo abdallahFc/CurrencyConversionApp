@@ -15,8 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,60 +28,59 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.domain.model.Currency
+import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 
 
 /* This is a dummy list of some currencies to test the DropDownMenu */
 //data class Currency(val code: String, val name: String, val flag: String, var isSelected: Boolean)
 
 val currenciesList = listOf(
-    Currency(
+    CurrencyEntity(
         code = "EGP",
         name = "Egyptian Pound",
         flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
     ),
-    Currency(
+    CurrencyEntity(
         code = "USD",
         name = "US Dollar",
         flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg"
     ),
-    Currency(
+    CurrencyEntity(
         code = "EUR",
         name = "Euro",
         flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/2560px-Flag_of_Europe.svg.png"
     ),
-    Currency(
+    CurrencyEntity(
         code = "GBP",
         name = "Sterling Pound",
         flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
     ),
-    Currency(
+    CurrencyEntity(
         code = "AED",
         name = "UAE Dirham",
         flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png"
     ),
-    Currency(
+    CurrencyEntity(
         code = "JPY",
         name = "Japan Yen",
         flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png"
     ),
-    Currency(
+    CurrencyEntity(
         code = "SAR",
         name = "Saudi Riyal",
         flag = "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
     ),
-    Currency(
+    CurrencyEntity(
         code = "KWD",
         name = "Kuwait Dinar",
         flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg"
     ),
-    Currency(
+    CurrencyEntity(
         code = "BHD",
         name = "Bahrain Dinar",
         flag = "https://cdn.britannica.com/67/5767-004-E0FF7201/Flag-Bahrain.jpg"
@@ -96,15 +93,15 @@ val currenciesList = listOf(
  * currency.
  */
 @Composable
-fun SpinnerComponent(baseCurrency: Currency) {
+fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
     // this is a mutable state variable to control the dropDown menu whether it's expanded or not
 
     var isExpanded by remember { mutableStateOf(false) }
 
     // this the selected currency that the user will select from the dropDown menu, it's mutableState so it recompose the component every time the user select another currency
 
-    var selectedCurrencyCode by remember { mutableStateOf(baseCurrency.code) }
-    var selectedCurrencyFlag by remember { mutableStateOf(baseCurrency.flag) }
+    var selectedCurrencyCode by remember { mutableStateOf(baseCurrencyEntity.code) }
+    var selectedCurrencyFlag by remember { mutableStateOf(baseCurrencyEntity.flag) }
 
     // The container of the flag, currency name and the drop icon
     Row(

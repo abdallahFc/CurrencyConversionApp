@@ -41,8 +41,6 @@ fun FavouritesScreen(favViewModel: FavouritesViewModel = hiltViewModel()) {
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(20.dp),
-        modifier = Modifier
-            .padding(/*top = 26.dp, bottom = 80.dp*/)
     ) {
         Text(
             text = stringResource(id = R.string.my_favourites),

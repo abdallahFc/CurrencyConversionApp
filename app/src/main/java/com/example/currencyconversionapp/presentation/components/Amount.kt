@@ -2,6 +2,7 @@ package com.example.currencyconversionapp.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,30 +17,51 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun AmountField(
     modifier: Modifier = Modifier,
     text: String = "",
+    isAmountError: Boolean = false,
+    amountErrorMessage: String = "Invalid amount",
     onValueChange: (String) -> Unit,
 ) {
-    OutlinedTextField(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(48.dp),
-        value = text,
-        onValueChange = onValueChange,
-        shape = RoundedCornerShape(20.dp),
-        singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-        colors= TextFieldDefaults.outlinedTextFieldColors(
-            backgroundColor =MaterialTheme.colorScheme.surface,
-            focusedBorderColor = MaterialTheme.colorScheme.secondary,
-            unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
-            textColor=MaterialTheme.colorScheme.onPrimary,
-        ),
-    )
+    Column {
+        OutlinedTextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .height(48.dp),
+            value = text,
+            onValueChange = onValueChange,
+            shape = RoundedCornerShape(20.dp),
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                backgroundColor = MaterialTheme.colorScheme.surface,
+                focusedBorderColor = MaterialTheme.colorScheme.secondary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                textColor = MaterialTheme.colorScheme.onPrimary,
+            ),
+            isError = isAmountError,
+            placeholder = {
+                Text(
+                    text = "Amount",
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+            }
+        )
+        if (isAmountError) {
+            Text(
+                text = amountErrorMessage,
+                color = MaterialTheme.colorScheme.error,
+                fontSize =12.sp ,
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+            )
+        }
+    }
 }
+
 
 @Composable
 fun ConvertedFiled(

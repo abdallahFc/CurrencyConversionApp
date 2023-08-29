@@ -10,12 +10,9 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<T, E>(initialState: T) : ViewModel() {
+abstract class BaseViewModel<T>(initialState: T) : ViewModel() {
     protected val _state = MutableStateFlow(initialState)
     val state = _state.asStateFlow()
-
-    protected val _effect = MutableSharedFlow<E>()
-    val effect = _effect.asSharedFlow()
 
     protected fun <T> tryToExecute(
         function: suspend () -> T,
@@ -34,11 +31,4 @@ abstract class BaseViewModel<T, E>(initialState: T) : ViewModel() {
 
     }
 
-    protected fun effectActionExecutor(
-        effect: E,
-    ) {
-        viewModelScope.launch {
-            _effect.emit(effect)
-        }
-    }
 }

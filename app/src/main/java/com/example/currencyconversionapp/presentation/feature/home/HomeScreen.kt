@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.presentation.components.ContentVisibility
 import com.example.currencyconversionapp.presentation.feature.comparison.ComparisonScreen
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterScreen
 import com.example.currencyconversionapp.presentation.theme.Black
@@ -66,74 +67,77 @@ fun HomeScreen() {
     val pagerState = rememberPagerState(pageCount = {
         2
     }, initialPage = 0)
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Box(Modifier.weight(0.3f)) {
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .paint(
-                        painter = painterResource(id = R.drawable.background),
-                        contentScale = ContentScale.Crop
-                    )
-                    .paint(
-                        painter = painterResource(id = R.drawable.grad),
-                        contentScale = ContentScale.Crop
-                    )
-                    .padding(start = 16.dp, end = 16.dp, top = 50.dp)
-            ) {
+    ContentVisibility(true){
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Box(Modifier.weight(0.3f)) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .paint(
+                            painter = painterResource(id = R.drawable.background),
+                            contentScale = ContentScale.Crop
+                        )
+                        .paint(
+                            painter = painterResource(id = R.drawable.grad),
+                            contentScale = ContentScale.Crop
+                        )
+                        .padding(start = 16.dp, end = 16.dp, top = 50.dp)
+                ) {
 
 
-                Text(
-                    text = stringResource(id = R.string.app_name),
-                    modifier = Modifier.fillMaxWidth(),
-                    style = TextStyle(
-                        fontSize = 26.sp,
-                        fontWeight = FontWeight(700),
-                        color = Color.White,
+                    Text(
+                        text = stringResource(id = R.string.app_name),
+                        modifier = Modifier.fillMaxWidth(),
+                        style = TextStyle(
+                            fontSize = 26.sp,
+                            fontWeight = FontWeight(700),
+                            color = Color.White,
+                        )
                     )
-                )
-                Text(
-                    text = stringResource(id = R.string.currency_convert),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 42.dp),
-                    textAlign = TextAlign.Center,
-                    style = TextStyle(
-                        fontSize = 22.sp,
-                        fontFamily = FontFamily(Font(R.font.montserrat_bold)),
-                        fontWeight = FontWeight(600),
-                        color = Color.White,
+                    Text(
+                        text = stringResource(id = R.string.currency_convert),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 42.dp),
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = 22.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                            fontWeight = FontWeight(600),
+                            color = Color.White,
+                        )
                     )
-                )
-                Text(
-                    text = stringResource(id = R.string.check_live_exchange_rates),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    textAlign = TextAlign.Center,
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        fontFamily= FontFamily(Font(R.font.montserrat_regular)),
-                        fontWeight = FontWeight(400),
-                        color = Color.White,
+                    Text(
+                        text = stringResource(id = R.string.check_live_exchange_rates),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily= FontFamily(Font(R.font.montserrat_regular)),
+                            fontWeight = FontWeight(400),
+                            color = Color.White,
+                        )
                     )
+                }
+                centerControls(
+                    Modifier
+                        .align(Alignment.BottomCenter)
+                        .layout { measurable, constraints ->
+                            val placeable = measurable.measure(constraints)
+                            layout(placeable.width, placeable.height) {
+                                placeable.place(0, placeable.height / 2)
+                            }
+                        }, pagerState
                 )
             }
-            centerControls(
-                Modifier
-                    .align(Alignment.BottomCenter)
-                    .layout { measurable, constraints ->
-                        val placeable = measurable.measure(constraints)
-                        layout(placeable.width, placeable.height) {
-                            placeable.place(0, placeable.height / 2)
-                        }
-                    }, pagerState
-            )
+            BottomControls(Modifier.weight(0.7f), pagerState)
         }
-        BottomControls(Modifier.weight(0.7f), pagerState)
     }
+
 }
 
 

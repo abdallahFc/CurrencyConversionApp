@@ -1,39 +1,90 @@
 package com.example.currencyconversionapp.presentation.feature.conversion
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.currencyconversionapp.data.repo.CurrencyRepository
-import com.example.currencyconversionapp.domain.model.Currency
+import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
+import com.example.currencyconversionapp.domain.repository.CurrencyRepository
+import com.example.currencyconversionapp.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class ConverterViewModel @Inject constructor(private val currencyRepository: CurrencyRepository) :
-    ViewModel() {
+class ConverterViewModel @Inject constructor(
+    private val currencyRepository: CurrencyRepository
+) : BaseViewModel<ConvertUiState>(ConvertUiState()), ConverterContract {
 
-    private var _toCurrencyAmount = mutableStateOf("1")
-    var toCurrencyAmount: MutableState<String> = _toCurrencyAmount
+    init {
+        convertCurrency(
+            baseCurrency = state.value.baseCurrency.name,
+            targetCurrency = state.value.targetCurrency.name,
+            amount = state.value.amount
+        )
+    }
 
-    private var _fromCurrencyAmount = mutableStateOf("1")
-    var fromCurrencyAmount: MutableState<String> = _fromCurrencyAmount
+    private fun convertCurrency(
+        baseCurrency: String,
+        targetCurrency: String,
+        amount: Double
+    ) {
+        _state.update { state -> state.copy(isLoading = true, isError = false) }
+        tryToExecute(
+            function = {
+                currencyRepository.convertCurrency(baseCurrency, targetCurrency, amount)
+            },
+            onSuccess = ::handleConversionSuccess,
+            onError = ::handleConversionError,
+            dispatcher = Dispatchers.IO
+        )
+    }
 
-    private var list = mutableListOf<Currency>()
-    private var _favCurrenciesList: MutableStateFlow<List<Currency>?> = MutableStateFlow(null)
-    val favCurrenciesList = _favCurrenciesList
+    private fun handleConversionSuccess(convertedAmount: ConvertCurrencyDto) {
+        _state.update { state ->
+            state.copy(
+                isLoading = false,
+                convertedAmount = convertedAmount.amount,
+                isError = false
+            )
+        }
+    }
 
-    suspend fun getCurrencies() {
-        viewModelScope.launch {
-            list = currencyRepository.getCurrencies().toMutableList()
-            _favCurrenciesList.emit(list.toMutableList())
+    private fun handleConversionError(exception: Exception) {
+        _state.update { state ->
+            state.copy(
+                isLoading = false,
+                error = exception.message ?: "Something went wrong",
+                isError = true
+            )
+        }
+    }
+
+    override fun onConvertClicked() {
+        convertCurrency(
+            state.value.baseCurrency.name,
+            state.value.targetCurrency.name,
+            state.value.amount
+        )
+    }
+
+    override fun onBaseCurrencyChanged(baseCurrency: String) {
+        _state.update { state -> state.copy(baseCurrency = CurrencyCode.valueOf(baseCurrency)) }
+    }
+
+    override fun onTargetCurrencyChanged(targetCurrency: String) {
+        _state.update { state -> state.copy(targetCurrency = CurrencyCode.valueOf(targetCurrency)) }
+    }
+
+    override fun onAmountChanged(amount: String) {
+        val parsedAmount = amount.toDoubleOrNull()
+        if (parsedAmount != null && parsedAmount >= 0) {
+            _state.update { state ->
+                state.copy(amount = parsedAmount, isAmountError = false)
+            }
+        } else {
+            _state.update { state ->
+                state.copy(isAmountError = true)
+            }
         }
     }
 
 
-    fun convertButtonClickable() {
-
-    }
 }

@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.presentation.feature.conversion
+package com.example.currencyconversionapp.presentation.feature.conversion.combosable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,15 +22,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.domain.model.Currency
+import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
 import com.example.currencyconversionapp.presentation.components.CustomButton
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
+import com.example.currencyconversionapp.presentation.feature.conversion.ConvertUiState
+import com.example.currencyconversionapp.presentation.feature.conversion.ConverterContract
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 
 @Composable
-fun Converting(viewModel: ConverterViewModel = viewModel()) {
+fun Converting(
+    listener: ConverterContract,
+    state: ConvertUiState,
+) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -54,9 +59,10 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 AmountField(
-                    text = "1",
+                    text = state.amount.toString(),
+                    isAmountError = state.isAmountError,
                 ) {
-
+                    listener.onAmountChanged(it)
                 }
             }
             Column(
@@ -76,7 +82,7 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    Currency(
+                    CurrencyEntity(
                         code = "EGP",
                         name = "Egyptian Pound",
                         flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
@@ -107,7 +113,7 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    Currency(
+                    CurrencyEntity(
                         code = "USD",
                         name = "US Dollar",
                         flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
@@ -136,15 +142,8 @@ fun Converting(viewModel: ConverterViewModel = viewModel()) {
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton(stringResource(id = R.string.convert), viewModel::convertButtonClickable)
+        CustomButton(stringResource(id = R.string.convert)){
+            listener.onConvertClicked()
+        }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewFavs() {
-    CurrencyConversionAppTheme {
-        Converting()
-    }
-
 }
