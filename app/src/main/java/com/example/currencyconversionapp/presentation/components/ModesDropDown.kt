@@ -1,7 +1,11 @@
 package com.example.currencyconversionapp.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.DropdownMenu
@@ -9,7 +13,9 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Switch
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
@@ -27,55 +33,40 @@ import com.example.currencyconversionapp.R
 
 @Composable
 fun ModesDropDown(
+    checked: Boolean,
+    onModeChange: () -> Unit,
     onLanguageChange: () -> Unit,
-    onModeChange: () -> Unit
-    ) {
+) {
     var expanded by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentSize(Alignment.TopEnd)
     ) {
-        IconButton(onClick = { expanded = !expanded }) {
-            Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = "Settings",
-                tint = MaterialTheme.colors.background
-            )
-        }
-        DropdownMenu(
-            modifier = Modifier.background(color = androidx.compose.material3.MaterialTheme.colorScheme.surface),
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.wrapContentSize()
         ) {
-            DropdownMenuItem(
-                content = {
-                    Text(
-                        text = stringResource(R.string.change_language),
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            /*fontFamily = FontFamily(Font(R.font.open sans)),*/
-                            fontWeight = FontWeight(400),
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary
-                        )
-                    )
-                },
-                onClick = onLanguageChange
-            )
-            DropdownMenuItem(
-                content = {
-                    Text(
-                        text = stringResource(R.string.change_mode),
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            /*fontFamily = FontFamily(Font(R.font.open sans)),*/
-                            fontWeight = FontWeight(400),
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary
-                        )
-                    )
-                },
-                onClick = onModeChange
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Switch(checked = checked, onCheckedChange = {
+                    onModeChange()
+                })
+                Text(
+                    text = stringResource(R.string.dark_mode),
+                    color = MaterialTheme.colors.onPrimary
+                )
+            }
+
+            Text(text = stringResource(id = R.string.change_language),
+                color = MaterialTheme.colors.onPrimary,
+                modifier = Modifier.clickable {
+                    onLanguageChange()
+                }
+           )
+
         }
     }
 }
