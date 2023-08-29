@@ -9,9 +9,9 @@ import com.example.currencyconversionapp.presentation.feature.conversion.Currenc
 import com.example.currencyconversionapp.presentation.feature.conversion.CurrencyUiModel
 import com.example.currencyconversionapp.presentation.util.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+
 @HiltViewModel
 class ComparisonViewModel @Inject constructor(
     private val currencyRepository: CurrencyRepository,
@@ -27,7 +27,7 @@ class ComparisonViewModel @Inject constructor(
         getAllCurrencies()
     }
 
-    private fun compareCurrency(
+    fun compareCurrency(
         baseCurrency: String,
         targetCurrency: String,
         amount: Double
@@ -47,16 +47,14 @@ class ComparisonViewModel @Inject constructor(
         convertedAmount:
         List<ConvertCurrencyDto>
     ) {
-        Log.d("ComparisonViewModel", "handleConversionSuccess: $convertedAmount")
         _state.update { state ->
             state.copy(
                 isLoading = false,
-                convertedAmountOne = (convertedAmount[0].conversion_rate.toDouble() * state.amount).toString(),
-                convertedAmountTwo = (convertedAmount[1].conversion_rate.toDouble() * state.amount).toString(),
+                convertedAmountOne = (convertedAmount[0].conversion_rate.toDouble() * convertedAmount[0].amount.toDouble()).toString(),
+                convertedAmountTwo = (convertedAmount[1].conversion_rate.toDouble() * convertedAmount[1].amount.toDouble()).toString(),
                 isError = false
             )
         }
-        Log.d("ComparisonViewModel", "handleConversionSuccess: ${state.value}")
     }
 
     private fun handleConversionError(exception: Exception) {
@@ -69,7 +67,7 @@ class ComparisonViewModel @Inject constructor(
         }
     }
 
-    private fun getAllCurrencies() {
+    fun getAllCurrencies() {
         _state.update { state -> state.copy(isLoadingList = true, isError = false) }
         tryToExecute(
             function = {

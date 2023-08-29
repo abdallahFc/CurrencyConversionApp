@@ -26,7 +26,7 @@ class ConverterViewModel @Inject constructor(
         getAllCurrencies()
     }
 
-    private fun convertCurrency(
+    fun convertCurrency(
         baseCurrency: String,
         targetCurrency: String,
         amount: Double
@@ -62,7 +62,7 @@ class ConverterViewModel @Inject constructor(
         }
     }
 
-    private fun getAllCurrencies() {
+    fun getAllCurrencies() {
         _state.update { state -> state.copy(isLoadingList = true, isError = false) }
         tryToExecute(
             function = {
@@ -126,6 +126,5 @@ class ConverterViewModel @Inject constructor(
             }
         }
     }
-
 
 }
