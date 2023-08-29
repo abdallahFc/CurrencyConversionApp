@@ -15,4 +15,5 @@
     <string name="currency">CURRENCY</string>
     <string name="change_language">Change Language</string>
     <string name="change_mode">Change Mode</string>
+    <string name="no_favorite_list">There are no favorite currencies\nAdd to Favorites!</string>
 </resources>

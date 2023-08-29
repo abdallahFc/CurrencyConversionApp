@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,11 +34,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.ui.composables.CurrencyItem
+import com.example.currencyconversionapp.ui.composables.LottieAnimations
 import com.example.currencyconversionapp.ui.composables.currenciesList
 import com.example.currencyconversionapp.ui.feature.favourites.FavouritesScreen
 import com.example.currencyconversionapp.ui.navigation.LocalNavigationProvider
@@ -69,6 +77,7 @@ import com.example.currencyconversionapp.ui.theme.CurrencyConversionAppTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConverterScreen() {
+
 //    Column(
 //        modifier = Modifier
 //            .fillMaxSize(),
@@ -140,7 +149,7 @@ fun ConverterScreen() {
                         modifier = Modifier.size(24.dp),
                         painter = painterResource(id = R.drawable.add_icon),
                         contentDescription = "Add Icon",
-                        colorFilter = ColorFilter.tint(color=MaterialTheme.colorScheme.onPrimary)
+                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onPrimary)
                     )
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
@@ -154,23 +163,50 @@ fun ConverterScreen() {
                 }
             }
         }
-        item {
-            Text(
-                text = stringResource(id = R.string.my_portfolio),
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    lineHeight = 24.sp,
-                    fontWeight = FontWeight(400),
-                    color = MaterialTheme.colorScheme.onPrimary,
+        if (currenciesList.isEmpty()) {
+            item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 20.dp)
+                        .wrapContentHeight(),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = stringResource(R.string.no_favorite_list),
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        textAlign = TextAlign.Center,
+                        fontSize = 18.sp
+                    )
+                    LottieAnimations(
+                        composition = R.raw.empty_animation,
+                        speed = 1f,
+                        modifier = Modifier
+                            .size(300.dp)
+                            .align(Alignment.CenterHorizontally)
+                        )
+                }
+            }
+        } else {
+            item {
+                Text(
+                    text = stringResource(id = R.string.my_portfolio),
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        lineHeight = 24.sp,
+                        fontWeight = FontWeight(400),
+                        color = MaterialTheme.colorScheme.onPrimary,
+                    )
                 )
-            )
-        }
-        items(currenciesList.size) {
-            CurrencyItem(
-                currencyName = currenciesList[it].name,
-                flag = currenciesList[it].flag,
-                rate = "1.32"
-            )
+            }
+            items(currenciesList.size) {
+                CurrencyItem(
+                    currencyName = currenciesList[it].name,
+                    flag = currenciesList[it].flag,
+                    rate = "1.32"
+                )
+            }
         }
     }
 }

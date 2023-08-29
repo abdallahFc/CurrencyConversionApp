@@ -38,8 +38,8 @@ import com.example.currencyconversionapp.data.source.local.Currency
 /* This is a dummy list of some currencies to test the DropDownMenu */
 //data class Currency(val currencyCode: String, val currencyName: String, val currencyFlag: String)
 
-val currenciesList = listOf(
-    Currency(
+val currenciesList = emptyList<Currency>()
+   /* Currency(
         code = "EGP",
         name = "Egyptian Pound",
         flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
@@ -119,7 +119,7 @@ val currenciesList = listOf(
         name = "Kuwait Dinar",
         flag = "https://cdn.britannica.com/70/5770-004-A99DD01D/Flag-Kuwait.jpg"
     )
-)
+)*/
 
 
 /** The SpinnerComponent is a component where the users can select the currency they want to convert from,
