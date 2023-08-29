@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,11 +37,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,16 +52,15 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
-import com.example.currencyconversionapp.presentation.components.ContentVisibility
 import com.example.currencyconversionapp.presentation.components.CurrencyItem
 import com.example.currencyconversionapp.presentation.components.EmptyView
 import com.example.currencyconversionapp.presentation.feature.conversion.combosable.Converting
 import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesScreen
 import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesViewModel
-import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConverterScreen(
@@ -81,17 +84,14 @@ fun ConverterScreen(
     var isSheetOpened by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
     if (isSheetOpened) {
-        LaunchedEffect(key1 = Unit) {
-            favViewModel.getCurrencies()
-        }
         ModalBottomSheet(
             sheetState = sheetState,
             containerColor = MaterialTheme.colorScheme.surface,
             onDismissRequest = {
+                isSheetOpened = false
                 scope.launch {
                     favViewModel.getCurrencies()
                 }
-                isSheetOpened = false
             }
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -105,9 +105,9 @@ fun ConverterScreen(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
                             onClick = {
+                                isSheetOpened = false
                                 scope.launch {
                                     favViewModel.getCurrencies()
-                                    isSheetOpened = false
                                 }
                             }),
                     painter = painterResource(id = R.drawable.close),
@@ -123,11 +123,17 @@ fun ConverterScreen(
             }
         }
     }
+    val focusManager = LocalFocusManager.current
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp)
-            .padding(top = 32.dp),
+            .padding(top = 32.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            },
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(8.dp)
     ) {
@@ -153,6 +159,7 @@ fun ConverterScreen(
                     text = stringResource(id = R.string.live_exchange_rates),
                     style = TextStyle(
                         fontSize = 16.sp,
+                        fontFamily = FontFamily(Font(R.font.poppins_regular)),
                         fontWeight = FontWeight(600),
                         color = MaterialTheme.colorScheme.onPrimary
                     )
@@ -173,6 +180,7 @@ fun ConverterScreen(
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
                         text = stringResource(R.string.add_to_favorites),
+                        fontFamily = FontFamily(Font(R.font.poppins_regular)),
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight(500),
@@ -185,6 +193,7 @@ fun ConverterScreen(
         item {
             Text(
                 text = stringResource(id = R.string.my_portfolio),
+                fontFamily = FontFamily(Font(R.font.poppins_regular)),
                 style = TextStyle(
                     fontSize = 18.sp,
                     lineHeight = 24.sp,
@@ -196,19 +205,10 @@ fun ConverterScreen(
 
         if (list.isEmpty()) {
             item {
-                EmptyView(state =true)
+                EmptyView(state = true)
             }
         } else {
-            items(list) {
-                var showEmpty by remember {
-                    mutableStateOf(false)
-                }
-                if (list.isEmpty()) {
-                    showEmpty = true
-                }
-                ContentVisibility(state = showEmpty) {
-                    Text(text = "No Favourite Currencies yet!")
-                }
+            items(items = list) {
                 CurrencyItem(
                     currencyName = it.name,
                     flag = it.flag,

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,10 +26,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -103,6 +109,9 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
     var selectedCurrencyCode by remember { mutableStateOf(baseCurrencyEntity.code) }
     var selectedCurrencyFlag by remember { mutableStateOf(baseCurrencyEntity.flag) }
 
+    var size by remember { mutableStateOf(IntSize.Zero) }
+
+
     // The container of the flag, currency name and the drop icon
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -124,6 +133,9 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
                 indication = null,
                 onClick = { isExpanded = isExpanded.not() }
             )
+            .onSizeChanged {
+                size = it
+            }
     ) {
         // The flag of the currency
         AsyncImage(
@@ -168,10 +180,17 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
         DropdownMenu(
             expanded = isExpanded,
             modifier = Modifier
-                .height(250.dp)
+                .then(
+                    with(LocalDensity.current) {
+                        Modifier.width(
+                            (size.width - 80).toDp()
+                        )
+                    }
+                )
+                .requiredHeightIn(min = 50.dp, max = 200.dp)
                 .background(color = MaterialTheme.colorScheme.surface),
             onDismissRequest = { isExpanded = false },
-            offset = DpOffset(15.dp, 0.dp)
+            offset = DpOffset(18.dp, 0.dp)
         ) {
             repeat(currenciesList.size) {
                 DropdownMenuItem(
@@ -180,9 +199,10 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
                             text = currenciesList[it].code,
                             style = TextStyle(
                                 fontSize = 16.sp,
-                                /*fontFamily = FontFamily(Font(R.font.open sans)),*/
+                                fontFamily = FontFamily(Font(R.font.poppins_regular)),
                                 fontWeight = FontWeight(400),
-                                color = MaterialTheme.colorScheme.onPrimary
+                                color = if (currenciesList[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.surface
+                                else MaterialTheme.colorScheme.onPrimary
                             )
                         )
                     },
@@ -199,10 +219,14 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
                         )
                     },
                     onClick = {
+                        isExpanded = isExpanded.not()
                         selectedCurrencyCode = currenciesList[it].code
                         selectedCurrencyFlag = currenciesList[it].flag
-                        isExpanded = isExpanded.not()
-                    }
+                    },
+                    modifier = Modifier.background(
+                        if (currenciesList[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.onBackground
+                        else MaterialTheme.colorScheme.surface
+                    )
                 )
             }
         }

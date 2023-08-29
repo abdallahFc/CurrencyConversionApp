@@ -13,6 +13,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -44,9 +45,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -61,10 +64,10 @@ import androidx.compose.ui.unit.sp
 import androidx.core.os.LocaleListCompat
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.presentation.components.ModesDropDown
-import com.example.currencyconversionapp.ui.feature.comparison.ComparisonScreen
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterScreen
 import com.example.currencyconversionapp.presentation.theme.ButtonColor
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
+import com.example.currencyconversionapp.ui.feature.comparison.ComparisonScreen
 import kotlinx.coroutines.launch
 
 
@@ -76,8 +79,15 @@ fun HomeScreen() {
     var language by remember {
         mutableStateOf("en")
     }
+    val focusManager = LocalFocusManager.current
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            }
     ) {
         Box(Modifier.weight(0.3f)) {
             Column(
@@ -109,11 +119,20 @@ fun HomeScreen() {
                         onLanguageChange = {
                             when (LocaleListCompat.forLanguageTags(language)) {
                                 LocaleListCompat.forLanguageTags("en") -> {
-                                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
+                                    AppCompatDelegate.setApplicationLocales(
+                                        LocaleListCompat.forLanguageTags(
+                                            "ar"
+                                        )
+                                    )
                                     language = "ar"
                                 }
+
                                 LocaleListCompat.forLanguageTags("ar") -> {
-                                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("en"))
+                                    AppCompatDelegate.setApplicationLocales(
+                                        LocaleListCompat.forLanguageTags(
+                                            "en"
+                                        )
+                                    )
                                     language = "en"
                                 }
                             }
@@ -320,7 +339,7 @@ fun CustomTab(
         MyTabIndicator(
             indicatorWidth = tabWidth,
             indicatorOffset = indicatorOffset,
-            indicatorColor = MaterialTheme.colorScheme.background /*Color.White*/,
+            indicatorColor = MaterialTheme.colorScheme.background, /*Color.White*/
         )
         Row(
             horizontalArrangement = Arrangement.Center,
