@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
+import com.example.currencyconversionapp.presentation.feature.conversion.CurrencyUiModel
 
 
 /* This is a dummy list of some currencies to test the DropDownMenu */
@@ -99,15 +100,19 @@ val currenciesList = listOf(
  * currency.
  */
 @Composable
-fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
+fun SpinnerComponent(
+    currencies: List<CurrencyUiModel>,
+    code: String ,
+    onCurrencySelected: (String) -> Unit
+) {
     // this is a mutable state variable to control the dropDown menu whether it's expanded or not
 
     var isExpanded by remember { mutableStateOf(false) }
 
     // this the selected currency that the user will select from the dropDown menu, it's mutableState so it recompose the component every time the user select another currency
-
-    var selectedCurrencyCode by remember { mutableStateOf(baseCurrencyEntity.code) }
-    var selectedCurrencyFlag by remember { mutableStateOf(baseCurrencyEntity.flag) }
+    val target = currencies.find { it.code == code }
+    var selectedCurrencyCode by remember { mutableStateOf(target?.code ?: "") }
+    var selectedCurrencyFlag by remember { mutableStateOf(target?.flagUrl ?: "") }
 
     var size by remember { mutableStateOf(IntSize.Zero) }
 
@@ -139,7 +144,7 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
     ) {
         // The flag of the currency
         AsyncImage(
-            model = selectedCurrencyFlag,
+            model = target?.flagUrl ?: "",
             contentDescription = "currency flag",
             placeholder = painterResource(id = R.drawable.placeholder),
             error = painterResource(id = R.drawable.placeholder),
@@ -152,7 +157,7 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
 
         // The currency name
         Text(
-            text = selectedCurrencyCode,
+            text = target?.code ?: "",
             style = TextStyle(
                 fontSize = 16.sp,
                 /*fontFamily = FontFamily(Font(R.font.open sans)),*/
@@ -192,23 +197,23 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
             onDismissRequest = { isExpanded = false },
             offset = DpOffset(18.dp, 0.dp)
         ) {
-            repeat(currenciesList.size) {
+            repeat(currencies.size) {
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = currenciesList[it].code,
+                            text = currencies[it].code,
                             style = TextStyle(
                                 fontSize = 16.sp,
                                 fontFamily = FontFamily(Font(R.font.poppins_regular)),
                                 fontWeight = FontWeight(400),
-                                color = if (currenciesList[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.surface
+                                color = if (currencies[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.surface
                                 else MaterialTheme.colorScheme.onPrimary
                             )
                         )
                     },
                     leadingIcon = {
                         AsyncImage(
-                            model = currenciesList[it].flag,
+                            model = currencies[it].flagUrl,
                             placeholder = painterResource(id = R.drawable.placeholder),
                             error = painterResource(id = R.drawable.placeholder),
                             contentDescription = "Currency Flag",
@@ -220,11 +225,12 @@ fun SpinnerComponent(baseCurrencyEntity: CurrencyEntity) {
                     },
                     onClick = {
                         isExpanded = isExpanded.not()
-                        selectedCurrencyCode = currenciesList[it].code
-                        selectedCurrencyFlag = currenciesList[it].flag
+                        selectedCurrencyCode = currencies[it].code
+                        onCurrencySelected(currencies[it].code)
+                        //selectedCurrencyFlag = currencies[it].flagUrl
                     },
                     modifier = Modifier.background(
-                        if (currenciesList[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.onBackground
+                        if (currencies[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.onBackground
                         else MaterialTheme.colorScheme.surface
                     )
                 )

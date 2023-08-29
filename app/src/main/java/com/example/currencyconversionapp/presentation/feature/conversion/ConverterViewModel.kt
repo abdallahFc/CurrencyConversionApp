@@ -2,6 +2,7 @@ package com.example.currencyconversionapp.presentation.feature.conversion
 
 import android.util.Log
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
+import com.example.currencyconversionapp.data.source.remote.model.CurrencyDto
 import com.example.currencyconversionapp.domain.repository.CurrencyRepository
 import com.example.currencyconversionapp.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,6 +21,7 @@ class ConverterViewModel @Inject constructor(
             targetCurrency = state.value.targetCurrency.name,
             amount = state.value.amount
         )
+        getAllCurrencies()
     }
 
     private fun convertCurrency(
@@ -39,7 +41,6 @@ class ConverterViewModel @Inject constructor(
     }
 
     private fun handleConversionSuccess(convertedAmount: ConvertCurrencyDto) {
-        Log.d("vieewe","Df $convertedAmount")
         _state.update { state ->
             state.copy(
                 isLoading = false,
@@ -53,6 +54,42 @@ class ConverterViewModel @Inject constructor(
         _state.update { state ->
             state.copy(
                 isLoading = false,
+                error = exception.message ?: "Something went wrong",
+                isError = true
+            )
+        }
+    }
+
+    private fun getAllCurrencies() {
+        _state.update { state -> state.copy(isLoadingList = true, isError = false) }
+        tryToExecute(
+            function = {
+                currencyRepository.getAllCurrencies()
+            },
+            onSuccess = ::handleGetAllCurrenciesSuccess,
+            onError = ::handleGetAllCurrenciesError,
+            dispatcher = Dispatchers.IO
+        )
+    }
+    private fun handleGetAllCurrenciesSuccess(currencies:List<CurrencyDto>) {
+        _state.update { state ->
+            state.copy(
+                isLoadingList = false,
+                currencies = currencies.map { currency ->
+                    CurrencyUiModel(
+                        code = currency.code,
+                        flagUrl = currency.flagUrl,
+                        name = currency.name
+                    )
+                },
+                isError = false
+            )
+        }
+    }
+    private fun handleGetAllCurrenciesError(exception: Exception) {
+        _state.update { state ->
+            state.copy(
+                isLoadingList = false,
                 error = exception.message ?: "Something went wrong",
                 isError = true
             )

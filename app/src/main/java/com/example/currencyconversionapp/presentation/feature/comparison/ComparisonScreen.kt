@@ -94,12 +94,10 @@ fun ComparisonScreen(viewModel: ComparisonViewModel = hiltViewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    CurrencyEntity(
-                        code = "EGP",
-                        name = "Egyptian Pound",
-                        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
-                    )
-                )
+                    emptyList(),""
+                ){
+
+                }
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -125,12 +123,8 @@ fun ComparisonScreen(viewModel: ComparisonViewModel = hiltViewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    CurrencyEntity(
-                        code = "USD",
-                        name = "US Dollar",
-                        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
-                    )
-                )
+                    emptyList(),""
+                ){}
             }
             Column(
                 modifier = Modifier
@@ -149,12 +143,8 @@ fun ComparisonScreen(viewModel: ComparisonViewModel = hiltViewModel()) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    CurrencyEntity(
-                        code = "GBP",
-                        name = "Sterling Pound",
-                        flag = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
-                    )
-                )
+                    emptyList(),""
+                ){}
             }
         }
         Spacer(modifier = Modifier.height(20.dp))

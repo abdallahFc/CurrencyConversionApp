@@ -1,7 +1,7 @@
 package com.example.currencyconversionapp.data.source.remote.model
 
-data class Currency(
+data class CurrencyDto(
     val code: String,
-    val flag_url: String,
+    val flagUrl : String,
     val name: String
 )

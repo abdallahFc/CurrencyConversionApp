@@ -130,9 +130,9 @@ fun ConverterScreen(
         }
     }
     val focusManager = LocalFocusManager.current
-    Loading(state = state.isLoading)
+    Loading(state = state.isLoading || state.isLoadingList)
     NetworkError(state = state.isError, error ="Error with network",)
-    ContentVisibility(state =!state.isLoading &&!state.isError ) {
+    ContentVisibility(state =!state.isLoading &&!state.isError&&!state.isLoadingList ) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()

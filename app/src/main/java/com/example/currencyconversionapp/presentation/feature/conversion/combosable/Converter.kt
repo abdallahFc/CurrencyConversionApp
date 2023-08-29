@@ -80,12 +80,10 @@ fun Converting(
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    CurrencyEntity(
-                        code = "EGP",
-                        name = "Egyptian Pound",
-                        flag = "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
-                    )
-                )
+                    state.currencies,state.baseCurrency.code
+                ){
+                    listener.onBaseCurrencyChanged(it)
+                }
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -111,12 +109,10 @@ fun Converting(
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 SpinnerComponent(
-                    CurrencyEntity(
-                        code = "USD",
-                        name = "US Dollar",
-                        flag = "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
-                    )
-                )
+                    state.currencies,state.targetCurrency.code
+                ){
+                    listener.onTargetCurrencyChanged(it)
+                }
             }
             Column(
                 modifier = Modifier
