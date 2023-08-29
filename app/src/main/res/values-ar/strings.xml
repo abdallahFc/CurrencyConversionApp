@@ -16,4 +16,5 @@
     <string name="currency">عملة</string>
     <string name="change_language">تغيير اللغة</string>
     <string name="change_mode">تغيير الوضع</string>
+    <string name="dark_mode">الوضع الداكن</string>
 </resources>

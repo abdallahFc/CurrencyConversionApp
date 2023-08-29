@@ -16,4 +16,6 @@ interface CurrencyRepository {
         targetCurrency: String,
         amount: Double
     ): ConvertCurrencyDto
+    fun setDarkMode(isDark: Boolean)
+    fun isDark() : Boolean
 }

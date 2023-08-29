@@ -1,7 +1,10 @@
 package com.example.currencyconversionapp.data.repo
 
+import androidx.appcompat.app.AppCompatDelegate
+import com.example.currencyconversionapp.ConCurrencyApp
 import com.example.currencyconversionapp.data.source.local.CurrencyDao
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
+import com.example.currencyconversionapp.data.source.local.model.PreferencesManager
 import com.example.currencyconversionapp.data.source.remote.CurrenciesService
 import com.example.currencyconversionapp.data.source.remote.CurrencyService
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
@@ -26,6 +29,8 @@ class CurrencyRepositoryImpl @Inject constructor(
         }
     }
 
+    val sharedpref = PreferencesManager(ConCurrencyApp.appContext)
+
     override suspend fun convertCurrency(
         baseCurrency: String,
         targetCurrency: String,
@@ -35,6 +40,15 @@ class CurrencyRepositoryImpl @Inject constructor(
             currencyApiService.convertCurrency(baseCurrency, targetCurrency, amount)
         }
     }
+
+    override fun setDarkMode(isDark: Boolean) {
+        sharedpref.saveData("LanguagePref", isDark)
+    }
+
+    override fun isDark(): Boolean {
+        return sharedpref.getData("LanguagePref", AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO)
+    }
+
 
     private inline fun <reified T> wrapResponse(
         function: () -> Response<T>

@@ -31,6 +31,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -62,9 +63,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.LocaleListCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
+import com.example.currencyconversionapp.presentation.base.BaseViewModel
 import com.example.currencyconversionapp.presentation.components.ModesDropDown
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterScreen
+import com.example.currencyconversionapp.presentation.feature.conversion.ConverterViewModel
 import com.example.currencyconversionapp.presentation.theme.ButtonColor
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 import com.example.currencyconversionapp.ui.feature.comparison.ComparisonScreen
@@ -73,7 +77,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val pagerState = rememberPagerState(pageCount = { 2 }, initialPage = 0)
     val context = LocalContext.current
     var language by remember {
@@ -117,59 +121,12 @@ fun HomeScreen() {
                     )
                     ModesDropDown(
                         onLanguageChange = {
-                            when (LocaleListCompat.forLanguageTags(language)) {
-                                LocaleListCompat.forLanguageTags("en") -> {
-                                    AppCompatDelegate.setApplicationLocales(
-                                        LocaleListCompat.forLanguageTags(
-                                            "ar"
-                                        )
-                                    )
-                                    language = "ar"
-                                }
-
-                                LocaleListCompat.forLanguageTags("ar") -> {
-                                    AppCompatDelegate.setApplicationLocales(
-                                        LocaleListCompat.forLanguageTags(
-                                            "en"
-                                        )
-                                    )
-                                    language = "en"
-                                }
-                            }
-                            context.findActivity()?.runOnUiThread {
-                                AppCompatDelegate.getApplicationLocales()
-                            }
+                            viewModel.onLanguageChange()
                         },
                         onModeChange = {
-                            when (AppCompatDelegate.getDefaultNightMode()) {
-                                MODE_NIGHT_NO -> {
-                                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-                                }
-
-                                MODE_NIGHT_YES -> {
-                                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
-                                }
-
-                                AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY -> {
-                                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-                                }
-
-                                AppCompatDelegate.MODE_NIGHT_AUTO_TIME -> {
-                                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-                                }
-
-                                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> {
-                                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-                                }
-
-                                AppCompatDelegate.MODE_NIGHT_UNSPECIFIED -> {
-                                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-                                }
-                            }
-                            context.findActivity()?.runOnUiThread {
-                                AppCompatDelegate.getDefaultNightMode()
-                            }
-                        }
+                            viewModel.onModeChange()
+                        },
+                        checked = viewModel.isDark()
                     )
                 }
                 Text(
@@ -383,13 +340,6 @@ fun CustomTabSample(modifier: Modifier, pagerState: PagerState) {
         },
     )
 }
-
-fun Context.findActivity(): Activity? = when (this) {
-    is Activity -> this
-    is ContextWrapper -> baseContext.findActivity()
-    else -> null
-}
-
 
 @Preview(showBackground = true)
 @Composable
