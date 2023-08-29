@@ -120,7 +120,9 @@ fun ConverterScreen(
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
                 )
-                FavouritesScreen()
+                FavouritesScreen(
+                    state.currencies
+                )
                 Spacer(
                     modifier = Modifier
                         .weight(1f)
@@ -221,7 +223,8 @@ fun ConverterScreen(
                     CurrencyItem(
                         currencyName = it.name,
                         flag = it.flag,
-                        rate = "1.32"
+                        rate = "1.32",
+                        code=it.code
                     )
                 }
             }

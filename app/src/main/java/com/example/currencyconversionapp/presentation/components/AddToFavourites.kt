@@ -84,7 +84,7 @@ fun AddToFavourites(
                         )
                     )
                     Text(
-                        text = stringResource(id = R.string.currency),
+                        text = code,
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight(400),
