@@ -7,13 +7,15 @@ import com.example.currencyconversionapp.domain.repository.CurrencyRepository
 import com.example.currencyconversionapp.presentation.base.BaseViewModel
 import com.example.currencyconversionapp.presentation.feature.conversion.CurrencyCode
 import com.example.currencyconversionapp.presentation.feature.conversion.CurrencyUiModel
+import com.example.currencyconversionapp.presentation.util.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 @HiltViewModel
 class ComparisonViewModel @Inject constructor(
-    private val currencyRepository: CurrencyRepository
+    private val currencyRepository: CurrencyRepository,
+    private val dispatcherProvider: DispatcherProvider
 ) : BaseViewModel<CompareUiState>(CompareUiState()), CompareContract {
 
     init {
@@ -37,7 +39,7 @@ class ComparisonViewModel @Inject constructor(
             },
             onSuccess = ::handleConversionSuccess,
             onError = ::handleConversionError,
-            dispatcher = Dispatchers.IO
+            dispatcher = dispatcherProvider.io
         )
     }
 
@@ -75,7 +77,7 @@ class ComparisonViewModel @Inject constructor(
             },
             onSuccess = ::handleGetAllCurrenciesSuccess,
             onError = ::handleGetAllCurrenciesError,
-            dispatcher = Dispatchers.IO
+            dispatcher = dispatcherProvider.io
         )
     }
 

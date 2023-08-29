@@ -1,5 +1,5 @@
-package com.example.currencyconversionapp.util
-import com.example.currencyconversionapp.util.DispatcherProvider
+package com.example.currencyconversionapp.presentation.util
+import com.example.currencyconversionapp.presentation.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
