@@ -5,6 +5,7 @@ import com.example.currencyconversionapp.ConCurrencyApp
 import com.example.currencyconversionapp.data.source.local.CurrencyDao
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.data.source.local.model.PreferencesManager
+import com.example.currencyconversionapp.data.source.remote.CompareService
 import com.example.currencyconversionapp.data.source.remote.CurrenciesService
 import com.example.currencyconversionapp.data.source.remote.CurrencyService
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class CurrencyRepositoryImpl @Inject constructor(
     private val currencyApiService: CurrencyService,
     private val currenciesApiService: CurrenciesService,
+    private val compareApiService: CompareService,
     private val dao: CurrencyDao
 ) : CurrencyRepository {
     override suspend fun getCurrencies() = dao.getCurrencies()
@@ -38,6 +40,16 @@ class CurrencyRepositoryImpl @Inject constructor(
     ): ConvertCurrencyDto {
         return wrapResponse {
             currencyApiService.convertCurrency(baseCurrency, targetCurrency, amount)
+        }
+    }
+
+    override suspend fun compareCurrency(
+        baseCurrency: String,
+        targetCurrency: String,
+        amount: Double
+    ): List<ConvertCurrencyDto> {
+        return wrapResponse {
+            compareApiService.compareCurrency(baseCurrency, targetCurrency, amount)
         }
     }
 

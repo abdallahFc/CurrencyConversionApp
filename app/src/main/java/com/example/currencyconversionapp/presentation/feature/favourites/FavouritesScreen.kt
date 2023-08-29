@@ -1,7 +1,6 @@
 package com.example.currencyconversionapp.presentation.feature.favourites
 
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,12 +27,15 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.presentation.components.AddToFavourites
-import com.example.currencyconversionapp.presentation.components.currenciesList
+import com.example.currencyconversionapp.presentation.feature.conversion.CurrencyUiModel
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun FavouritesScreen(favViewModel: FavouritesViewModel = hiltViewModel()) {
+fun FavouritesScreen(
+    currencyList: List<CurrencyUiModel> = emptyList(),
+    favViewModel: FavouritesViewModel = hiltViewModel()
+) {
 
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -59,14 +61,13 @@ fun FavouritesScreen(favViewModel: FavouritesViewModel = hiltViewModel()) {
             contentPadding = PaddingValues(8.dp)
         )
         {
-            items(currenciesList) { currency ->
+            items(currencyList) { currency ->
                 AddToFavourites(
                     currencyName = currency.name,
-                    flag = currency.flag,
+                    flag = currency.flagUrl,
                     code = currency.code,
                 ) {
                     if (!it) {
-                        Log.d("currency", "${currency.id}")
                         scope.launch {
                             /*deletedList.add(currency.name)*/
                             favViewModel.deleteCurrency(currency.code)

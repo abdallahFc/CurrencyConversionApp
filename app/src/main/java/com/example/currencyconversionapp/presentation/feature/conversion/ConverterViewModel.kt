@@ -5,6 +5,7 @@ import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrenc
 import com.example.currencyconversionapp.data.source.remote.model.CurrencyDto
 import com.example.currencyconversionapp.domain.repository.CurrencyRepository
 import com.example.currencyconversionapp.presentation.base.BaseViewModel
+import com.example.currencyconversionapp.presentation.util.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ConverterViewModel @Inject constructor(
-    private val currencyRepository: CurrencyRepository
+    private val currencyRepository: CurrencyRepository,
+    private val dispatcherProvider: DispatcherProvider
 ) : BaseViewModel<ConvertUiState>(ConvertUiState()), ConverterContract {
 
     init {
@@ -24,7 +26,7 @@ class ConverterViewModel @Inject constructor(
         getAllCurrencies()
     }
 
-    private fun convertCurrency(
+    fun convertCurrency(
         baseCurrency: String,
         targetCurrency: String,
         amount: Double
@@ -36,7 +38,7 @@ class ConverterViewModel @Inject constructor(
             },
             onSuccess = ::handleConversionSuccess,
             onError = ::handleConversionError,
-            dispatcher = Dispatchers.IO
+            dispatcher = dispatcherProvider.io
         )
     }
 
@@ -60,7 +62,7 @@ class ConverterViewModel @Inject constructor(
         }
     }
 
-    private fun getAllCurrencies() {
+    fun getAllCurrencies() {
         _state.update { state -> state.copy(isLoadingList = true, isError = false) }
         tryToExecute(
             function = {
@@ -68,7 +70,7 @@ class ConverterViewModel @Inject constructor(
             },
             onSuccess = ::handleGetAllCurrenciesSuccess,
             onError = ::handleGetAllCurrenciesError,
-            dispatcher = Dispatchers.IO
+            dispatcher = dispatcherProvider.io
         )
     }
     private fun handleGetAllCurrenciesSuccess(currencies:List<CurrencyDto>) {
@@ -124,6 +126,5 @@ class ConverterViewModel @Inject constructor(
             }
         }
     }
-
 
 }

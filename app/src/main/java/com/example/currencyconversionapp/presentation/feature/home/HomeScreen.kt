@@ -71,7 +71,7 @@ import com.example.currencyconversionapp.presentation.feature.conversion.Convert
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterViewModel
 import com.example.currencyconversionapp.presentation.theme.ButtonColor
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
-import com.example.currencyconversionapp.ui.feature.comparison.ComparisonScreen
+import com.example.currencyconversionapp.presentation.feature.comparison.ComparisonScreen
 import kotlinx.coroutines.launch
 
 

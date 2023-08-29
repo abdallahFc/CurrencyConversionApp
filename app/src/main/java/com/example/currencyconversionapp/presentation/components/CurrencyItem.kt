@@ -34,7 +34,8 @@ import com.example.currencyconversionapp.R
 fun CurrencyItem(
     currencyName: String,
     flag: String,
-    rate: String
+    rate: String,
+    code: String,
 ) {
     Column {
         Row(
@@ -64,7 +65,7 @@ fun CurrencyItem(
                         )
                     )
                     Text(
-                        text = stringResource(id = R.string.currency),
+                        text =code,
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight(400),
@@ -95,75 +96,3 @@ fun CurrencyItem(
         )
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewFava() {
-    CurrencyItem(
-        "EGP",
-        "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg",
-        "1.32"
-    )
-}
-
-//LazyColumn {
-//    itemsIndexed(currencyList) { index: Int, item: String ->
-//        Row(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(10.dp),
-//            verticalAlignment = Alignment.CenterVertically,
-//            horizontalArrangement = Arrangement.Start
-//        ) {
-//            Image(
-//                modifier = Modifier
-//                    .size(width = 44.dp, height = 44.dp)
-//                    .weight(1F),
-//                painter = painterResource(id = R.drawable.img),
-//                contentDescription = "image description",
-//                contentScale = ContentScale.None
-//            )
-//            Column(
-//                verticalArrangement = Arrangement.SpaceBetween,
-//                horizontalAlignment = Alignment.Start,
-//                modifier = Modifier.weight(2F)
-//            ) {
-//                Text(
-//                    text = item,
-//                    style = TextStyle(
-//                        fontSize = 14.sp,
-//                        lineHeight = 24.sp,
-//                        /*fontFamily = FontFamily(Font(R.font.montserrat)),*/
-//                        fontWeight = FontWeight(400),
-//                        color = Color(0xFF121212),
-//                    )
-//                )
-//                Text(
-//                    text = "CURRENCY",
-//                    style = TextStyle(
-//                        fontSize = 12.sp,
-//                        lineHeight = 20.sp,
-//                        /*fontFamily = FontFamily(Font(R.font.montserrat)),*/
-//                        fontWeight = FontWeight(400),
-//                        color = Color(0xFFB8B8B8),
-//                    )
-//                )
-//            }
-//            Text(
-//                text = "1.3",
-//                style = TextStyle(
-//                    fontSize = 18.sp,
-//                    lineHeight = 24.sp,
-//                    /*fontFamily = FontFamily(Font(R.font.montserrat)),*/
-//                    fontWeight = FontWeight(500),
-//                    color = Color(0xFF121212),
-//                    textAlign = TextAlign.Right,
-//                ),
-//                modifier = Modifier
-//                    .weight(1F)
-//                    .padding(20.dp)
-//            )
-//        }
-//        Divider(modifier=Modifier.fillMaxWidth().padding(horizontal = 20.dp))
-//    }
-//}

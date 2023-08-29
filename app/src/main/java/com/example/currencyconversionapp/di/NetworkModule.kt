@@ -1,5 +1,6 @@
 package com.example.currencyconversionapp.di
 
+import com.example.currencyconversionapp.data.source.remote.CompareService
 import com.example.currencyconversionapp.data.source.remote.CurrenciesService
 import com.example.currencyconversionapp.data.source.remote.CurrencyService
 import dagger.Module
@@ -29,6 +30,13 @@ object NetworkModule {
     }
 
     @Provides
+    fun provideCompareApiService(
+        @Named("CompareApi") compareRetrofit: Retrofit,
+    ): CompareService {
+        return compareRetrofit.create(CompareService::class.java)
+    }
+
+    @Provides
     @Named("CurrencyApi")
     fun provideCurrencyRetrofit(
         gsonConverterFactory: GsonConverterFactory
@@ -49,6 +57,17 @@ object NetworkModule {
             .addConverterFactory(gsonConverterFactory)
             .build()
     }
+    @Provides
+    @Named("CompareApi")
+    fun provideCompareRetrofit(
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://finalv99compare-production.up.railway.app")
+            .addConverterFactory(gsonConverterFactory)
+            .build()
+    }
+
     @Provides
     fun provideGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
