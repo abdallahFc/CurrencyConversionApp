@@ -33,8 +33,7 @@ import com.example.currencyconversionapp.R
 
 @Composable
 fun ModesDropDown(
-    modeChecked: Boolean,
-    languageChecked: Boolean,
+    checked: Boolean,
     onModeChange: () -> Unit,
     onLanguageChange: () -> Unit,
 ) {
@@ -52,7 +51,7 @@ fun ModesDropDown(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Switch(checked = modeChecked, onCheckedChange = {
+                Switch(checked = checked, onCheckedChange = {
                     onModeChange()
                 })
                 Text(
@@ -60,18 +59,14 @@ fun ModesDropDown(
                     color = MaterialTheme.colors.onPrimary
                 )
             }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Switch(checked = languageChecked, onCheckedChange = {
-                    onLanguageChange()
-                })
-                Text(text = stringResource(id = R.string.change_language),
-                    color = MaterialTheme.colors.onPrimary,
-                )
 
-            }
+            Text(text = stringResource(id = R.string.change_language),
+                color = MaterialTheme.colors.onPrimary,
+                modifier = Modifier.clickable {
+                    onLanguageChange()
+                }
+           )
+
         }
     }
 }
