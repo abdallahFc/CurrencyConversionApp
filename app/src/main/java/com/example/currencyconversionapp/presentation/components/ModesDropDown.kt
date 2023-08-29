@@ -1,9 +1,9 @@
-package com.example.currencyconversionapp.ui.composables
+package com.example.currencyconversionapp.presentation.components
 
-import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
@@ -11,7 +11,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,8 +19,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
 
 @Composable
@@ -43,15 +44,36 @@ fun ModesDropDown(
             )
         }
         DropdownMenu(
+            modifier = Modifier.background(color = androidx.compose.material3.MaterialTheme.colorScheme.surface),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
             DropdownMenuItem(
-                content = { Text(stringResource(R.string.change_language)) },
+                content = {
+                    Text(
+                        text = stringResource(R.string.change_language),
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            /*fontFamily = FontFamily(Font(R.font.open sans)),*/
+                            fontWeight = FontWeight(400),
+                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary
+                        )
+                    )
+                },
                 onClick = onLanguageChange
             )
             DropdownMenuItem(
-                content = { Text(stringResource(R.string.change_mode)) },
+                content = {
+                    Text(
+                        text = stringResource(R.string.change_mode),
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            /*fontFamily = FontFamily(Font(R.font.open sans)),*/
+                            fontWeight = FontWeight(400),
+                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary
+                        )
+                    )
+                },
                 onClick = onModeChange
             )
         }

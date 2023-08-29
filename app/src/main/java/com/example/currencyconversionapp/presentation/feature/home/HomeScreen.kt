@@ -30,14 +30,9 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -65,17 +60,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.LocaleListCompat
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.ui.composables.ModesDropDown
+import com.example.currencyconversionapp.presentation.components.ModesDropDown
 import com.example.currencyconversionapp.ui.feature.comparison.ComparisonScreen
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
-import com.example.currencyconversionapp.presentation.components.ContentVisibility
-import com.example.currencyconversionapp.presentation.feature.comparison.ComparisonScreen
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterScreen
-import com.example.currencyconversionapp.presentation.theme.Black
 import com.example.currencyconversionapp.presentation.theme.ButtonColor
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
-import com.example.currencyconversionapp.presentation.theme.Grey
 import kotlinx.coroutines.launch
 
 

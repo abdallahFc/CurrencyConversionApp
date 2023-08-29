@@ -170,7 +170,7 @@ fun ComparisonScreen(viewModel : ComparisonViewModel = hiltViewModel()) {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton(stringResource(id = R.string.compare), viewModel::onConvertClicked)
+        CustomButton(stringResource(id = R.string.compare), viewModel::compareButtonClickable)
     }
 }
 
