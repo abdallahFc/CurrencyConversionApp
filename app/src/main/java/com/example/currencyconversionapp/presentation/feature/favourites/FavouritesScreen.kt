@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +48,7 @@ fun FavouritesScreen(favViewModel: FavouritesViewModel = hiltViewModel()) {
             text = stringResource(id = R.string.my_favourites),
             style = TextStyle(
                 fontSize = 18.sp,
+                fontFamily = FontFamily(Font(R.font.poppins_bold)),
                 fontWeight = FontWeight(500),
                 color = MaterialTheme.colorScheme.onPrimary,
             ),

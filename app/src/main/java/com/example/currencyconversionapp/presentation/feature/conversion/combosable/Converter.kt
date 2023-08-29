@@ -16,12 +16,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.components.AmountField
@@ -30,7 +27,6 @@ import com.example.currencyconversionapp.presentation.components.CustomButton
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
 import com.example.currencyconversionapp.presentation.feature.conversion.ConvertUiState
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterContract
-import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 
 @Composable
 fun Converting(
@@ -53,6 +49,7 @@ fun Converting(
                     text = stringResource(id = R.string.amount),
                     style = TextStyle(
                         fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold)),
                         fontWeight = FontWeight(600),
                         color = MaterialTheme.colorScheme.onPrimary,
                     )
@@ -75,6 +72,7 @@ fun Converting(
                     text = stringResource(id = R.string.from),
                     style = TextStyle(
                         fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold)),
                         fontWeight = FontWeight(600),
                         color = MaterialTheme.colorScheme.onPrimary,
                     )
@@ -103,9 +101,9 @@ fun Converting(
             ) {
                 Text(
                     text = stringResource(id = R.string.to),
-                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold)),
                         fontWeight = FontWeight(600),
                         color = MaterialTheme.colorScheme.onPrimary,
                     )
@@ -127,9 +125,9 @@ fun Converting(
             ) {
                 Text(
                     text = stringResource(id = R.string.amount),
-                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold)),
                         fontWeight = FontWeight(600),
                         color = MaterialTheme.colorScheme.onPrimary,
                     )
@@ -141,7 +139,7 @@ fun Converting(
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
-        CustomButton(stringResource(id = R.string.convert)){
+        CustomButton(stringResource(id = R.string.convert)) {
             listener.onConvertClicked()
         }
     }

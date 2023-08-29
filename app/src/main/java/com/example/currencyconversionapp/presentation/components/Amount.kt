@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
@@ -15,9 +16,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.currencyconversionapp.R
 
 @Composable
 fun AmountField(
@@ -27,6 +34,7 @@ fun AmountField(
     amountErrorMessage: String = "Invalid amount",
     onValueChange: (String) -> Unit,
 ) {
+    val focusManager = LocalFocusManager.current
     Column {
         OutlinedTextField(
             modifier = modifier
@@ -37,6 +45,7 @@ fun AmountField(
             shape = RoundedCornerShape(20.dp),
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 backgroundColor = MaterialTheme.colorScheme.surface,
                 focusedBorderColor = MaterialTheme.colorScheme.secondary,
@@ -44,6 +53,11 @@ fun AmountField(
                 textColor = MaterialTheme.colorScheme.onPrimary,
             ),
             isError = isAmountError,
+            textStyle = TextStyle(
+                fontSize = 16.sp,
+                fontFamily = FontFamily(Font(R.font.poppins_bold)),
+                fontWeight = FontWeight(600)
+            ),
             placeholder = {
                 Text(
                     text = "Amount",
@@ -55,7 +69,7 @@ fun AmountField(
             Text(
                 text = amountErrorMessage,
                 color = MaterialTheme.colorScheme.error,
-                fontSize =12.sp ,
+                fontSize = 12.sp,
                 modifier = Modifier.padding(start = 16.dp, top = 4.dp)
             )
         }
@@ -67,18 +81,26 @@ fun AmountField(
 fun ConvertedFiled(
     modifier: Modifier = Modifier,
     text: String = "",
-){
+) {
     Text(
-        text=text,
+        text = text,
+        style = TextStyle(
+            fontSize = 16.sp,
+            fontFamily = FontFamily(Font(R.font.poppins_bold)),
+            fontWeight = FontWeight(600)
+        ),
         modifier = modifier
             .fillMaxWidth()
             .height(48.dp)
             .clip(RoundedCornerShape(size = 20.dp))
-            .border(width = 1.dp, color =MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(size = 20.dp))
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.secondary,
+                shape = RoundedCornerShape(size = 20.dp)
+            )
             .background(MaterialTheme.colorScheme.surface)
             .padding(16.dp),
-        color =MaterialTheme.colorScheme.onPrimary
-    ,
+        color = MaterialTheme.colorScheme.onPrimary,
     )
 
 }
