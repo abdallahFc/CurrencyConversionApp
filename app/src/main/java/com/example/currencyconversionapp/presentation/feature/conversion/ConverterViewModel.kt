@@ -1,5 +1,6 @@
 package com.example.currencyconversionapp.presentation.feature.conversion
 
+import android.util.Log
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
 import com.example.currencyconversionapp.domain.repository.CurrencyRepository
 import com.example.currencyconversionapp.presentation.base.BaseViewModel
@@ -38,10 +39,11 @@ class ConverterViewModel @Inject constructor(
     }
 
     private fun handleConversionSuccess(convertedAmount: ConvertCurrencyDto) {
+        Log.d("vieewe","Df $convertedAmount")
         _state.update { state ->
             state.copy(
                 isLoading = false,
-                convertedAmount = convertedAmount.amount,
+                convertedAmount = convertedAmount.conversion_rate,
                 isError = false
             )
         }

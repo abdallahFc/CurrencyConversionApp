@@ -52,8 +52,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
+import com.example.currencyconversionapp.presentation.components.ContentVisibility
 import com.example.currencyconversionapp.presentation.components.CurrencyItem
 import com.example.currencyconversionapp.presentation.components.EmptyView
+import com.example.currencyconversionapp.presentation.components.Loading
+import com.example.currencyconversionapp.presentation.components.NetworkError
 import com.example.currencyconversionapp.presentation.feature.conversion.combosable.Converting
 import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesScreen
 import com.example.currencyconversionapp.presentation.feature.favourites.FavouritesViewModel
@@ -80,6 +83,9 @@ fun ConverterScreen(
                 }
             }
         }
+    }
+    LaunchedEffect(key1 = state){
+        Log.d("currencies", "dss ${state}")
     }
     var isSheetOpened by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
@@ -124,99 +130,104 @@ fun ConverterScreen(
         }
     }
     val focusManager = LocalFocusManager.current
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp)
-            .padding(top = 32.dp)
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = {
-                    focusManager.clearFocus()
-                })
-            },
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(8.dp)
-    ) {
-        item {
-            Converting(viewModel, state)
-        }
-        item {
-            Divider(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .background(MaterialTheme.colorScheme.secondary)
-            )
-        }
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
+    Loading(state = state.isLoading)
+    NetworkError(state = state.isError, error ="Error with network",)
+    ContentVisibility(state =!state.isLoading &&!state.isError ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+                .padding(top = 32.dp)
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        focusManager.clearFocus()
+                    })
+                },
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(8.dp)
+        ) {
+            item {
+                Converting(viewModel, state)
+            }
+            item {
+                Divider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .background(MaterialTheme.colorScheme.secondary)
+                )
+            }
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.live_exchange_rates),
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.poppins_regular)),
+                            fontWeight = FontWeight(600),
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    )
+                    OutlinedButton(
+                        onClick = {
+                            isSheetOpened = true
+                        },
+                        modifier = Modifier
+                            .height(35.dp)
+                    ) {
+                        Image(
+                            modifier = Modifier.size(24.dp),
+                            painter = painterResource(id = R.drawable.add_icon),
+                            contentDescription = "Add Icon",
+                            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onPrimary)
+                        )
+                        Text(
+                            modifier = Modifier.padding(start = 8.dp),
+                            text = stringResource(R.string.add_to_favorites),
+                            fontFamily = FontFamily(Font(R.font.poppins_regular)),
+                            style = TextStyle(
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight(500),
+                                color = MaterialTheme.colorScheme.onPrimary,
+                            )
+                        )
+                    }
+                }
+            }
+            item {
                 Text(
-                    text = stringResource(id = R.string.live_exchange_rates),
+                    text = stringResource(id = R.string.my_portfolio),
+                    fontFamily = FontFamily(Font(R.font.poppins_regular)),
                     style = TextStyle(
-                        fontSize = 16.sp,
-                        fontFamily = FontFamily(Font(R.font.poppins_regular)),
-                        fontWeight = FontWeight(600),
-                        color = MaterialTheme.colorScheme.onPrimary
+                        fontSize = 18.sp,
+                        lineHeight = 24.sp,
+                        fontWeight = FontWeight(400),
+                        color = MaterialTheme.colorScheme.onPrimary,
                     )
                 )
-                OutlinedButton(
-                    onClick = {
-                        isSheetOpened = true
-                    },
-                    modifier = Modifier
-                        .height(35.dp)
-                ) {
-                    Image(
-                        modifier = Modifier.size(24.dp),
-                        painter = painterResource(id = R.drawable.add_icon),
-                        contentDescription = "Add Icon",
-                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onPrimary)
-                    )
-                    Text(
-                        modifier = Modifier.padding(start = 8.dp),
-                        text = stringResource(R.string.add_to_favorites),
-                        fontFamily = FontFamily(Font(R.font.poppins_regular)),
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight(500),
-                            color = MaterialTheme.colorScheme.onPrimary,
-                        )
+            }
+
+            if (list.isEmpty()) {
+                item {
+                    EmptyView(state = true)
+                }
+            } else {
+                items(items = list) {
+                    CurrencyItem(
+                        currencyName = it.name,
+                        flag = it.flag,
+                        rate = "1.32"
                     )
                 }
             }
         }
-        item {
-            Text(
-                text = stringResource(id = R.string.my_portfolio),
-                fontFamily = FontFamily(Font(R.font.poppins_regular)),
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    lineHeight = 24.sp,
-                    fontWeight = FontWeight(400),
-                    color = MaterialTheme.colorScheme.onPrimary,
-                )
-            )
-        }
-
-        if (list.isEmpty()) {
-            item {
-                EmptyView(state = true)
-            }
-        } else {
-            items(items = list) {
-                CurrencyItem(
-                    currencyName = it.name,
-                    flag = it.flag,
-                    rate = "1.32"
-                )
-            }
-        }
     }
+
 }
 
 @Preview(showBackground = true)

@@ -24,6 +24,7 @@ import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
 import com.example.currencyconversionapp.presentation.components.CustomButton
+import com.example.currencyconversionapp.presentation.components.NetworkError
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
 import com.example.currencyconversionapp.presentation.feature.conversion.ConvertUiState
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterContract
@@ -134,7 +135,7 @@ fun Converting(
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 ConvertedFiled(
-                    text = "1"
+                    text = state.convertedAmount
                 )
             }
         }

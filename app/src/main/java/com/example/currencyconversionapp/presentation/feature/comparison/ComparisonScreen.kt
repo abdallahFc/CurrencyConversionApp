@@ -30,6 +30,7 @@ import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
 import com.example.currencyconversionapp.presentation.components.CustomButton
+import com.example.currencyconversionapp.presentation.components.Loading
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
 import com.example.currencyconversionapp.presentation.feature.comparison.ComparisonViewModel
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme

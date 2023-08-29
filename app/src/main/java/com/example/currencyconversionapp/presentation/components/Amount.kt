@@ -54,9 +54,9 @@ fun AmountField(
             ),
             isError = isAmountError,
             textStyle = TextStyle(
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontFamily = FontFamily(Font(R.font.poppins_bold)),
-                fontWeight = FontWeight(600)
+                fontWeight = FontWeight(500)
             ),
             placeholder = {
                 Text(
@@ -85,9 +85,9 @@ fun ConvertedFiled(
     Text(
         text = text,
         style = TextStyle(
-            fontSize = 16.sp,
+            fontSize = 14.sp,
             fontFamily = FontFamily(Font(R.font.poppins_bold)),
-            fontWeight = FontWeight(600)
+            fontWeight = FontWeight(500)
         ),
         modifier = modifier
             .fillMaxWidth()
@@ -99,7 +99,7 @@ fun ConvertedFiled(
                 shape = RoundedCornerShape(size = 20.dp)
             )
             .background(MaterialTheme.colorScheme.surface)
-            .padding(16.dp),
+            .padding(horizontal = 16.dp, vertical = 12.dp),
         color = MaterialTheme.colorScheme.onPrimary,
     )
 
