@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.components.AmountField
@@ -50,7 +51,6 @@ fun Converting(
             ) {
                 Text(
                     text = stringResource(id = R.string.amount),
-                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -73,7 +73,6 @@ fun Converting(
             ) {
                 Text(
                     text = stringResource(id = R.string.from),
-                    fontFamily = FontFamily(Font(R.font.poppins_bold)),
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight(600),
@@ -146,4 +145,6 @@ fun Converting(
             listener.onConvertClicked()
         }
     }
+}
+
 }
