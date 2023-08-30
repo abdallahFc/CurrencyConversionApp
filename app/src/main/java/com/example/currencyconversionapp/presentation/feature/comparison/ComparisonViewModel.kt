@@ -1,6 +1,5 @@
 package com.example.currencyconversionapp.presentation.feature.comparison
 
-import android.util.Log
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
 import com.example.currencyconversionapp.data.source.remote.model.CurrencyDto
 import com.example.currencyconversionapp.domain.repository.CurrencyRepository
@@ -10,6 +9,7 @@ import com.example.currencyconversionapp.presentation.feature.conversion.Currenc
 import com.example.currencyconversionapp.presentation.util.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,15 +43,17 @@ class ComparisonViewModel @Inject constructor(
         )
     }
 
-    private fun handleConversionSuccess(
-        convertedAmount:
-        List<ConvertCurrencyDto>
-    ) {
+    private fun handleConversionSuccess(convertedAmount: List<ConvertCurrencyDto>) {
+        val decimalFormat = DecimalFormat("#.##")
+
+        val formattedAmountOne = decimalFormat.format(convertedAmount[0].conversion_rate.toDouble() * convertedAmount[0].amount.toDouble())
+        val formattedAmountTwo = decimalFormat.format(convertedAmount[1].conversion_rate.toDouble() * convertedAmount[1].amount.toDouble())
+
         _state.update { state ->
             state.copy(
                 isLoading = false,
-                convertedAmountOne = (convertedAmount[0].conversion_rate.toDouble() * convertedAmount[0].amount.toDouble()).toString(),
-                convertedAmountTwo = (convertedAmount[1].conversion_rate.toDouble() * convertedAmount[1].amount.toDouble()).toString(),
+                convertedAmountOne = formattedAmountOne,
+                convertedAmountTwo = formattedAmountTwo,
                 isError = false
             )
         }

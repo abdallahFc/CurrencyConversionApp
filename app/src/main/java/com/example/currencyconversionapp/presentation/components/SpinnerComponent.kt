@@ -206,8 +206,7 @@ fun SpinnerComponent(
                                 fontSize = 16.sp,
                                 fontFamily = FontFamily(Font(R.font.poppins_regular)),
                                 fontWeight = FontWeight(400),
-                                color = if (currencies[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.surface
-                                else MaterialTheme.colorScheme.onPrimary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         )
                     },
@@ -230,7 +229,7 @@ fun SpinnerComponent(
                         //selectedCurrencyFlag = currencies[it].flagUrl
                     },
                     modifier = Modifier.background(
-                        if (currencies[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.onBackground
+                        if (currencies[it].code == selectedCurrencyCode) MaterialTheme.colorScheme.background
                         else MaterialTheme.colorScheme.surface
                     )
                 )

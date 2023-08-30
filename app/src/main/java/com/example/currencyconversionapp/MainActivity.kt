@@ -21,6 +21,7 @@ import com.example.currencyconversionapp.presentation.feature.home.HomeViewModel
 import com.example.currencyconversionapp.presentation.navigation.LocalNavigationProvider
 import com.example.currencyconversionapp.presentation.navigation.MainNavGraph
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

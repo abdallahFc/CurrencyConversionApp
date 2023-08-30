@@ -97,6 +97,7 @@ fun ConverterScreen(
                 isSheetOpened = false
                 scope.launch {
                     favViewModel.getCurrencies()
+                    viewModel.getAllFavCurrencies()
                 }
             }
         ) {
@@ -113,7 +114,7 @@ fun ConverterScreen(
                             onClick = {
                                 isSheetOpened = false
                                 scope.launch {
-                                    favViewModel.getCurrencies()
+                                    //favViewModel.getCurrencies()
                                 }
                             }),
                     painter = painterResource(id = R.drawable.close),
@@ -214,17 +215,18 @@ fun ConverterScreen(
                 )
             }
 
-            if (list.isEmpty()) {
+            if (state.favCurrencies.isEmpty()) {
                 item {
                     EmptyView(state = true)
                 }
             } else {
-                items(items = list) {
+                items(items = state.favCurrencies) {
                     CurrencyItem(
                         currencyName = it.name,
-                        flag = it.flag,
-                        rate = "1.32",
-                        code=it.code
+                        flag = it.flagUrl,
+                        rate = it.rate,
+                        code=it.code,
+                        loading=state.isFavoriteLoading,
                     )
                 }
             }
