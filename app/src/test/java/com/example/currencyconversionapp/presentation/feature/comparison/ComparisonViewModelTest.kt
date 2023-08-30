@@ -2,8 +2,7 @@ package com.example.currencyconversionapp.presentation.feature.comparison
 
 import app.cash.turbine.test
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
-import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
-import com.example.currencyconversionapp.domain.repository.CurrencyRepository
+import com.example.currencyconversionapp.data.repo.CurrencyRepository
 import com.example.currencyconversionapp.presentation.feature.conversion.CurrencyCode
 import com.example.currencyconversionapp.presentation.feature.util.MainCoroutineRule
 import com.example.currencyconversionapp.presentation.feature.util.TestDispatchers

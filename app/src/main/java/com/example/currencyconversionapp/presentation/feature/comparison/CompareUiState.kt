@@ -7,7 +7,7 @@ data class CompareUiState(
     val isLoading: Boolean = false,
     val isLoadingList: Boolean = false,
     val baseCurrency: CurrencyCode = CurrencyCode.EGP,
-    val targetOneCurrency: CurrencyCode = CurrencyCode.USD,
+    val targetOneCurrency: CurrencyCode = CurrencyCode.KWD,
     val targetTwoCurrency: CurrencyCode = CurrencyCode.EUR,
     val amount: Double = 1.0,
     val convertedAmountOne: String = "",

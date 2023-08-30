@@ -1,10 +1,9 @@
 package com.example.currencyconversionapp.presentation.feature.conversion
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
 import com.example.currencyconversionapp.data.source.remote.model.CurrencyDto
-import com.example.currencyconversionapp.domain.repository.CurrencyRepository
+import com.example.currencyconversionapp.data.repo.CurrencyRepository
 import com.example.currencyconversionapp.presentation.base.BaseViewModel
 import com.example.currencyconversionapp.presentation.util.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +16,7 @@ import javax.inject.Inject
 class ConverterViewModel @Inject constructor(
     private val currencyRepository: CurrencyRepository,
     private val dispatcherProvider: DispatcherProvider
-) : BaseViewModel<ConvertUiState>(ConvertUiState()), ConverterContract {
+) : BaseViewModel<ConvertUiState>(ConvertUiState()), ConverterInteractionListener {
 
     init {
         convertCurrency(

@@ -1,4 +1,4 @@
-package com.example.currencyconversionapp.domain.repository
+package com.example.currencyconversionapp.data.repo
 
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto

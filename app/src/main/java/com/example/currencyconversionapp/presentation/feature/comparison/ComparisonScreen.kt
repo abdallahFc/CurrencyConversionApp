@@ -48,7 +48,7 @@ fun ComparisonScreen(viewModel: ComparisonViewModel = hiltViewModel()) {
 @Composable
 fun ComparisonContent(
     state: CompareUiState,
-    listener: CompareContract
+    listener: CompareInteractionListener
 ) {
     val focusManager = LocalFocusManager.current
     Loading(state = state.isLoading || state.isLoadingList)

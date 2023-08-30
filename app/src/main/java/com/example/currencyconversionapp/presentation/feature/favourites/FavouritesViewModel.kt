@@ -2,7 +2,7 @@ package com.example.currencyconversionapp.presentation.feature.favourites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.currencyconversionapp.domain.repository.CurrencyRepository
+import com.example.currencyconversionapp.data.repo.CurrencyRepository
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.feature.conversion.CurrencyUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel

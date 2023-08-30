@@ -1,6 +1,6 @@
 package com.example.currencyconversionapp.di
 
-import com.example.currencyconversionapp.domain.repository.CurrencyRepository
+import com.example.currencyconversionapp.data.repo.CurrencyRepository
 import com.example.currencyconversionapp.data.repo.CurrencyRepositoryImpl
 import dagger.Binds
 import dagger.Module

@@ -20,18 +20,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.presentation.components.AmountField
 import com.example.currencyconversionapp.presentation.components.ConvertedFiled
 import com.example.currencyconversionapp.presentation.components.CustomButton
-import com.example.currencyconversionapp.presentation.components.NetworkError
 import com.example.currencyconversionapp.presentation.components.SpinnerComponent
 import com.example.currencyconversionapp.presentation.feature.conversion.ConvertUiState
-import com.example.currencyconversionapp.presentation.feature.conversion.ConverterContract
+import com.example.currencyconversionapp.presentation.feature.conversion.ConverterInteractionListener
 
 @Composable
 fun Converting(
-    listener: ConverterContract,
+    listener: ConverterInteractionListener,
     state: ConvertUiState,
 ) {
     Column {

@@ -8,9 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
 import com.example.currencyconversionapp.ConCurrencyApp
-import com.example.currencyconversionapp.domain.repository.CurrencyRepository
+import com.example.currencyconversionapp.data.repo.CurrencyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel

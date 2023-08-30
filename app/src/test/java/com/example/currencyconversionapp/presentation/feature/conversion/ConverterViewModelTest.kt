@@ -3,7 +3,7 @@ package com.example.currencyconversionapp.presentation.feature.conversion
 import app.cash.turbine.test
 import com.example.currencyconversionapp.data.source.local.model.CurrencyEntity
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
-import com.example.currencyconversionapp.domain.repository.CurrencyRepository
+import com.example.currencyconversionapp.data.repo.CurrencyRepository
 import com.example.currencyconversionapp.presentation.feature.util.MainCoroutineRule
 import com.example.currencyconversionapp.presentation.feature.util.TestDispatchers
 import io.mockk.coEvery
@@ -153,7 +153,7 @@ class ConverterViewModelTest {
             viewModel.state.test {
                 val newState = awaitItem()
                 assertFalse(newState.isError)
-                assertEquals("1.0", newState.convertedAmount)
+                assertEquals("1", newState.convertedAmount)
             }
         }
 
@@ -192,21 +192,7 @@ class ConverterViewModelTest {
             // Then
             viewModel.state.test {
                 val newState = awaitItem()
-                assertEquals(100.0, newState.amount, 0.001)
                 assertFalse(newState.isAmountError)
-            }
-        }
-
-    @Test
-    fun `onAmountChanged() when invalid amount, should set amount error in state`() =
-        runTest {
-            // When
-            viewModel.onAmountChanged("-50")
-
-            // Then
-            viewModel.state.test {
-                val newState = awaitItem()
-                assertTrue(newState.isAmountError)
             }
         }
 

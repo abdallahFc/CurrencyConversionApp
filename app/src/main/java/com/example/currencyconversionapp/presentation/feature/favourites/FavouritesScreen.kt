@@ -36,12 +36,8 @@ fun FavouritesScreen(
     currencyList: List<CurrencyUiModel> = emptyList(),
     favViewModel: FavouritesViewModel = hiltViewModel()
 ) {
-
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    /*val addedList = mutableListOf<String>()*/
-    /*val deletedList = mutableListOf<String>()*/
-
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(20.dp),
@@ -69,7 +65,6 @@ fun FavouritesScreen(
                 ) {
                     if (!it) {
                         scope.launch {
-                            /*deletedList.add(currency.name)*/
                             favViewModel.deleteCurrency(currency.code)
                         }
                         Toast.makeText(

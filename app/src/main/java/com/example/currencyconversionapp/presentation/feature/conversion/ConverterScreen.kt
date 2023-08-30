@@ -72,70 +72,12 @@ fun ConverterScreen(
 ) {
     val state by viewModel.state.collectAsState()
     val scope = rememberCoroutineScope()
-    var list by remember { mutableStateOf(listOf<CurrencyEntity>()) }
-    LaunchedEffect(key1 = Unit) {
-        Log.d("currencies", list.toString())
-        scope.launch {
-            favViewModel.getCurrencies()
-            favViewModel.favCurrenciesList.collectLatest {
-                it?.let {
-                    list = it.toMutableList()
-                }
-            }
-        }
-    }
-    LaunchedEffect(key1 = state){
-        Log.d("currencies", "dss ${state}")
-    }
     var isSheetOpened by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
-    if (isSheetOpened) {
-        ModalBottomSheet(
-            sheetState = sheetState,
-            containerColor = MaterialTheme.colorScheme.surface,
-            onDismissRequest = {
-                isSheetOpened = false
-                scope.launch {
-                    favViewModel.getCurrencies()
-                    viewModel.getAllFavCurrencies()
-                }
-            }
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Image(
-                    modifier = Modifier
-                        .size(55.dp)
-                        .aspectRatio(1f)
-                        .align(Alignment.End)
-                        .padding(16.dp)
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = null,
-                            onClick = {
-                                isSheetOpened = false
-                                scope.launch {
-                                    //favViewModel.getCurrencies()
-                                }
-                            }),
-                    painter = painterResource(id = R.drawable.close),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
-                )
-                FavouritesScreen(
-                    state.currencies
-                )
-                Spacer(
-                    modifier = Modifier
-                        .weight(1f)
-                        .alpha(0.3f)
-                )
-            }
-        }
-    }
     val focusManager = LocalFocusManager.current
-    Loading(state = state.isLoading || state.isLoadingList)
-    NetworkError(state = state.isError, error ="Error with network",)
-    ContentVisibility(state =!state.isLoading &&!state.isError&&!state.isLoadingList ) {
+    Loading(state = state.loadingVisibility())
+    NetworkError(state = state.isError, error ="Network Error",)
+    ContentVisibility(state =state.contentVisibility()) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -214,7 +156,6 @@ fun ConverterScreen(
                     )
                 )
             }
-
             if (state.favCurrencies.isEmpty()) {
                 item {
                     EmptyView(state = true)
@@ -232,9 +173,49 @@ fun ConverterScreen(
             }
         }
     }
+    if (isSheetOpened) {
+        ModalBottomSheet(
+            sheetState = sheetState,
+            containerColor = MaterialTheme.colorScheme.surface,
+            onDismissRequest = {
+                isSheetOpened = false
+                scope.launch {
+                    favViewModel.getCurrencies()
+                    viewModel.getAllFavCurrencies()
+                }
+            }
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Image(
+                    modifier = Modifier
+                        .size(55.dp)
+                        .aspectRatio(1f)
+                        .align(Alignment.End)
+                        .padding(16.dp)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {
+                                isSheetOpened = false
+                            }),
+                    painter = painterResource(id = R.drawable.close),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
+                )
+                FavouritesScreen(
+                    state.currencies
+                )
+                Spacer(
+                    modifier = Modifier
+                        .weight(1f)
+                        .alpha(0.3f)
+                )
+            }
+        }
+    }
+
 
 }
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewFav() {

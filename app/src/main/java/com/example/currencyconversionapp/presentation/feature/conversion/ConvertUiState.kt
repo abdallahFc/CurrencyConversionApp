@@ -3,8 +3,8 @@ package com.example.currencyconversionapp.presentation.feature.conversion
 data class ConvertUiState(
     val isLoading: Boolean = false,
     val isLoadingList: Boolean = false,
-    val baseCurrency: CurrencyCode = CurrencyCode.USD,
-    val targetCurrency: CurrencyCode = CurrencyCode.EGP,
+    val baseCurrency: CurrencyCode = CurrencyCode.EGP,
+    val targetCurrency: CurrencyCode = CurrencyCode.USD,
     val amount: String = "1.0",
     val convertedAmount: String = "",
     val currencies: List<CurrencyUiModel> = emptyList(),
@@ -35,4 +35,11 @@ enum class CurrencyCode(val code: String) {
     AED("AED"),
     BHD("BHD"),
     EUR("EUR")
+}
+
+fun ConvertUiState.contentVisibility(): Boolean {
+    return !isLoading &&!isError&&!isLoadingList
+}
+fun ConvertUiState.loadingVisibility(): Boolean {
+    return isLoading || isLoadingList
 }

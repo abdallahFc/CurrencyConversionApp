@@ -10,7 +10,6 @@ import com.example.currencyconversionapp.data.source.remote.CurrenciesService
 import com.example.currencyconversionapp.data.source.remote.CurrencyService
 import com.example.currencyconversionapp.data.source.remote.model.ConvertCurrencyDto
 import com.example.currencyconversionapp.data.source.remote.model.CurrencyDto
-import com.example.currencyconversionapp.domain.repository.CurrencyRepository
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject

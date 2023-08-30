@@ -1,20 +1,7 @@
 package com.example.currencyconversionapp.presentation.feature.home
 
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,28 +9,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Switch
 import androidx.compose.material.Text
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
@@ -59,20 +36,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.os.LocaleListCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.currencyconversionapp.R
-import com.example.currencyconversionapp.presentation.base.BaseViewModel
 import com.example.currencyconversionapp.presentation.components.ModesDropDown
 import com.example.currencyconversionapp.presentation.feature.conversion.ConverterScreen
-import com.example.currencyconversionapp.presentation.feature.conversion.ConverterViewModel
-import com.example.currencyconversionapp.presentation.theme.ButtonColor
 import com.example.currencyconversionapp.presentation.theme.CurrencyConversionAppTheme
 import com.example.currencyconversionapp.presentation.feature.comparison.ComparisonScreen
-import kotlinx.coroutines.launch
+import com.example.currencyconversionapp.presentation.feature.home.combosable.CustomTabSample
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -156,7 +128,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
                     )
                 )
             }
-            CenterControls(
+            CustomTabSample(
                 Modifier
                     .align(Alignment.BottomCenter)
                     .layout { measurable, constraints ->
@@ -167,20 +139,14 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
                     }, pagerState
             )
         }
-        BottomControls(Modifier.weight(0.7f), pagerState)
+        CurrencyViewPager(Modifier.weight(0.7f), pagerState)
     }
 }
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CenterControls(modifier: Modifier, pagerState: PagerState) {
-    CustomTabSample(modifier, pagerState)
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun BottomControls(modifier: Modifier, pagerState: PagerState) {
+fun CurrencyViewPager(modifier: Modifier, pagerState: PagerState) {
     Column(
         modifier = modifier.fillMaxSize()
     ) {
@@ -201,144 +167,6 @@ fun BottomControls(modifier: Modifier, pagerState: PagerState) {
             }
         }
     }
-}
-
-
-@Composable
-private fun MyTabIndicator(
-    indicatorWidth: Dp,
-    indicatorOffset: Dp,
-    indicatorColor: Color,
-    paddingStart: Dp = 0.dp,
-    paddingEnd: Dp = 0.dp
-) {
-    Box(
-        modifier = Modifier
-            .padding(vertical = 4.dp)
-            .padding(start = paddingStart, end = paddingEnd)
-            .fillMaxHeight()
-            .width(indicatorWidth)
-            .offset(x = indicatorOffset)
-            .clip(CircleShape)
-            .background(color = indicatorColor)
-
-    )
-}
-
-
-@Composable
-private fun MyTabItem(
-    modifier: Modifier = Modifier,
-    isSelected: Boolean,
-    onClick: () -> Unit,
-    tabWidth: Dp,
-    text: String,
-) {
-    val tabTextColor: Color by animateColorAsState(
-        targetValue = if (isSelected) {
-            MaterialTheme.colorScheme.onPrimary
-        } else {
-            ButtonColor
-        },
-        animationSpec = tween(easing = LinearEasing), label = "",
-    )
-
-    val interactionSource = remember { MutableInteractionSource() }
-
-    Text(
-        modifier = modifier
-            .clip(CircleShape)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null
-            ) {
-                onClick()
-            }
-            .width(tabWidth)
-            .padding(
-                vertical = 8.dp,
-                horizontal = 12.dp,
-            )
-            .fillMaxHeight()
-            .wrapContentHeight(Alignment.CenterVertically),
-        text = text,
-        fontFamily = FontFamily(Font(R.font.poppins_regular)),
-        fontWeight = FontWeight(400),
-        color = tabTextColor,
-        textAlign = TextAlign.Center,
-    )
-}
-
-
-@Composable
-fun CustomTab(
-    selectedItemIndex: Int,
-    items: List<String>,
-    modifier: Modifier = Modifier,
-    tabWidth: Dp = 140.dp,
-    onClick: (index: Int) -> Unit,
-) {
-    val indicatorOffset: Dp by animateDpAsState(
-        targetValue = tabWidth * selectedItemIndex,
-        animationSpec = tween(easing = LinearEasing), label = "",
-    )
-
-    Box(
-        modifier = modifier
-            .clip(CircleShape)
-            .background(MaterialTheme.colorScheme.surface)
-            .height(54.dp)
-            .padding(
-                end = if (selectedItemIndex == 1) 4.dp else 0.dp,
-                start = if (selectedItemIndex == 0) 4.dp else 0.dp
-            )
-    ) {
-        MyTabIndicator(
-            indicatorWidth = tabWidth,
-            indicatorOffset = indicatorOffset,
-            indicatorColor = MaterialTheme.colorScheme.background, /*Color.White*/
-        )
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.clip(CircleShape),
-        ) {
-            items.mapIndexed { index, text ->
-                val isSelected = index == selectedItemIndex
-                MyTabItem(
-                    modifier = Modifier.align(Alignment.CenterVertically),
-                    isSelected = isSelected,
-                    onClick = {
-                        onClick(index)
-                    },
-                    tabWidth = tabWidth,
-                    text = text,
-                )
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun CustomTabSample(modifier: Modifier, pagerState: PagerState) {
-    val (selected, setSelected) = remember {
-        mutableIntStateOf(0)
-    }
-    val coroutineScope = rememberCoroutineScope()
-    CustomTab(
-        modifier = modifier,
-        items = listOf(
-            stringResource(id = R.string.convert),
-            stringResource(id = R.string.compare)
-        ),
-        selectedItemIndex = selected,
-        onClick = {
-            coroutineScope.launch {
-                pagerState.animateScrollToPage(it)
-            }
-            setSelected(it)
-        },
-    )
 }
 
 @Preview(showBackground = true)
