@@ -25,7 +25,7 @@ class ConverterViewModel @Inject constructor(
             amount = state.value.amount.toDoubleOrNull()
         )
         getAllCurrencies()
-        getAllFavCurrencies()
+       getAllFavCurrencies()
     }
 
     fun convertCurrency(
@@ -72,7 +72,7 @@ class ConverterViewModel @Inject constructor(
     }
 
     fun getAllCurrencies() {
-        _state.update { state -> state.copy(isLoadingList = true, isError = false) }
+        _state.update { state -> state.copy(isLoadingList = true) }
         tryToExecute(
             function = {
                 currencyRepository.getAllCurrencies()
@@ -113,7 +113,7 @@ class ConverterViewModel @Inject constructor(
             val favList = currencyRepository.getCurrencies()
             if (favList.isEmpty()) {
                 _state.update { state ->
-                    state.copy(isFavoriteLoading = false, isError = false,
+                    state.copy(isFavoriteLoading = false,
                         favCurrencies = emptyList())
                 }
                 return@launch
@@ -122,7 +122,7 @@ class ConverterViewModel @Inject constructor(
                 currency.code
             }
             _state.update { state ->
-                state.copy(isFavoriteLoading = true, isError = false,
+                state.copy(isFavoriteLoading = true, isFavError = false,
                     favCurrencies = favList.map {
                         CurrencyUiModel(
                             code = it.code,

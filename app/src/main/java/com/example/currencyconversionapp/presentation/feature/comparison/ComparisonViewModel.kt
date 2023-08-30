@@ -46,8 +46,8 @@ class ComparisonViewModel @Inject constructor(
     private fun handleConversionSuccess(convertedAmount: List<ConvertCurrencyDto>) {
         val decimalFormat = DecimalFormat("#.##")
 
-        val formattedAmountOne = decimalFormat.format(convertedAmount[0].conversion_rate.toDouble() * convertedAmount[0].amount.toDouble())
-        val formattedAmountTwo = decimalFormat.format(convertedAmount[1].conversion_rate.toDouble() * convertedAmount[1].amount.toDouble())
+        val formattedAmountOne = decimalFormat.format(convertedAmount[0].conversion_rate.toDouble())
+        val formattedAmountTwo = decimalFormat.format(convertedAmount[1].conversion_rate.toDouble())
 
         _state.update { state ->
             state.copy(

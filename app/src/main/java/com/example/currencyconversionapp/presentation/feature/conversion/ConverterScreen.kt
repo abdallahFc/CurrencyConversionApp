@@ -75,6 +75,9 @@ fun ConverterScreen(
     var isSheetOpened by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
     val focusManager = LocalFocusManager.current
+    LaunchedEffect(key1 = state){
+        Log.d("ConverterScreen", "ConverterScreen: $state")
+    }
     Loading(state = state.loadingVisibility())
     NetworkError(state = state.isError, error ="Network Error",)
     ContentVisibility(state =state.contentVisibility()) {
