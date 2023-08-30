@@ -27,7 +27,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -63,7 +62,9 @@ fun AddToFavourites(
         ) {
             Row {
                 AsyncImage(
-                    model = flag,
+                    model = if (code == "EGP") "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+                    else if (code == "SAR") "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
+                    else flag,
                     contentDescription = "flag Image",
                     placeholder = painterResource(id = R.drawable.placeholder),
                     error = painterResource(id = R.drawable.placeholder),

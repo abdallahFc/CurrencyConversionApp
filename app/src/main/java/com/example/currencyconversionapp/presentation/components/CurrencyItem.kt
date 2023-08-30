@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -50,7 +49,9 @@ fun CurrencyItem(
         ) {
             Row {
                 AsyncImage(
-                    model = flag,
+                    model = if (code == "EGP") "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+                    else if (code == "SAR") "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
+                    else flag,
                     placeholder = painterResource(id = R.drawable.placeholder),
                     error = painterResource(id = R.drawable.placeholder),
                     contentDescription = "flag Image",
@@ -86,7 +87,8 @@ fun CurrencyItem(
                     spec = LottieCompositionSpec.RawRes(R.raw.loading)
                 )
                 Box(
-                    modifier =Modifier.align(Alignment.CenterVertically)
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
                         .padding(end = 16.dp)
                         .background(Color.Transparent),
                     contentAlignment = Alignment.Center

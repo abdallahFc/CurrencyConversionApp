@@ -102,7 +102,7 @@ val currenciesList = listOf(
 @Composable
 fun SpinnerComponent(
     currencies: List<CurrencyUiModel>,
-    code: String ,
+    code: String,
     onCurrencySelected: (String) -> Unit
 ) {
     // this is a mutable state variable to control the dropDown menu whether it's expanded or not
@@ -144,7 +144,9 @@ fun SpinnerComponent(
     ) {
         // The flag of the currency
         AsyncImage(
-            model = target?.flagUrl ?: "",
+            model = if (target?.code == "EGP") "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+            else if (target?.code == "SAR") "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
+            else target?.flagUrl ?: "",
             contentDescription = "currency flag",
             placeholder = painterResource(id = R.drawable.placeholder),
             error = painterResource(id = R.drawable.placeholder),
@@ -212,7 +214,9 @@ fun SpinnerComponent(
                     },
                     leadingIcon = {
                         AsyncImage(
-                            model = currencies[it].flagUrl,
+                            model = if (currencies[it].code == "EGP") "https://cdn.britannica.com/85/185-004-1EA59040/Flag-Egypt.jpg"
+                            else if (currencies[it].code == "SAR") "https://cdn.britannica.com/79/5779-004-DC479508/Flag-Saudi-Arabia.jpg"
+                            else currencies[it].flagUrl,
                             placeholder = painterResource(id = R.drawable.placeholder),
                             error = painterResource(id = R.drawable.placeholder),
                             contentDescription = "Currency Flag",
