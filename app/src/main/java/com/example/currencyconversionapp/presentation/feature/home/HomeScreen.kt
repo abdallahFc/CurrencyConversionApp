@@ -105,7 +105,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
                         painter = painterResource(id = R.drawable.grad),
                         contentScale = ContentScale.Crop
                     )
-                    .padding(start = 16.dp, end = 16.dp, top = 50.dp)
+                    .padding(start = 16.dp, end = 16.dp, top = 32.dp, bottom = 16.dp)
             ) {
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -133,7 +133,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
                     text = stringResource(id = R.string.currency_convert),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 42.dp),
+                        .padding(top = 32.dp),
                     textAlign = TextAlign.Center,
                     style = TextStyle(
                         fontSize = 22.sp,
